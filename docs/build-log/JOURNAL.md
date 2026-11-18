@@ -98,3 +98,15 @@
 **Decisions made:** Hand-crafted override parts (orphans KD-310/NS-PRS-3400, constraint-scenario NS-IND-1200..1208, injection scenario AL-DIO-101/103/199) guarantee agent scenarios are well-defined; 60/40 dev/test split by sorted part number; GT also stores replacement_candidates
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:07 — 1.2 Real datasheet manifest, fetch script, provisional labels
+**Goal:** 9 real public datasheets (ifm, Omron, Lantronix, Wachendorff, wenglor, Bernstein) located via web search, verified as PDFs, listed in corpus/real/manifest.yaml with sha256; fetch.py re-downloads and verifies; draft labels in eval/datasets/extraction_real.jsonl all verified_by_human=false
+**What I did:** 9 real public datasheets (ifm, Omron, Lantronix, Wachendorff, wenglor, Bernstein) located via web search, verified as PDFs, listed in corpus/real/manifest.yaml with sha256; fetch.py re-downloads and verifies; draft labels in eval/datasets/extraction_real.jsonl all verified_by_human=false
+**Files changed:** corpus/real/* eval/datasets/extraction_real.jsonl
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** fetch.py run: 9 verified, 0 problems (network, manual run; not part of the test suite)
+**Eval results (if any):** n/a
+**Problems and how I solved them:** Baumer/Parker/ifm AL2301/Mean Well/ipf blocked automated download (403); excluded. Multi-model catalogs (Leadshine, siol hubs, P+F parameter sheets) excluded as unsuitable for single-component labels.
+**Decisions made:** Where a datasheet gives only nominal or ambiguous values the label is null or the highest rating, documented in each record's notes field
+**Deviations from spec:** 9 real datasheets instead of 10-20 (logged in Needs user)
+**Next step:** next task in PROGRESS.md

@@ -5,6 +5,8 @@
 - (Docker blocker from 2026-11-18 resolved: daemon running.)
 - Model IDs (`claude-haiku-5-5`, `claude-sonnet-5-5`) come from the build environment; the pricing page lists names and prices only. Prices verified 2026-11-18 (see `config/pricing.yaml`). Please re-check model IDs on the models overview page before the first paid run.
 
+- Verify real-datasheet labels in `eval/datasets/extraction_real.jsonl` (all `verified_by_human: false`; metrics on them are provisional). Only 9 of the 10-20 target real datasheets were obtainable (Baumer, ifm AL2301, Parker, Mean Well blocked automated downloads).
+
 ## Tasks
 Status: todo | in progress | done | blocked
 
@@ -18,7 +20,7 @@ Status: todo | in progress | done | blocked
 - 0.7 Auth + RBAC + audit — done (2026-11-18, 05d9f56)
 ### M1 — Corpus and datasets
 - 1.1 Synthetic datasheet generator + ground truth — done (2026-11-18, dba5846)
-- 1.2 Real datasheet manifest + fetch + provisional labels — todo
+- 1.2 Real datasheet manifest + fetch + provisional labels — done (2026-11-18, 4964190)
 - 1.3 qa.jsonl + dataset validation — todo
 - 1.4 ERP mock + seed + faults + tests — todo
 ### M2 — Ingestion, retrieval, Q&A, eval core

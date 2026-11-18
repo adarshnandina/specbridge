@@ -1,0 +1,65 @@
+# Real public datasheets, retrieved for local evaluation only (not redistributed).
+documents:
+- doc_key: ifm/AL2205/real
+  vendor: ifm
+  url: https://selectumllc.com/attachments/ifm/AL2205-datasheet.pdf
+  sha256: 90134590b313bcf60052530e75e4eaebc73bfea4a509034ebeb15cd6b3bc35d1
+  retrieved_at: '2026-11-18'
+  filename: ifm__AL2205.pdf
+  note: used locally for evaluation only; not redistributed
+- doc_key: ifm/AL5021/real
+  vendor: ifm
+  url: https://docs.rs-online.com/b265/A700000015313604.pdf
+  sha256: b1d4b687f57f15c616f500e779f286d2b7580dad75dd29e367bf902dc3ee4bce
+  retrieved_at: '2026-11-18'
+  filename: ifm__AL5021.pdf
+  note: used locally for evaluation only; not redistributed
+- doc_key: lantronix/25079/real
+  vendor: Lantronix
+  url: https://cdn.lantronix.com/wp-content/uploads/pdf/25079.pdf
+  sha256: 13211770bbe7d29e9d20ec7eaf4c3540341c617da8a907e1af977d23a3bc1cf4
+  retrieved_at: '2026-11-18'
+  filename: lantronix__25079.pdf
+  note: used locally for evaluation only; not redistributed
+- doc_key: omron/R88D-1SN55F-ECT/real
+  vendor: Omron
+  url: https://cdn.soselectronic.com/productdata/6a/85/b2b3a88a/r88d-1sn55f-ect.pdf
+  sha256: 21bd19ef85841a4d65b913e7162d410354aaf2224361095ce57aea1f7c7b7223
+  retrieved_at: '2026-11-18'
+  filename: omron__R88D-1SN55F-ECT.pdf
+  note: used locally for evaluation only; not redistributed
+- doc_key: omron/E2E-X4B3DL12-M1/real
+  vendor: Omron
+  url: https://docs.rs-online.com/2d9b/A700000015857222.pdf
+  sha256: bf5db7b3c4058534427c0c67f391b6c0bce8874999328313b6be628266fe2a55
+  retrieved_at: '2026-11-18'
+  filename: omron__E2E-X4B3DL12-M1.pdf
+  note: used locally for evaluation only; not redistributed
+- doc_key: omron/E2E-X14B1T18-M1/real
+  vendor: Omron
+  url: https://docs.rs-online.com/b1dd/A700000015857234.pdf
+  sha256: afd817d7e64b57adc5ee8177af2369b2e7e9a8caad717846a88323a14be4f09a
+  retrieved_at: '2026-11-18'
+  filename: omron__E2E-X14B1T18-M1.pdf
+  note: used locally for evaluation only; not redistributed
+- doc_key: wachendorff/DRA10-24/real
+  vendor: Wachendorff Prozesstechnik
+  url: https://www.wachendorff-prozesstechnik.de/en/product-groups/reliable-power-supply-units-for-automation-and-building-automation/products/power-supply-units-for-automation/din-rail-power-supply-24V-10-Watt-DRA10-24/pdf
+  sha256: 1840367964c19cd16231e89ae1193c50220f35adae9098878ca4621ed0578f3a
+  retrieved_at: '2026-11-18'
+  filename: wachendorff__DRA10-24.pdf
+  note: used locally for evaluation only; not redistributed
+- doc_key: wenglor/I18H014/real
+  vendor: wenglor
+  url: https://www.automatyka24.pl/file/39192,I18H014_karta_katalogowa.pdf
+  sha256: 772df1c6148ceea4b8c2fb8cbbc8811a7adc1daaf66a401c218cd7df506250c8
+  retrieved_at: '2026-11-18'
+  filename: wenglor__I18H014.pdf
+  note: used locally for evaluation only; not redistributed
+- doc_key: bernstein/6532705002/real
+  vendor: Bernstein
+  url: https://www.partbeaver.com/static/pdfs/bernstein_221901.pdf
+  sha256: ab27c6c6036230b759ca8a6527bb29334c3ef3d923d3d8c5e4af9683686cf4b2
+  retrieved_at: '2026-11-18'
+  filename: bernstein__6532705002.pdf
+  note: used locally for evaluation only; not redistributed
