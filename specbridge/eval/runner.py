@@ -156,6 +156,21 @@ def estimate_cost(suite: str, n_items: int, ctx: SuiteContext) -> float:
 
 
 # ------------------------------------------------------------------- suites
+def _corpus_stats(index: str) -> dict[str, Any] | None:
+    """What the retrieval index contained (documents/chunks): runs are only comparable if equal."""
+    try:
+        with session_scope() as s:
+            n = s.scalar(select(func.count()).select_from(Chunk).where(Chunk.index_name == index))
+            d = s.scalar(
+                select(func.count(func.distinct(Chunk.document_id))).where(
+                    Chunk.index_name == index
+                )
+            )
+        return {"index": index, "documents": int(d or 0), "chunks": int(n or 0)}
+    except Exception:
+        return None
+
+
 def _check_index(index: str) -> None:
     with session_scope() as s:
         n = s.scalar(select(func.count()).select_from(Chunk).where(Chunk.index_name == index))
@@ -387,6 +402,7 @@ def run_eval(
         if not key_ok:
             raise RuntimeError("ANTHROPIC_API_KEY is not set: paid runs are blocked")
     ctx.llm, _ = make_llm(settings, provider_name, use_cache)
+    corpus = _corpus_stats(cfg.index_name or settings.default_index)
     created = datetime.now()
     sha = git_sha()
     run_id = f"{created:%Y%m%d-%H%M%S}_{sha}_{tag}"
@@ -412,6 +428,7 @@ def run_eval(
         "cost_usd": 0.0,
         "aborted": False,
         "embedding_model": settings.embedding_model,
+        "corpus": corpus,
     }
     for s in suites:
         if s not in SUITE_RUNNERS:

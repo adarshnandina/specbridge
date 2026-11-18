@@ -58,7 +58,7 @@ corpus-synthetic:
 corpus: corpus-synthetic
 	-$(UV) python -m corpus.real.fetch
 
-ingest: corpus-synthetic
+ingest: corpus
 	$(UV) specbridge ingest data/corpus --index main --strategy layout
 
 eval-retrieval:

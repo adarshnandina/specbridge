@@ -200,3 +200,17 @@ def test_unrelated_dataset_change_does_not_block_a_suite_gate(tmp_path):
     cand2 = write(tmp_path, "d.json", run("d", datasets={"qa.jsonl": "CHANGED"}))
     ok, rep = run_gate(base, str(cand2), suites=["retrieval"])
     assert not ok and "qa.jsonl" in rep
+
+
+def test_gate_refuses_runs_measured_on_different_indexed_corpora(tmp_path):
+    base = run("b")
+    base["corpus"] = {"index": "main", "documents": 60, "chunks": 264}
+    same = {**run("c"), "corpus": {"index": "main", "documents": 60, "chunks": 264}}
+    other = {**run("d"), "corpus": {"index": "main", "documents": 51, "chunks": 200}}
+    b = write(tmp_path, "b.json", base)
+    assert run_gate(b, str(write(tmp_path, "c.json", same)), suites=["retrieval"])[0]
+    ok, rep = run_gate(b, str(write(tmp_path, "d.json", other)), suites=["retrieval"])
+    assert not ok and "indexed corpus differs" in rep
+    # an older baseline without corpus info is still comparable
+    old = write(tmp_path, "o.json", run("o"))
+    assert run_gate(old, str(write(tmp_path, "e.json", other)), suites=["retrieval"])[0]

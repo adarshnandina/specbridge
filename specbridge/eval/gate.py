@@ -185,6 +185,20 @@ def run_gate(
             f"dataset hashes differ ({', '.join(diff)}): runs are not comparable; "
             "re-baseline or pass --allow-dataset-change"
         )
+    bc, cc = base.get("corpus"), cand.get("corpus")
+    if (
+        not allow_dataset_change
+        and bc
+        and cc
+        and gated
+        and set(gated) & {"retrieval", "qa"}
+        and (bc["documents"], bc["chunks"]) != (cc["documents"], cc["chunks"])
+    ):
+        problems.append(
+            f"indexed corpus differs (baseline {bc['documents']} docs/{bc['chunks']} chunks, "
+            f"candidate {cc['documents']}/{cc['chunks']}): ingest the same corpus "
+            "(`make corpus ingest`) or re-baseline"
+        )
     checks = evaluate(base, cand, thresholds, suites)
     lines = [
         f"# Gate: baseline `{base['run_id']}` vs candidate `{cand['run_id']}`",
