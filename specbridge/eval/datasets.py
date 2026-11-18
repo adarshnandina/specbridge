@@ -62,6 +62,19 @@ def file_sha256(path: Path | str) -> str:
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+# Which dataset files each suite's results depend on (used to decide run comparability).
+SUITE_DATASETS = {
+    "retrieval": ["qa.jsonl", "extraction_synthetic.jsonl"],
+    "qa": ["qa.jsonl", "extraction_synthetic.jsonl"],
+    "extraction": ["extraction_synthetic.jsonl", "extraction_real.jsonl"],
+    "agent": ["agent_scenarios.yaml", "extraction_synthetic.jsonl"],
+}
+
+
+def relevant_datasets(suites: list[str]) -> set[str]:
+    return {f for s in suites for f in SUITE_DATASETS.get(s, [])}
+
+
 def dataset_hashes(dataset_dir: Path = DATASET_DIR) -> dict[str, str]:
     return {p.name: file_sha256(p) for p in sorted(dataset_dir.glob("*")) if p.is_file()}
 

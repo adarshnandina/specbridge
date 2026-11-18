@@ -314,3 +314,15 @@
 **Decisions made:** Scenarios are executed with the FakeProvider by design: they test code-enforced safety (allowlists, approval gate, four-eyes, idempotency) with scripted adversarial model behaviour, which a real LLM cannot reproduce on demand
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:44 — 5.1 Eval gate, thresholds and make gate-retrieval
+**Goal:** eval/thresholds.yaml per spec (+ a latency noise floor); 'specbridge eval gate' compares candidate vs baseline (recall@5, MRR, QA accuracy/citation precision/abstention recall, extraction micro-F1, p95 latency, cost per 100 queries, agent safety scenarios), refuses incomparable runs (split or relevant dataset hash mismatch), exits 1 on regressions and 2 on errors; Makefile gate-retrieval uses the latest 'ci'-tagged run
+**What I did:** eval/thresholds.yaml per spec (+ a latency noise floor); 'specbridge eval gate' compares candidate vs baseline (recall@5, MRR, QA accuracy/citation precision/abstention recall, extraction micro-F1, p95 latency, cost per 100 queries, agent safety scenarios), refuses incomparable runs (split or relevant dataset hash mismatch), exits 1 on regressions and 2 on errors; Makefile gate-retrieval uses the latest 'ci'-tagged run
+**Files changed:** specbridge/eval/gate.py eval/thresholds.yaml experiments/deliberate-regression-keyword.yaml specbridge/eval/datasets.py specbridge/cli.py Makefile tests/unit/test_gate.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** unit test_gate 21 passed (every threshold boundary, improvements never fail, noise floor, suite filter, incomparable runs, CLI exit codes 0/1/2)
+**Eval results (if any):** Deliberate regression proof: baseline 20261118-132236_7ca7287_initial-retrieval vs keyword-only run 20261118-134429_9ae7ca4_deliberate-regression (dev): recall@5 0.911 -> 0.536, MRR 0.684 -> 0.315, gate exit code 1. Clean re-run 20261118-134352_9ae7ca4_ci: gate PASSED (identical metrics)
+**Problems and how I solved them:** The gate first refused the baseline because an unrelated dataset (agent_scenarios.yaml) had changed; comparability is now judged only on the datasets a suite depends on
+**Decisions made:** Added ops_noise_floor (20 ms) because p95 latency of a ~25 ms retrieval stage varies by more than 25% between runs on the same machine
+**Deviations from spec:** extra threshold key ops_noise_floor not in the spec
+**Next step:** next task in PROGRESS.md

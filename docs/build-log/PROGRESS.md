@@ -43,7 +43,7 @@ Status: todo | in progress | done | blocked
 - 4.3 API routes + UI approvals/timeline — done (2026-11-18, d2125f1)
 - 4.4 Agent scenario suite (14) — done (2026-11-18, 6af582b)
 ### M5 — Experiments and gating
-- 5.1 eval gate + thresholds — todo
+- 5.1 eval gate + thresholds — done (2026-11-18, 693f6bb)
 - 5.2 Experiments — todo
 - 5.3 Final defaults + baseline — todo
 ### M6 — Hardening and docs

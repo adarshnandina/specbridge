@@ -1,0 +1,5 @@
+name: deliberate-regression-keyword
+description: >
+  Deliberately degraded retrieval (keyword only) used to prove that `specbridge eval gate`
+  detects regressions. Not a candidate configuration.
+retrieval: {mode: keyword}

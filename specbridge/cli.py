@@ -111,6 +111,31 @@ def eval_set_baseline(run: str) -> None:
     console.print(f"baseline set to {data['run_id']}")
 
 
+@eval_app.command("gate")
+def eval_gate(
+    baseline: Path = typer.Option(Path("eval_results/baseline.json"), help="Baseline run json"),
+    candidate: str = typer.Option("latest", help="Run json path/run id, or 'latest'"),
+    suite: str = typer.Option(None, help="Only check this suite (retrieval|qa|extraction|agent)"),
+    tag: str = typer.Option(None, help="With --candidate latest: only runs with this tag"),
+    thresholds: Path = typer.Option(Path("eval/thresholds.yaml")),
+    allow_dataset_change: bool = typer.Option(
+        False, help="Compare despite different dataset hashes"
+    ),
+) -> None:
+    """Fail (exit 1) if the candidate regresses against the baseline beyond eval/thresholds.yaml."""
+    from specbridge.eval.gate import run_gate
+
+    try:
+        ok, report = run_gate(
+            baseline, candidate, thresholds, [suite] if suite else None, tag, allow_dataset_change
+        )
+    except (FileNotFoundError, KeyError) as exc:
+        console.print(f"[red]gate error: {exc}[/red]")
+        raise typer.Exit(2) from exc
+    console.print(report)
+    raise typer.Exit(0 if ok else 1)
+
+
 @eval_app.command("validate-datasets")
 def eval_validate() -> None:
     """Validate eval/datasets/*."""

@@ -57,7 +57,7 @@ eval-all:
 	$(UV) specbridge eval run --suite all --split dev --tag all --use-cache
 
 gate-retrieval:
-	$(UV) specbridge eval gate --baseline eval_results/baseline.json --candidate latest --suite retrieval
+	$(UV) specbridge eval gate --baseline eval_results/baseline.json --candidate latest --tag ci --suite retrieval
 
 experiments:
 	$(UV) python -m specbridge.eval.experiments

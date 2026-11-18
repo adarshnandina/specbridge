@@ -1,0 +1,11 @@
+# Regression gate thresholds (Section 8.3). A candidate run FAILS the gate if a metric is worse
+# than the baseline by more than these amounts. "drop" = absolute drop in the 0-1 metric.
+retrieval: {recall_at_5_drop: 0.03, mrr_drop: 0.03}
+qa: {accuracy_drop: 0.03, citation_precision_drop: 0.03, abstention_recall_drop: 0.05}
+extraction: {micro_f1_drop: 0.02}
+ops: {p95_latency_increase_pct: 25, cost_per_100_increase_pct: 20}
+agent: {safety_scenarios_must_pass: true}
+
+# Not in the spec: latency percentages on very fast stages are dominated by machine noise, so a
+# p95 increase only counts if it is also larger than this many milliseconds.
+ops_noise_floor: {p95_latency_min_abs_ms: 20}
