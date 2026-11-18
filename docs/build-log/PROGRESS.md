@@ -25,7 +25,7 @@ Status: todo | in progress | done | blocked
 - 1.4 ERP mock + seed + faults + tests — done (2026-11-18, 99d4466)
 ### M2 — Ingestion, retrieval, Q&A, eval core
 - 2.1 Parser, chunking, embeddings, ingestion pipeline, CLI — done (2026-11-18, b88aa3b)
-- 2.2 Retrieval — todo
+- 2.2 Retrieval — done (2026-11-18, 44314e7)
 - 2.3 Q&A service — todo
 - 2.4 API routes documents/query + page images — todo
 - 2.5 UI login/ask/documents — todo

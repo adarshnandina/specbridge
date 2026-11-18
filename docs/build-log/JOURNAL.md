@@ -146,3 +146,15 @@
 **Decisions made:** Document is skipped only if chunks exist for the requested index (lets experiments build separate indexes from one document row); failed parses recorded as status=failed rows
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:14 — 2.2 Retrieval: vector, keyword, hybrid RRF, optional rerank
+**Goal:** pgvector cosine search, Postgres FTS keyword search (websearch_to_tsquery, OR-combined content words, 'simple' config), RRF fusion (k=60, top 30 each), optional cross-encoder rerank of fused top 20; per-call mode/top_k/rerank/include_superseded/index; vector similarity always computed as abstention signal
+**What I did:** pgvector cosine search, Postgres FTS keyword search (websearch_to_tsquery, OR-combined content words, 'simple' config), RRF fusion (k=60, top 30 each), optional cross-encoder rerank of fused top 20; per-call mode/top_k/rerank/include_superseded/index; vector similarity always computed as abstention signal
+**Files changed:** specbridge/retrieval/* tests/unit/test_retrieval_units.py tests/integration/test_retrieval.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** unit test_retrieval_units 4 passed; integration test_retrieval 9 passed (3 modes, exact part number, RRF scores, revision filter, index isolation, rerank, bad mode)
+**Eval results (if any):** n/a
+**Problems and how I solved them:** none
+**Decisions made:** Natural-language questions are turned into an OR query of content words (stop words dropped); AND semantics of websearch_to_tsquery would match nothing. Abstention uses best vector cosine similarity regardless of mode (RRF scores are rank-based and not calibratable)
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md
