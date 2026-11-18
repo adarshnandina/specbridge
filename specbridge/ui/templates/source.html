@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Source · SpecBridge{% endblock %}
+{% block content %}
+<h1>{{ doc_key }} — page {{ page }}</h1>
+<blockquote class="quote">{{ quote }}</blockquote>
+<p><a href="/ui/ask">&larr; back</a></p>
+<img class="page" alt="Datasheet page {{ page }} with the cited region highlighted"
+     src="/ui/page/{{ document_id }}/{{ page }}?chunk_id={{ chunk_id }}">
+{% endblock %}

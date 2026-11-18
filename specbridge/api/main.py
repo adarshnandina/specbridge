@@ -1,14 +1,17 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
+from fastapi.staticfiles import StaticFiles
 from slowapi import Limiter
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 
 from specbridge.api.middleware import RequestContextMiddleware
-from specbridge.api.routers import documents, health, query
+from specbridge.api.routers import documents, health, query, ui
 from specbridge.config import get_settings
 from specbridge.errors import AppError
 from specbridge.logging_setup import get_logger, setup_logging
@@ -56,6 +59,25 @@ def create_app() -> FastAPI:
     async def _unhandled(request: Request, exc: Exception) -> JSONResponse:
         log.exception("api.unhandled", error=str(exc))
         return _error(request, 500, "internal_error", "Internal server error")
+
+    @app.exception_handler(ui.LoginRedirect)
+    async def _login_redirect(request: Request, exc: ui.LoginRedirect) -> RedirectResponse:
+        return RedirectResponse("/ui/login", status_code=303)
+
+    @app.exception_handler(PermissionError)
+    async def _ui_forbidden(request: Request, exc: PermissionError) -> JSONResponse:
+        return _error(request, 403, "forbidden", f"Missing permission: {exc}")
+
+    app.mount(
+        "/ui/static",
+        StaticFiles(directory=str(Path(__file__).resolve().parents[1] / "ui" / "static")),
+        name="ui-static",
+    )
+    app.include_router(ui.router)
+
+    @app.get("/", include_in_schema=False)
+    def root() -> RedirectResponse:
+        return RedirectResponse("/ui/ask", status_code=303)
 
     app.include_router(health.router)
     app.include_router(documents.router)

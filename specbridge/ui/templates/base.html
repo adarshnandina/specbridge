@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}SpecBridge{% endblock %}</title>
+  <link rel="stylesheet" href="/ui/static/style.css">
+</head>
+<body>
+<header>
+  <a class="brand" href="/ui/ask">SpecBridge</a>
+  {% if user %}
+  <nav>
+    <a href="/ui/ask">Ask</a>
+    <a href="/ui/documents">Documents</a>
+    <a href="/ui/review">Review</a>
+    <a href="/ui/approvals">Approvals</a>
+    <a href="/ui/runs">Agent</a>
+  </nav>
+  <span class="who">{{ user.user }} <small>({{ user.role }})</small>
+    <a href="/ui/logout">Log out</a></span>
+  {% endif %}
+</header>
+<main>
+{% if flash %}<div class="flash {{ flash_kind or 'info' }}">{{ flash }}</div>{% endif %}
+{% block content %}{% endblock %}
+</main>
+</body>
+</html>

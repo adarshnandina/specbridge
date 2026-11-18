@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Ask · SpecBridge{% endblock %}
+{% block content %}
+<h1>Ask the datasheets</h1>
+<form method="post" action="/ui/ask" class="card">
+  <textarea name="question" rows="2" maxlength="1000" placeholder="e.g. What is the maximum operating temperature of the KD-210?" required>{{ question or '' }}</textarea>
+  <button type="submit">Ask</button>
+</form>
+{% if result %}
+<section class="card answer {{ 'abstained' if result.abstained else '' }}">
+  {% if result.abstained %}<span class="badge warn">No supported answer</span>{% endif %}
+  <p class="answer-text">{{ result.answer }}</p>
+  {% if result.citations %}
+  <h3>Sources</h3>
+  <ol class="citations">
+    {% for c in result.citations %}
+    <li>
+      <a href="/ui/source?document_id={{ c.document_id }}&amp;page={{ c.page }}&amp;chunk_id={{ c.chunk_id }}&amp;quote={{ c.quote | urlencode }}&amp;doc_key={{ c.doc_key | urlencode }}">
+        <strong>{{ c.doc_key }}</strong>, page {{ c.page }}</a>
+      <blockquote>{{ c.quote }}</blockquote>
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+  <p class="meta">{{ result.latency_ms }} ms · ${{ '%.4f' | format(result.cost_usd) }} · request {{ result.request_id }}</p>
+</section>
+{% endif %}
+{% endblock %}

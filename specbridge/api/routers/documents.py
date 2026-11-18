@@ -128,14 +128,10 @@ def render_page_png(
         doc.close()
 
 
-@router.get("/documents/{document_id}/pages/{page_no}/image")
-def page_image(
-    document_id: uuid.UUID,
-    page_no: int,
-    chunk_id: uuid.UUID | None = None,
-    db: Session = Depends(get_db),
-    _: Principal = Depends(require("read")),
-) -> Response:
+def page_image_bytes(
+    db: Session, document_id: uuid.UUID, page_no: int, chunk_id: uuid.UUID | None
+) -> bytes:
+    """PNG of a page, cited chunk highlighted; cached on disk."""
     doc = db.get(Document, document_id)
     if not doc or doc.status != "ingested":
         raise NotFoundError("Document not found")
@@ -150,13 +146,24 @@ def page_image(
     cache_dir.mkdir(parents=True, exist_ok=True)
     cache_file = cache_dir / f"{doc.sha256}_{page_no}_{str(chunk_id) if chunk_id else 'plain'}.png"
     if cache_file.exists():
-        png = cache_file.read_bytes()
-    else:
-        try:
-            png = render_page_png(doc.storage_path, page_no, bboxes)
-        except NotFoundError:
-            raise
-        except Exception as exc:
-            raise UploadError(f"Could not render page: {exc}") from exc
-        cache_file.write_bytes(png)
+        return cache_file.read_bytes()
+    try:
+        png = render_page_png(doc.storage_path, page_no, bboxes)
+    except NotFoundError:
+        raise
+    except Exception as exc:
+        raise UploadError(f"Could not render page: {exc}") from exc
+    cache_file.write_bytes(png)
+    return png
+
+
+@router.get("/documents/{document_id}/pages/{page_no}/image")
+def page_image(
+    document_id: uuid.UUID,
+    page_no: int,
+    chunk_id: uuid.UUID | None = None,
+    db: Session = Depends(get_db),
+    _: Principal = Depends(require("read")),
+) -> Response:
+    png = page_image_bytes(db, document_id, page_no, chunk_id)
     return Response(png, media_type="image/png", headers={"Cache-Control": "private, max-age=3600"})

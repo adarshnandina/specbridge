@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Documents · SpecBridge{% endblock %}
+{% block content %}
+<h1>Documents <small>({{ docs|length }})</small></h1>
+<table>
+  <thead><tr><th>Doc key</th><th>Vendor</th><th>Title</th><th>Rev</th><th>Pages</th><th>Source</th><th>Status</th></tr></thead>
+  <tbody>
+  {% for d in docs %}
+  <tr class="{{ '' if d.is_latest else 'superseded' }}">
+    <td>{{ d.doc_key }}</td><td>{{ d.vendor or '' }}</td><td>{{ d.title or '' }}</td>
+    <td>{{ d.revision_label or '' }}{% if not d.is_latest %} <span class="badge">superseded</span>{% endif %}</td>
+    <td>{{ d.page_count }}</td><td>{{ d.source_type }}</td>
+    <td>{{ d.status }}{% if d.error %} <span title="{{ d.error }}">⚠</span>{% endif %}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
