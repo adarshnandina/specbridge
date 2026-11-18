@@ -78,7 +78,7 @@ def validate_datasets(dataset_dir: Path = DATASET_DIR) -> list[str]:
     qs = [q.question for q in qa]
     if len(set(qs)) != len(qs):
         problems.append("duplicate qa questions")
-    counts = Counter(q.type for q in qa)
+    counts: Counter[str] = Counter(q.type for q in qa)
     for t, n in MIN_COUNTS.items():
         if counts[t] < n:
             problems.append(f"type {t}: {counts[t]} < required {n}")

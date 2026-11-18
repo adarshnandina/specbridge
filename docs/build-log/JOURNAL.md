@@ -134,3 +134,15 @@
 **Decisions made:** Extra item fields beyond spec: expect_abstain, forbidden (injection), superseded_value, unit/tolerance. Unanswerable: 10 absent-attribute, 3 nonexistent part, 2 null-field questions
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:13 — 2.1 Parser, chunking, embeddings, ingestion pipeline and CLI
+**Goal:** PyMuPDF parser (blocks+bboxes, tables via find_tables with word-spaced cell text, headings, part-number/revision/vendor detection); fixed and layout chunking with context headers kept out of displayed content; embedder wrapper (bge-small, offline hash embedder for tests); idempotent ingestion with per-index chunks, revision linking, failure recording; 'specbridge ingest' CLI
+**What I did:** PyMuPDF parser (blocks+bboxes, tables via find_tables with word-spaced cell text, headings, part-number/revision/vendor detection); fixed and layout chunking with context headers kept out of displayed content; embedder wrapper (bge-small, offline hash embedder for tests); idempotent ingestion with per-index chunks, revision linking, failure recording; 'specbridge ingest' CLI
+**Files changed:** specbridge/ingestion/* specbridge/cli.py tests/unit/test_chunking.py tests/integration/test_ingestion.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** unit 59 passed total (test_chunking.py 9); integration 8 passed (idempotency, extra index, reingest, revision linking, failure isolation, upload validation). Real run: 'specbridge ingest data/corpus' -> 60 files, 0 failed, 264 chunks (58 tables), 33s incl. model load
+**Eval results (if any):** n/a
+**Problems and how I solved them:** find_tables().extract() dropped spaces in cells -> rebuilt cell text with page.get_textbox per cell; heading-only chunks (vendor banner) merged into following section; IO-Link 'revision 1.1' was mis-detected as datasheet revision -> case-sensitive Revision + lookbehind
+**Decisions made:** Document is skipped only if chunks exist for the requested index (lets experiments build separate indexes from one document row); failed parses recorded as status=failed rows
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md
