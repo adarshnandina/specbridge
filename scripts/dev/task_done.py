@@ -5,6 +5,7 @@ usage: task_done.py ID "Title" --summary S --tests T [--files "a b"] [--problems
        [--decisions D] [--eval E] [--deviations V] [--next N] [--path P ...]
 --path restricts the commit to those pathspecs (default: everything).
 """
+
 from __future__ import annotations
 
 import argparse
@@ -21,8 +22,11 @@ def sh(*cmd: str) -> str:
 
 
 def next_change_no() -> int:
-    nums = [int(m.group(1)) for p in (ROOT / "docs/changes").glob("*.md")
-            if (m := re.match(r"(\d+)-", p.name))]
+    nums = [
+        int(m.group(1))
+        for p in (ROOT / "docs/changes").glob("*.md")
+        if (m := re.match(r"(\d+)-", p.name))
+    ]
     return max(nums, default=0) + 1
 
 
@@ -79,8 +83,12 @@ Part of milestone task {a.id} in SPECBRIDGE_SPEC.md Section 13.
 """)
     prog = ROOT / "docs/build-log/PROGRESS.md"
     text = prog.read_text()
-    text = re.sub(rf"^(- {re.escape(a.id)} .*?) — .*$", r"\1 — done (" + now[:10] + ", HASH)",
-                  text, flags=re.M)
+    text = re.sub(
+        rf"^(- {re.escape(a.id)} .*?) — .*$",
+        r"\1 — done (" + now[:10] + ", HASH)",
+        text,
+        flags=re.M,
+    )
     prog.write_text(text)
     paths = a.path or ["."]
     sh("git", "add", "-A", "--", *paths, "docs", "scripts")

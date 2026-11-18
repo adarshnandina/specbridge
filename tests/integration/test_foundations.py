@@ -1,8 +1,8 @@
 import pytest
-from alembic import command
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine, inspect, select
 
+from alembic import command
 from specbridge import audit
 from specbridge.api.deps import audit_denied
 from specbridge.api.main import create_app
@@ -26,8 +26,18 @@ def test_migrations_up_down_up(pg_url):
     assert "chunks" not in inspect(eng).get_table_names()
     command.upgrade(cfg, "head")
     tables = set(inspect(eng).get_table_names())
-    assert {"documents", "pages", "chunks", "extractions", "agent_runs", "agent_steps",
-            "approvals", "audit_log", "llm_calls", "query_logs"} <= tables
+    assert {
+        "documents",
+        "pages",
+        "chunks",
+        "extractions",
+        "agent_runs",
+        "agent_steps",
+        "approvals",
+        "audit_log",
+        "llm_calls",
+        "query_logs",
+    } <= tables
 
 
 def test_audit_and_denied_survive(db):
@@ -42,8 +52,7 @@ def test_llm_call_rows_and_budget(db):
     p = FakeProvider()
     p.script("qa", "hi", "again")
     s = Settings(_env_file=None, log_llm_payloads=False, llm_daily_budget_usd=5.0)
-    svc = LLMService(p, settings=s, recorder=db_recorder,
-                     budget=BudgetGuard(5.0, db_spent_today))
+    svc = LLMService(p, settings=s, recorder=db_recorder, budget=BudgetGuard(5.0, db_spent_today))
     svc.complete(LLMRequest(messages=[{"role": "user", "content": "q"}], purpose="qa"))
     with session_scope() as sess:
         row = sess.execute(select(LLMCall)).scalars().one()

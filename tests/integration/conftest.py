@@ -4,10 +4,11 @@ import os
 from collections.abc import Iterator
 
 import pytest
-from alembic import command
 from alembic.config import Config
 from sqlalchemy import create_engine, text
 from testcontainers.postgres import PostgresContainer
+
+from alembic import command
 
 
 def alembic_cfg(url: str) -> Config:
@@ -38,10 +39,12 @@ def db(pg_url: str) -> Iterator[object]:
     from specbridge.db.session import get_engine, session_scope
 
     with get_engine().begin() as c:
-        c.execute(text(
-            "TRUNCATE approvals, agent_steps, agent_runs, extractions, chunks, pages, "
-            "documents, audit_log, llm_calls, query_logs RESTART IDENTITY CASCADE"
-        ))
+        c.execute(
+            text(
+                "TRUNCATE approvals, agent_steps, agent_runs, extractions, chunks, pages, "
+                "documents, audit_log, llm_calls, query_logs RESTART IDENTITY CASCADE"
+            )
+        )
     with session_scope() as s:
         yield s
 

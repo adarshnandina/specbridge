@@ -17,7 +17,7 @@ Status: todo | in progress | done | blocked
 - 0.6 LLM provider layer — done (2026-11-18, 0d925bf)
 - 0.7 Auth + RBAC + audit — done (2026-11-18, 05d9f56)
 ### M1 — Corpus and datasets
-- 1.1 Synthetic datasheet generator + ground truth — todo
+- 1.1 Synthetic datasheet generator + ground truth — done (2026-11-18, dba5846)
 - 1.2 Real datasheet manifest + fetch + provisional labels — todo
 - 1.3 qa.jsonl + dataset validation — todo
 - 1.4 ERP mock + seed + faults + tests — todo

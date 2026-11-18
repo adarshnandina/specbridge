@@ -86,3 +86,15 @@
 **Decisions made:** none
 **Deviations from spec:** none
 **Next step:** M1.1 synthetic datasheet generator
+
+## 2026-11-18 13:05 — 1.1 Synthetic datasheet generator and ground truth
+**Goal:** Deterministic generator (seed 42): 3 fictional vendors, 45 parts + 5 rev1.1 + 1 prompt-injection datasheet = 51 PDFs in 4 layout families with format variety; ground truth with per-field evidence pages, lifecycle, replacement candidates; shared candidate rule in specbridge/extraction/fields.py
+**What I did:** Deterministic generator (seed 42): 3 fictional vendors, 45 parts + 5 rev1.1 + 1 prompt-injection datasheet = 51 PDFs in 4 layout families with format variety; ground truth with per-field evidence pages, lifecycle, replacement candidates; shared candidate rule in specbridge/extraction/fields.py
+**Files changed:** corpus/synthetic/* specbridge/extraction/fields.py eval/datasets/extraction_synthetic.jsonl tests/unit/test_corpus.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** tests/unit/test_corpus.py 8 passed (counts, determinism, revisions, scenario invariants, injection doc)
+**Eval results (if any):** n/a
+**Problems and how I solved them:** Initial hash-based split gave 23/28; replaced with rank-based split. Ruff E501 disabled (formatter wraps; long data strings).
+**Decisions made:** Hand-crafted override parts (orphans KD-310/NS-PRS-3400, constraint-scenario NS-IND-1200..1208, injection scenario AL-DIO-101/103/199) guarantee agent scenarios are well-defined; 60/40 dev/test split by sorted part number; GT also stores replacement_candidates
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md
