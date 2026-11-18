@@ -42,7 +42,7 @@ class Settings(BaseSettings):
     rerank_enabled: bool = False
     reranker_model: str = "BAAI/bge-reranker-base"
     chunk_strategy: Literal["fixed", "layout"] = "layout"
-    retrieval_mode: Literal["vector", "keyword", "hybrid"] = "hybrid"
+    retrieval_mode: Literal["vector", "keyword", "hybrid"] = "vector"
     retrieval_top_k: int = Field(8, gt=0)
     default_index: str = "main"
     abstain_min_score: float = 0.0

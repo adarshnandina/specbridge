@@ -15,7 +15,7 @@ from specbridge.config import get_settings
 from specbridge.db.models import Chunk, Document
 from specbridge.ingestion.embeddings import Embedder, get_embedder
 from specbridge.logging_setup import get_logger
-from specbridge.retrieval.hybrid import rrf
+from specbridge.retrieval.hybrid import rrf_scored
 from specbridge.retrieval.keyword import keyword_search
 from specbridge.retrieval.rerank import Reranker, get_reranker
 from specbridge.retrieval.vector import similarities, vector_search
@@ -102,7 +102,7 @@ def retrieve(
         order = [i for i, _ in kw_hits]
         fused = {i: sc for i, sc in kw_hits}
     else:
-        f = rrf([[i for i, _ in vec_hits], [i for i, _ in kw_hits]])
+        f = rrf_scored([vec_hits, kw_hits])
         order = [i for i, _ in f]
         fused = dict(f)
     pool = order[: (RERANK_POOL if rerank else top_k)]

@@ -41,23 +41,31 @@ scripted *compromised model* that obeys injected instructions.
 ## What testing changed (real results, with run ids)
 
 - **Context headers were the biggest lever.** Prefixing chunks with `[vendor | part | title | rev | section]`
-  raised recall@5 from 0.43 to 0.91 on dev (`20261118-134705_ba6fde4_exp4-header-off` vs
-  `20261118-134704_ba6fde4_exp4-header-on`) and 0.43 to 0.87 on test.
-- **I had misattributed a gain.** Layout chunking beat fixed chunking (0.91 vs 0.64), but the header was only
-  on one side. A control with headers on both sides showed no significant difference
-  (`20261118-135103_ba6fde4_exp1-chunking-fixed-header`), so I stopped claiming layout-aware chunking helps retrieval.
+  raised dev recall@5 from 0.38 to 0.77 (`20261118-142303_f14eb9c_exp4-header-off` vs
+  `20261118-142302_f14eb9c_exp4-header-on`) and from 0.43 to 0.87 on test.
+- **I had misattributed a gain.** Layout chunking looked clearly better than fixed chunking, but the header
+  was only on one side. A control with headers on both sides (`20261118-142211_f14eb9c_exp1-chunking-fixed-header`)
+  is numerically at least as good as layout chunks, so I stopped claiming layout-aware chunking helps retrieval.
+- **A clean checkout broke my baseline - and found a real bug.** The same hybrid configuration scored recall@5
+  0.91 in my dev database, 0.84 in a fresh one, and 0.77 once I made the ordering deterministic: ties were
+  broken by random UUIDs. I fixed it (deterministic tie-breaks, tie-aware fusion; two independent indexes now
+  give identical ranks), **re-ran every experiment**, and re-baselined. The old runs are kept and labelled
+  as superseded.
+- **That reversed a decision.** With deterministic ranking, hybrid search was worse than vector-only on every
+  metric on both splits (dev recall@5 0.77 vs 0.88, `20261118-142215_f14eb9c_exp2-mode-hybrid` vs
+  `20261118-142212_f14eb9c_exp2-mode-vector`), so vector-only is now the default.
 - **A reranker made retrieval worse until I fixed it.** It scored chunks without their header (recall@5 0.59,
-  `20261118-134620_ba6fde4_exp3-hybrid-rerank` before the fix); scoring header + content gives recall@1 0.875 vs
-  0.554 (`20261118-134750_ba6fde4_exp3-hybrid-rerank`), at ~800 ms per query, so it stays opt-in.
-- **Hybrid search did not beat vector-only** here (within noise), and **no retrieval-score abstention threshold
-  generalised from dev to test**, so abstention relies on citation verification and the model's own flag.
+  a pre-fix run, `20261118-134620_ba6fde4_exp3-hybrid-rerank`); scoring header + content gives dev recall@1 0.89
+  vs 0.61 for vector-only (`20261118-142216_f14eb9c_exp3-hybrid-rerank`), at ~800 ms per query, so it stays opt-in.
+- **No abstention threshold generalised** from dev to test, so abstention relies on citation verification and
+  the model's own flag (unmeasured with a real model).
 - **A safety test exposed a blind spot in my own harness.** Replacing the stable idempotency key with a random one
   went undetected until I added an ERP fault where the write succeeds but the response is lost (scenario S15).
 - **A "configured" rate limiter did nothing** (slowapi silently exempted every route with the installed FastAPI);
   the test I wrote for it caught that, and I replaced it.
-- **The gate catches regressions:** a deliberately degraded retrieval run fails it with exit code 1
-  (`20261118-134429_9ae7ca4_deliberate-regression`, recall@5 0.911 -> 0.536).
-- **Agent safety:** 15/15 scenarios and 6/6 safety scenarios pass (`20261118-135200_e64a52b_baseline-dev-all`).
+- **The gate catches regressions:** a keyword-only run fails it with exit code 1
+  (`20261118-142214_f14eb9c_exp2-mode-keyword`, recall@5 0.875 -> 0.464).
+- **Agent safety:** 15/15 scenarios and 6/6 safety scenarios pass (`20261118-142407_f14eb9c_baseline-dev-all`).
   Mutation checks - removing the allowlist entry, the four-eyes check, the discontinued filter or the stable
   key - each make a scenario fail.
 

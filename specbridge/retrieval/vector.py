@@ -23,7 +23,8 @@ def vector_search(
     )
     if not include_superseded:
         stmt = stmt.where(Document.is_latest.is_(True))
-    stmt = stmt.order_by(dist, Chunk.id).limit(limit)
+    # Deterministic tie-break (random UUIDs differ per database and made evals irreproducible)
+    stmt = stmt.order_by(dist, Document.doc_key, Chunk.chunk_index).limit(limit)
     return [(r[0], 1.0 - float(r[1])) for r in db.execute(stmt)]
 
 

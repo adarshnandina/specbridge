@@ -16,5 +16,8 @@
 | 2026-11-18 | Gate adds `ops_noise_floor` (20 ms) | A 25% p95 rule is below machine noise for a ~25 ms stage |
 | 2026-11-18 | Gate compares only datasets a suite depends on | Unrelated dataset edits should not invalidate a retrieval baseline |
 | 2026-11-18 | Baseline = full **dev** run (fake provider for LLM suites); test-split report kept separately | CI gate runs on dev so developers never iterate against test |
-| 2026-11-18 | Final defaults unchanged after experiments (layout+header, hybrid, rerank off, ABSTAIN_MIN_SCORE=0.0) | See docs/EXPERIMENTS.md |
+| 2026-11-18 | Retrieval ties broken by (doc_key, chunk_index); keyword ties share a rank in RRF | Random-UUID tie order made a fresh checkout fail the gate (recall@5 0.84 vs 0.91); see EXPERIMENTS.md |
+| 2026-11-18 | Defaults after re-measurement: layout+header, **vector** (was hybrid), rerank off, ABSTAIN_MIN_SCORE=0.0 | Hybrid below vector on every metric on both splits; docs/EXPERIMENTS.md |
+| 2026-11-18 | Runs record the indexed corpus; gate refuses a different corpus | Baseline was measured with 60 docs; a 51-doc index is not comparable |
+| 2026-11-18 | `make ci` ingests synthetic + real datasheets (network) | Baseline includes the real ones as distractors |
 | 2026-11-18 | Reranker scores context header + content | Experiment 3 showed bare content makes reranking harmful |

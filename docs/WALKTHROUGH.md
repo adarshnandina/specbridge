@@ -100,12 +100,10 @@ chunks (`layout`: headings, tables as their own chunk with header row, **context
 separately from `content`, so citations show clean text. `index_name` per chunk lets experiments keep several chunkings in one DB. Idempotent by
 sha256; a document is "skipped" only if the requested index already has its chunks.
 
-**Rejected:** embedding the bare chunk (experiment 4: recall@5 0.43 vs 0.91); one table = one row chunk (loses header context);
+**Rejected:** embedding the bare chunk (experiment 4: dev recall@5 0.375 vs 0.768); one table = one row chunk (loses header context);
 OCR (out of scope; documented).
 
-**Q: What did you learn from the chunking experiment?** That I had confounded two changes. Layout chunks beat fixed chunks by a large margin (0.91 vs 0.64), but
-the header was only on the layout chunks. A control (fixed + header) was within noise of layout (dev 0.857 vs 0.911; test 0.865 vs 0.865). So the evidence supports the header,
-not layout-awareness. I kept layout (tight table highlights, no measured downside) but do not claim it improves retrieval.
+**Q: What did you learn from the chunking experiment?** That I had confounded two changes. Layout chunks looked clearly better than fixed chunks, but the header was only on the layout chunks. A control (fixed + header) is numerically at least as good as layout (dev recall@5 0.893 vs 0.768, flagged weak; test 0.865 vs 0.865). So the evidence supports the header, not layout-awareness. I kept layout (a table gets its own bounding box for tight citation highlights, which this benchmark does not measure) but do not claim it improves retrieval.
 
 **Q: What breaks the parser?** Scans (no text layer), merged/nested cells, wrapped table cells (a value split over two lines), and the table highlight box
 from `find_tables()` can be narrower than the drawn grid.
@@ -115,16 +113,14 @@ from `find_tables()` can be narrower than the drawn grid.
 ## 5. Retrieval (`retrieval/`)
 
 **What it does.** `vector` (pgvector cosine), `keyword` (Postgres FTS, `websearch_to_tsquery('simple')`, `ts_rank_cd` - not BM25), `hybrid` (RRF, k=60,
-top 30 of each), optional cross-encoder rerank of the fused top 20. All configurable per call, which is what lets the eval runner sweep them.
+top 30 of each, tie-aware ranks), optional cross-encoder rerank of the fused top 20. All configurable per call, which is what lets the eval runner sweep them.
 
 **Decisions.** Natural-language questions become an OR of content words (AND would match nothing). The best vector similarity is always computed because it is the abstention signal
 (RRF scores are rank-based and cannot be calibrated). The reranker must see header + content.
 
-**Q: Why hybrid if vector alone scored the same?** Honest answer: on this corpus I cannot show hybrid helps (dev recall@5 0.911 vs 0.875, within noise; vector was numerically ahead on test). I kept it as a default for
-exact part-number robustness on real datasheets, flagged it as a judgement call, and made `RETRIEVAL_MODE` a one-variable switch. With real data I would re-run experiment 2.
+**Q: Why is vector-only the default if you built hybrid?** Because the experiments said so, and I reversed my own first choice. My first pass kept hybrid; a clean checkout then failed my regression gate (the same config scored 0.84 instead of 0.91) and exposed that ties were broken by random UUIDs. After making ranking deterministic and re-measuring everything, hybrid was below vector-only on every metric on both splits (dev recall@5 0.768 vs 0.875; test 0.865 vs 0.892; intervals overlap). The pre-set rule - within noise, prefer the simpler option - gives vector. Hybrid and keyword stay selectable; real part numbers might favour keyword matching and I have not tested that.
 
-**Q: The reranker made things worse at first. What happened?** It scored `chunk.content`, and a table chunk alone does not say which part it belongs to (the header lives in metadata). Recall@5 fell to 0.589. Scoring header + content fixed it
-(recall@1 0.554 -> 0.875, MRR 0.684 -> 0.908) at ~800 ms CPU latency, recall@5 within noise. Both runs are kept in the record; a regression test pins the input.
+**Q: The reranker made things worse at first. What happened?** It scored `chunk.content`, and a table chunk alone does not say which part it belongs to (the header lives in metadata). Recall@5 fell to 0.589 (a pre-fix run, `20261118-134620_ba6fde4_exp3-hybrid-rerank`). Scoring header + content fixed it: dev recall@1 0.893 vs 0.607 for vector-only, recall@5 0.964 vs 0.875 (within noise), at ~800 ms CPU latency, so it is opt-in. A regression test pins the input.
 
 **Q: How would this scale?** pgvector HNSW to a few million chunks on one box; beyond that, a dedicated vector store and a real BM25 engine. Latency here (p50 ~25 ms) is for 264 chunks and proves nothing about scale.
 
@@ -213,9 +209,9 @@ Caveat: the injected claim *can* verify against its source and influence the ran
 
 **Decisions.** Retrieval eval needs no LLM so it gates every change. The gate refuses incomparable runs (different split or datasets a suite depends on). A latency noise floor avoids flaky failures. Fake-provider numbers are labelled *pipeline check* inside every result file.
 
-**Q: How do you know the gate works?** A deliberate keyword-only run (`20261118-134429_9ae7ca4_deliberate-regression`) drops recall@5 from 0.911 to 0.536 and the gate exits 1; unit tests cover every threshold boundary.
+**Q: How do you know the gate works?** A keyword-only run (`20261118-142214_f14eb9c_exp2-mode-keyword`) drops recall@5 from 0.875 to 0.464 and the gate exits 1; unit tests cover every threshold boundary; and a fresh checkout once failed it for real, which exposed the tie-ordering bug.
 
-**Q: How should I read your intervals?** n=56 dev / 37 test, so recall@5 0.91 is "about 0.81-0.96". I call a difference real only if the 95% intervals are disjoint; hybrid vs vector, layout vs fixed+header are not.
+**Q: How should I read your intervals?** n=56 dev / 37 test, so recall@5 0.88 is "about 0.76-0.94". I call a difference real only if the 95% intervals are disjoint; hybrid vs vector, layout vs fixed+header are not.
 
 **Q: What is the weakest part of your evaluation?** Everything LLM-dependent is unmeasured with a real model: QA accuracy, abstention, citation quality, extraction F1 and the validated-record precision, the judge, and experiments 5 and 6. The pipeline and the commands exist; one dev QA run is ~$0.035.
 

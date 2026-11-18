@@ -19,7 +19,7 @@ side in one database (used for experiments 1 and 4).
 ## Consequences
 - One backup, one connection string, one failure domain; joins between chunks and documents
   (e.g. "latest revision only") are plain SQL; `agent_runs`/`approvals`/`audit_log` rows commit atomically with state changes.
-- Retrieval latency is ~25 ms p50 on 264 chunks (run `20261118-132236_7ca7287_initial-retrieval`);
+- Retrieval latency is ~25 ms p50 on 264 chunks (run `20261118-142407_f14eb9c_baseline-dev-all`);
   this says nothing about scale. HNSW post-filtering by `index_name` needs `hnsw.ef_search` raised
   (set per query); at millions of chunks a dedicated vector store should be re-evaluated.
 - The keyword side is Postgres FTS (`ts_rank_cd`), not BM25 (see LIMITATIONS).

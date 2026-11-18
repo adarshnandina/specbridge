@@ -1,0 +1,62 @@
+{
+ "exp1-chunking-layout": {
+  "group": "exp1",
+  "run_id": "20261118-134853_ba6fde4_exp1-chunking-layout",
+  "suite": "retrieval",
+  "split": "test"
+ },
+ "exp1-chunking-fixed": {
+  "group": "exp1",
+  "run_id": "20261118-134857_ba6fde4_exp1-chunking-fixed",
+  "suite": "retrieval",
+  "split": "test"
+ },
+ "exp2-mode-vector": {
+  "group": "exp2",
+  "run_id": "20261118-134858_ba6fde4_exp2-mode-vector",
+  "suite": "retrieval",
+  "split": "test"
+ },
+ "exp2-mode-keyword": {
+  "group": "exp2",
+  "run_id": "20261118-134859_ba6fde4_exp2-mode-keyword",
+  "suite": "retrieval",
+  "split": "test"
+ },
+ "exp2-mode-hybrid": {
+  "group": "exp2",
+  "run_id": "20261118-134900_ba6fde4_exp2-mode-hybrid",
+  "suite": "retrieval",
+  "split": "test"
+ },
+ "exp3-hybrid-rerank": {
+  "group": "exp3",
+  "run_id": "20261118-134901_ba6fde4_exp3-hybrid-rerank",
+  "suite": "retrieval",
+  "split": "test"
+ },
+ "exp4-header-on": {
+  "group": "exp4",
+  "run_id": "20261118-134929_ba6fde4_exp4-header-on",
+  "suite": "retrieval",
+  "split": "test"
+ },
+ "exp4-header-off": {
+  "group": "exp4",
+  "run_id": "20261118-134930_ba6fde4_exp4-header-off",
+  "suite": "retrieval",
+  "split": "test"
+ },
+ "exp7-abstain-calibration": {
+  "group": "exp7",
+  "run_id": "20261118-134931_ba6fde4_exp7-abstain-calibration",
+  "suite": "calibration",
+  "split": "test"
+ },
+ "exp1-chunking-fixed-header": {
+  "group": "exp1",
+  "run_id": "20261118-135105_ba6fde4_exp1-chunking-fixed-header",
+  "suite": "retrieval",
+  "split": "test"
+ }
+}

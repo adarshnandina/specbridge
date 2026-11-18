@@ -93,9 +93,17 @@ def render_tables(split: str) -> str:
         ("exp3", "Experiment 3 - reranker"),
         ("exp4", "Experiment 4 - context header"),
     ):
-        rows = [(n, v) for n, v in idx.items() if v["group"] == group and v["suite"] == "retrieval"]
+        # "v1" entries are historical (measured before the deterministic tie-break): excluded here
+        rows = [
+            (n, v)
+            for n, v in idx.items()
+            if v["group"] == group and v["suite"] == "retrieval" and "v1" not in n
+        ]
         if group == "exp3":
-            rows = [("exp2-mode-hybrid", idx["exp2-mode-hybrid"])] + rows
+            rows = [
+                ("exp2-mode-hybrid", idx["exp2-mode-hybrid"]),
+                ("exp2-mode-vector", idx["exp2-mode-vector"]),
+            ] + rows
         ref = load_run(idx[refs[group]]["run_id"])["aggregates"]["retrieval"]["overall"]
         out += [
             f"**{title}** ({split} split)",

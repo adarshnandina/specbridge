@@ -19,7 +19,9 @@ ourselves on small samples.
   separate final report.
 
 ## Consequences
-- The gate was shown to catch a deliberate regression (keyword-only retrieval: recall@5 0.911 -> 0.536,
-  exit code 1) and to refuse incomparable runs.
+- The gate was shown to catch a deliberate regression (keyword-only retrieval, `20261118-142214_f14eb9c_exp2-mode-keyword`:
+  recall@5 0.875 -> 0.464, exit code 1) and to refuse incomparable runs (split, datasets, indexed corpus).
+- A fresh checkout failed the gate (recall@5 0.84 vs 0.91): ties were broken by random UUIDs, so results depended on the
+  ingest. Fixed with deterministic tie-breaks and corpus recording; everything was re-measured and re-baselined.
 - Small sets mean wide intervals; many differences cannot be resolved (docs/EXPERIMENTS.md).
 - The judge for open questions is uncalibrated until a human scores `judge_calibration.jsonl`.

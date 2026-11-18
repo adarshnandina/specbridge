@@ -25,3 +25,20 @@ def test_build_query_keeps_part_numbers_drops_stopwords():
     assert "NS-IND-1200" in q and "maximum" in q and " the " not in q and " is " not in q
     assert q.count(" or ") == len(q.split(" or ")) - 1
     assert build_query("what is the") == ""
+
+
+def test_competition_ranks_and_tie_aware_fusion():
+    from specbridge.retrieval.hybrid import competition_ranks, rrf_scored
+
+    assert competition_ranks([("a", 3.0), ("b", 2.0), ("c", 2.0), ("d", 1.0)]) == {
+        "a": 1,
+        "b": 2,
+        "c": 2,
+        "d": 4,
+    }
+    # b and c are tied in the keyword list: they must receive identical RRF credit
+    fused = dict(rrf_scored([[("a", 0.9), ("b", 0.8)], [("a", 1.0), ("b", 0.5), ("c", 0.5)]]))
+    assert fused["a"] > fused["b"] > fused["c"]
+    only_kw = dict(rrf_scored([[("x", 1.0)], [("p", 0.5), ("q", 0.5)]]))
+    assert only_kw["p"] == only_kw["q"]  # tie => equal credit, order carries no weight
+    assert [i for i, _ in rrf_scored([[("x", 1.0)], []])] == ["x"]

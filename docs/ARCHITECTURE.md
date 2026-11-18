@@ -39,7 +39,7 @@ flowchart LR
 | `db/` | SQLAlchemy models (Section 6 of the spec), sessions, Alembic migration `0001`, ephemeral databases for hermetic evals |
 | `llm/` | provider protocol, Anthropic/Bedrock/Fake providers, pricing from `config/pricing.yaml`, budget guard, response cache, usage accounting, forced-tool structured output |
 | `ingestion/` | PDF validation, PyMuPDF parser (blocks, tables, headings), `fixed` and `layout` chunking, embeddings, idempotent pipeline, revision linking |
-| `retrieval/` | `vector`, `keyword`, `hybrid` (RRF k=60), optional cross-encoder rerank |
+| `retrieval/` | `vector` (default), `keyword`, `hybrid` (RRF k=60, tie-aware ranks), optional cross-encoder rerank; deterministic tie-breaks |
 | `qa/` | prompt, untrusted-source wrapping, citation verification, abstention |
 | `extraction/` | schema, units, normalisation, validators, extractor with retry, review/approve/push, eval suite |
 | `erp_client/` | httpx client with retries and idempotency keys |
@@ -111,7 +111,7 @@ sequenceDiagram
     participant DB as Postgres
     C->>Q: question
     Q->>R: retrieve(mode, top_k, rerank)
-    R->>DB: vector top 30 + FTS top 30 -> RRF
+    R->>DB: vector top-k (default) | keyword | hybrid: vector + FTS top 30 -> RRF (tie-aware)
     alt no chunks or best similarity < ABSTAIN_MIN_SCORE
         Q-->>C: abstain (no LLM call)
     else
