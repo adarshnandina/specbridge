@@ -1,0 +1,4 @@
+name: exp4-header-off
+description: "Exp 4: layout chunking WITHOUT context header (index exp_nohdr)."
+index_name: exp_nohdr
+retrieval: {mode: hybrid}

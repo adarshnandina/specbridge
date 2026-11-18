@@ -1,0 +1,4 @@
+name: exp4-header-on
+description: "Exp 4: layout chunking WITH context header (index main)."
+index_name: main
+retrieval: {mode: hybrid}

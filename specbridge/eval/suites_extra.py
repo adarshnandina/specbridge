@@ -4,7 +4,11 @@ from __future__ import annotations
 
 import importlib
 
-for _mod in ("specbridge.extraction.eval_suite", "specbridge.agent.eval_suite"):
+for _mod in (
+    "specbridge.extraction.eval_suite",
+    "specbridge.agent.eval_suite",
+    "specbridge.eval.calibration",
+):
     try:
         importlib.import_module(_mod)
     except ModuleNotFoundError as exc:

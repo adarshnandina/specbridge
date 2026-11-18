@@ -1,0 +1,4 @@
+name: exp2-mode-hybrid
+description: "Exp 2: hybrid (RRF over vector + keyword)."
+index_name: main
+retrieval: {mode: hybrid}

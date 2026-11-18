@@ -1,0 +1,4 @@
+name: exp1-chunking-fixed
+description: "Exp 1: fixed ~300-token chunks with 50 overlap, no context header. Index exp_fixed."
+index_name: exp_fixed
+retrieval: {mode: hybrid}

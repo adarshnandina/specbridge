@@ -1,0 +1,3 @@
+name: exp6-extraction-retry
+description: "Exp 6: extraction with the validation-retry loop (needs API key)."
+extraction: {model: claude-haiku-5-5, retry: true, include_real: true}

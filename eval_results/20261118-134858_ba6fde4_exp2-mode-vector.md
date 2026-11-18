@@ -1,0 +1,41 @@
+# Eval run `20261118-134858_ba6fde4_exp2-mode-vector`
+
+- suites: retrieval · split: **test** · provider: fake
+- git: `ba6fde4` · created 2026-11-18T13:48:58 · duration 0.85 s · cost $0.0000
+- embedding model: BAAI/bge-small-en-v1.5 · models: n/a
+- prompt versions: n/a
+- config: `{"name": "exp2-mode-vector", "description": "Exp 2: vector (pgvector cosine) only.", "index_name": "main", "retrieval": {"mode": "vector"}, "qa": {}, "extraction": {}, "agent": {}}`
+
+## Retrieval
+
+| metric | value [95% CI] |
+|---|---|
+| recall_at_1 | 0.757 [0.599, 0.866] (n=37) |
+| recall_at_3 | 0.865 [0.720, 0.941] (n=37) |
+| recall_at_5 | 0.892 [0.753, 0.957] (n=37) |
+| recall_at_10 | 0.946 [0.823, 0.985] (n=37) |
+| mrr | 0.815 (n=37) |
+
+| type | n | recall@5 | mrr |
+|---|---|---|---|
+| cross_doc | 6 | 0.667 [0.300, 0.903] (n=6) | 0.472 |
+| factual | 14 | 0.857 [0.601, 0.960] (n=14) | 0.738 |
+| injection | 2 | 1.000 [0.342, 1.000] (n=2) | 1.000 |
+| open | 4 | 1.000 [0.510, 1.000] (n=4) | 1.000 |
+| revision | 3 | 1.000 [0.439, 1.000] (n=3) | 1.000 |
+| table_lookup | 8 | 1.000 [0.676, 1.000] (n=8) | 1.000 |
+
+## Ops
+
+```json
+{
+ "retrieval": {
+  "retrieval_latency_ms": {
+   "n": 37,
+   "p50": 22.0,
+   "p95": 24.0,
+   "mean": 21.756756756756758
+  }
+ }
+}
+```

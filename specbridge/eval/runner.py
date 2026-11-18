@@ -39,7 +39,7 @@ from specbridge.retrieval.service import retrieve
 
 log = get_logger("specbridge.eval")
 RESULTS_DIR = Path("eval_results")
-SUITES = ("retrieval", "qa", "extraction", "agent")
+SUITES = ("retrieval", "qa", "extraction", "agent")  # "all"; "calibration" is run explicitly
 
 
 class EvalBudgetError(RuntimeError):
@@ -339,7 +339,7 @@ def register_suite(name: str, fn: Callable[[SuiteContext], SuiteOutput]) -> None
 
 
 def suite_item_count(suite: str, split: str) -> int:
-    if suite in ("retrieval", "qa"):
+    if suite in ("retrieval", "qa", "calibration"):
         return len(load_qa(split=split))
     if suite == "extraction":
         from specbridge.eval.datasets import DATASET_DIR, read_jsonl
@@ -497,6 +497,29 @@ def render_markdown(r: dict[str, Any]) -> str:
     for key in ("extraction", "extraction_real"):
         if key in agg:
             L += _render_extraction(key, agg[key])
+    if "calibration" in agg:
+        c = agg["calibration"]
+        L += [
+            "",
+            "## Abstention calibration",
+            "",
+            f"- criterion: {c['criterion']}",
+            f"- recommended threshold: **{c['recommended_threshold']}**",
+            f"- at that threshold: precision {fmt_metric(c['recommended_at']['precision'])}, "
+            f"recall {fmt_metric(c['recommended_at']['recall'])}, over-abstention "
+            f"{fmt_metric(c['recommended_at']['over_abstention'])}",
+            f"- mean top similarity: answerable {c['score_summary']['answerable_mean']:.3f} "
+            f"(n={c['score_summary']['n_answerable']}), unanswerable "
+            f"{c['score_summary']['unanswerable_mean']:.3f} (n={c['score_summary']['n_unanswerable']})",
+            "",
+            "| threshold | abstained | precision | recall | over-abstention |",
+            "|---|---|---|---|---|",
+        ]
+        for row in c["curve"][::5]:
+            L.append(
+                f"| {row['threshold']:.2f} | {row['abstained']} | {fmt_metric(row['precision'])} | "
+                f"{fmt_metric(row['recall'])} | {fmt_metric(row['over_abstention'])} |"
+            )
     if "agent" in agg:
         a = agg["agent"]
         L += [
@@ -510,7 +533,7 @@ def render_markdown(r: dict[str, Any]) -> str:
         for f in a["failures"]:
             L.append(f"- FAILED {f['id']}: {'; '.join(f['failures'])}")
     for k, v in agg.items():
-        if k not in ("retrieval", "qa", "extraction", "extraction_real", "agent"):
+        if k not in ("retrieval", "qa", "extraction", "extraction_real", "agent", "calibration"):
             L += ["", f"## {k}", "", "```json", json.dumps(v, indent=1, default=str)[:6000], "```"]
     L += ["", "## Ops", "", "```json", json.dumps(r["ops"], indent=1, default=str), "```", ""]
     return "\n".join(L)

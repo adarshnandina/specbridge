@@ -1,0 +1,3 @@
+name: exp6-extraction-single-pass
+description: "Exp 6: extraction without the validation-retry loop (needs API key)."
+extraction: {model: claude-haiku-5-5, retry: false, include_real: true}

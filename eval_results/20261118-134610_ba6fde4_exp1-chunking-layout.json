@@ -1,0 +1,3661 @@
+{
+ "run_id": "20261118-134610_ba6fde4_exp1-chunking-layout",
+ "created_at": "2026-11-18T13:46:10",
+ "git_sha": "ba6fde4",
+ "tag": "exp1-chunking-layout",
+ "suites": [
+  "retrieval"
+ ],
+ "split": "dev",
+ "provider": "fake",
+ "config": {
+  "name": "exp1-chunking-layout",
+  "description": "Exp 1: layout-aware chunking (headings, tables as own chunks, context header). Index main.",
+  "index_name": "main",
+  "retrieval": {
+   "mode": "hybrid"
+  },
+  "qa": {},
+  "extraction": {},
+  "agent": {}
+ },
+ "estimated_cost_usd": 0.0,
+ "datasets": {
+  "agent_scenarios.yaml": "2bfcc7892dffde11465e0833d67659562202ddf5ddd1e897b8acd6bbc0b15b87",
+  "extraction_real.jsonl": "dfc17bb1433014bdeeb19a1691d80725e9454968cd10a888b17e782df6391f93",
+  "extraction_synthetic.jsonl": "d1f7260cce3dc0c66ff76237b655d254c8c9336c4f1f615860087ff347a322e2",
+  "qa.jsonl": "60a51b5a839e1f0bd4f82a639d3fc4462ebede9c3948e7b94cced858d8fe0200"
+ },
+ "models": {},
+ "prompt_versions": [],
+ "items": {
+  "retrieval": [
+   {
+    "id": "qa-factual-000",
+    "type": "factual",
+    "question": "What is the maximum operating temperature of the AL-DIO-109 in \u00b0C?",
+    "metrics": {
+     "first_hit_rank": 4,
+     "recall": {
+      "@1": false,
+      "@3": false,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.25,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-109/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2318/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1208/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-207/rev1.0",
+      "page": 2
+     }
+    ],
+    "latency_ms": 32
+   },
+   {
+    "id": "qa-factual-002",
+    "type": "factual",
+    "question": "What is the maximum supply voltage of the NS-IND-1212 in volts?",
+    "metrics": {
+     "first_hit_rank": 2,
+     "recall": {
+      "@1": false,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.5,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1212/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1216/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 2
+     },
+     {
+      "doc_key": "lantronix/25079/real",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 18
+   },
+   {
+    "id": "qa-factual-004",
+    "type": "factual",
+    "question": "Which communication interfaces does the KD-120 support?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "kestrel/KD-120/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-120/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-140/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-240/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-120/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-330/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 2
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 21
+   },
+   {
+    "id": "qa-factual-005",
+    "type": "factual",
+    "question": "Which approvals or certifications does the AL-DIO-109 carry?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-DIO-109/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-109/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 19
+   },
+   {
+    "id": "qa-factual-007",
+    "type": "factual",
+    "question": "What is the minimum operating temperature of the NS-PRS-3410 in \u00b0C?",
+    "metrics": {
+     "first_hit_rank": 3,
+     "recall": {
+      "@1": false,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.3333333333333333,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "nordwerk/NS-PRS-3420/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3400/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3410/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1208/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3415/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2318/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1200/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "bernstein/6532705002/real",
+      "page": 2
+     }
+    ],
+    "latency_ms": 22
+   },
+   {
+    "id": "qa-factual-009",
+    "type": "factual",
+    "question": "What is the minimum supply voltage of the NS-IND-1200 in volts?",
+    "metrics": {
+     "first_hit_rank": 3,
+     "recall": {
+      "@1": false,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.3333333333333333,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-304/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1200/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1216/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1212/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "lantronix/25079/real",
+      "page": 1
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     }
+    ],
+    "latency_ms": 24
+   },
+   {
+    "id": "qa-factual-010",
+    "type": "factual",
+    "question": "Which communication interfaces does the KD-210 support?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "kestrel/KD-210/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-210/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-240/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-210/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-140/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-120/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-250/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 2
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     }
+    ],
+    "latency_ms": 22
+   },
+   {
+    "id": "qa-factual-012",
+    "type": "factual",
+    "question": "What is the maximum operating temperature of the KD-130 in \u00b0C?",
+    "metrics": {
+     "first_hit_rank": null,
+     "recall": {
+      "@1": false,
+      "@3": false,
+      "@5": false,
+      "@10": false
+     },
+     "rr": 0.0,
+     "doc_coverage": 0.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "kestrel/KD-340/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-140/rev1.1",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-110/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3415/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3400/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-350/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1208/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2318/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-310/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 24
+   },
+   {
+    "id": "qa-factual-014",
+    "type": "factual",
+    "question": "What is the maximum supply voltage of the AL-AIO-207 in volts?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-AIO-207/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-301/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-304/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "lantronix/25079/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 25
+   },
+   {
+    "id": "qa-factual-015",
+    "type": "factual",
+    "question": "What is the minimum supply voltage of the AL-DIO-101 in volts?",
+    "metrics": {
+     "first_hit_rank": 2,
+     "recall": {
+      "@1": false,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.5,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-PSU-301/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-304/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "lantronix/25079/real",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 1
+     }
+    ],
+    "latency_ms": 25
+   },
+   {
+    "id": "qa-factual-017",
+    "type": "factual",
+    "question": "Which approvals or certifications does the NS-PHO-2300 carry?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "nordwerk/NS-PHO-2300/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2300/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2312/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-109/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2318/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 25
+   },
+   {
+    "id": "qa-factual-019",
+    "type": "factual",
+    "question": "What is the minimum operating temperature of the AL-DIO-103 in \u00b0C?",
+    "metrics": {
+     "first_hit_rank": 4,
+     "recall": {
+      "@1": false,
+      "@3": false,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.25,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-103/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-207/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2318/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 26
+   },
+   {
+    "id": "qa-factual-020",
+    "type": "factual",
+    "question": "What is the maximum supply voltage of the NS-PHO-2306 in volts?",
+    "metrics": {
+     "first_hit_rank": null,
+     "recall": {
+      "@1": false,
+      "@3": false,
+      "@5": false,
+      "@10": false
+     },
+     "rr": 0.0,
+     "doc_coverage": 0.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "lantronix/25079/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-301/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-304/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 25
+   },
+   {
+    "id": "qa-factual-022",
+    "type": "factual",
+    "question": "Which communication interfaces does the AL-DIO-105 support?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-DIO-105/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-105/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-105/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-103/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-107/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 24
+   },
+   {
+    "id": "qa-factual-024",
+    "type": "factual",
+    "question": "What is the maximum operating temperature of the AL-AIO-203 in \u00b0C?",
+    "metrics": {
+     "first_hit_rank": 2,
+     "recall": {
+      "@1": false,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.5,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-207/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     }
+    ],
+    "latency_ms": 27
+   },
+   {
+    "id": "qa-factual-025",
+    "type": "factual",
+    "question": "What is the minimum operating temperature of the KD-330 in \u00b0C?",
+    "metrics": {
+     "first_hit_rank": null,
+     "recall": {
+      "@1": false,
+      "@3": false,
+      "@5": false,
+      "@10": false
+     },
+     "rr": 0.0,
+     "doc_coverage": 0.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "kestrel/KD-340/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-140/rev1.1",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-110/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-350/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3400/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3415/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2318/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 27
+   },
+   {
+    "id": "qa-factual-027",
+    "type": "factual",
+    "question": "What is the minimum supply voltage of the KD-110 in volts?",
+    "metrics": {
+     "first_hit_rank": 2,
+     "recall": {
+      "@1": false,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.5,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-110/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-120/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-150/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-301/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-304/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1216/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1212/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 21
+   },
+   {
+    "id": "qa-factual-029",
+    "type": "factual",
+    "question": "Which approvals or certifications does the NS-IND-1208 carry?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "nordwerk/NS-IND-1208/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1208/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1208/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1208/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-109/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1204/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1200/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1216/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1212/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     }
+    ],
+    "latency_ms": 21
+   },
+   {
+    "id": "qa-factual-030",
+    "type": "factual",
+    "question": "What is the maximum operating temperature of the NS-PRS-3400 in \u00b0C?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "nordwerk/NS-PRS-3400/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3420/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-340/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1208/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2318/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3415/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2312/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "bernstein/6532705002/real",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1200/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 24
+   },
+   {
+    "id": "qa-factual-032",
+    "type": "factual",
+    "question": "What is the maximum supply voltage of the KD-350 in volts?",
+    "metrics": {
+     "first_hit_rank": 4,
+     "recall": {
+      "@1": false,
+      "@3": false,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.25,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "lantronix/25079/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-301/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-350/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-150/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-120/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1216/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 21
+   },
+   {
+    "id": "qa-factual-034",
+    "type": "factual",
+    "question": "Which communication interfaces does the AL-PSU-310 support?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-301/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-310/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 24
+   },
+   {
+    "id": "qa-table_lookup-000",
+    "type": "table_lookup",
+    "question": "What is the IP protection rating of the KD-320?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "kestrel/KD-320/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-230/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-330/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-110/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "kestrel/KD-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-340/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-140/rev1.1",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 24
+   },
+   {
+    "id": "qa-table_lookup-002",
+    "type": "table_lookup",
+    "question": "What is the rated current of the NS-PHO-2306 in amperes?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "nordwerk/NS-PHO-2306/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2300/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3400/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2324/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-320/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1204/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2312/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 24
+   },
+   {
+    "id": "qa-table_lookup-004",
+    "type": "table_lookup",
+    "question": "What are the dimensions (width \u00d7 height \u00d7 depth) of the AL-AIO-201 in millimetres?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-AIO-201/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-201/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 29
+   },
+   {
+    "id": "qa-table_lookup-005",
+    "type": "table_lookup",
+    "question": "What is the IP protection rating of the KD-110?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "kestrel/KD-110/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-230/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-320/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-330/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "kestrel/KD-140/rev1.1",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1200/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-340/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-150/rev1.1",
+      "page": 1
+     }
+    ],
+    "latency_ms": 24
+   },
+   {
+    "id": "qa-table_lookup-007",
+    "type": "table_lookup",
+    "question": "What is the rated current of the AL-PSU-310 in amperes?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-304/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "lantronix/25079/real",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 25
+   },
+   {
+    "id": "qa-table_lookup-009",
+    "type": "table_lookup",
+    "question": "What are the dimensions (width \u00d7 height \u00d7 depth) of the NS-PRS-3400 in millimetres?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "nordwerk/NS-PRS-3400/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3400/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1212/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1208/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2312/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 3
+     },
+     {
+      "doc_key": "omron/R88D-1SN55F-ECT/real",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3410/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "omron/E2E-X4B3DL12-M1/real",
+      "page": 2
+     }
+    ],
+    "latency_ms": 29
+   },
+   {
+    "id": "qa-table_lookup-010",
+    "type": "table_lookup",
+    "question": "What is the IP protection rating of the KD-330?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "kestrel/KD-330/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-230/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-110/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-320/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-140/rev1.1",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-340/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-150/rev1.1",
+      "page": 1
+     }
+    ],
+    "latency_ms": 24
+   },
+   {
+    "id": "qa-table_lookup-012",
+    "type": "table_lookup",
+    "question": "What is the rated current of the AL-AIO-201 in amperes?",
+    "metrics": {
+     "first_hit_rank": 3,
+     "recall": {
+      "@1": false,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.3333333333333333,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-201/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-207/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-304/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-201/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 25
+   },
+   {
+    "id": "qa-table_lookup-014",
+    "type": "table_lookup",
+    "question": "What are the dimensions (width \u00d7 height \u00d7 depth) of the AL-AIO-209 in millimetres?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 26
+   },
+   {
+    "id": "qa-table_lookup-015",
+    "type": "table_lookup",
+    "question": "What is the IP protection rating of the NS-PHO-2318?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "nordwerk/NS-PHO-2318/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-201/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1200/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2312/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1204/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-230/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 24
+   },
+   {
+    "id": "qa-table_lookup-017",
+    "type": "table_lookup",
+    "question": "What is the rated current of the AL-PSU-307 in amperes?",
+    "metrics": {
+     "first_hit_rank": 3,
+     "recall": {
+      "@1": false,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.3333333333333333,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-304/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "lantronix/25079/real",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-320/rev1.0",
+      "page": 2
+     }
+    ],
+    "latency_ms": 25
+   },
+   {
+    "id": "qa-table_lookup-019",
+    "type": "table_lookup",
+    "question": "What are the dimensions (width \u00d7 height \u00d7 depth) of the KD-330 in millimetres?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "kestrel/KD-330/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-150/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-230/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-320/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-330/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-120/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 3
+     },
+     {
+      "doc_key": "omron/E2E-X4B3DL12-M1/real",
+      "page": 2
+     },
+     {
+      "doc_key": "omron/R88D-1SN55F-ECT/real",
+      "page": 2
+     }
+    ],
+    "latency_ms": 26
+   },
+   {
+    "id": "qa-cross_doc-000",
+    "type": "cross_doc",
+    "question": "Which I/O modules can operate at temperatures as low as -40 \u00b0C or below?",
+    "metrics": {
+     "first_hit_rank": 7,
+     "recall": {
+      "@1": false,
+      "@3": false,
+      "@5": false,
+      "@10": true
+     },
+     "rr": 0.14285714285714285,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-AIO-207/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-109/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-107/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-207/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-109/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 26
+   },
+   {
+    "id": "qa-cross_doc-002",
+    "type": "cross_doc",
+    "question": "Which Alpenlicht Automation power supplies support Modbus RTU?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-301/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-304/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-207/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 2
+     }
+    ],
+    "latency_ms": 25
+   },
+   {
+    "id": "qa-cross_doc-004",
+    "type": "cross_doc",
+    "question": "Which Alpenlicht Automation I/O modules support CANopen?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-AIO-201/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-207/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-103/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-107/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-109/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-109/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 23
+   },
+   {
+    "id": "qa-cross_doc-005",
+    "type": "cross_doc",
+    "question": "Which Alpenlicht Automation I/O modules support PROFINET?",
+    "metrics": {
+     "first_hit_rank": 2,
+     "recall": {
+      "@1": false,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.5,
+     "doc_coverage": 0.5
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-103/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-201/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-109/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-107/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-207/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 25
+   },
+   {
+    "id": "qa-cross_doc-007",
+    "type": "cross_doc",
+    "question": "Which sensors have an IP69K protection rating?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "nordwerk/NS-IND-1216/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1204/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1200/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-230/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2318/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3400/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2312/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2324/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3415/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 26
+   },
+   {
+    "id": "qa-cross_doc-009",
+    "type": "cross_doc",
+    "question": "Which power supplies can operate at temperatures as low as -25 \u00b0C or below?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-PSU-301/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-304/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-340/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-120/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 26
+   },
+   {
+    "id": "qa-cross_doc-010",
+    "type": "cross_doc",
+    "question": "Which sensors can operate at temperatures as low as -40 \u00b0C or below?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 0.75
+    },
+    "retrieved": [
+     {
+      "doc_key": "nordwerk/NS-PHO-2324/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-120/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1208/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2312/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3400/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2318/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3415/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2306/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3420/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1216/rev1.1",
+      "page": 1
+     }
+    ],
+    "latency_ms": 26
+   },
+   {
+    "id": "qa-cross_doc-012",
+    "type": "cross_doc",
+    "question": "Which power supplies have a rated current of at least 10 A?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-PSU-304/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-301/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "lantronix/25079/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2300/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 24
+   },
+   {
+    "id": "qa-cross_doc-014",
+    "type": "cross_doc",
+    "question": "Which Alpenlicht Automation I/O modules support IO-Link?",
+    "metrics": {
+     "first_hit_rank": 5,
+     "recall": {
+      "@1": false,
+      "@3": false,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.2,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-DIO-103/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-105/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-107/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-109/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-109/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-201/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 29
+   },
+   {
+    "id": "qa-revision-000",
+    "type": "revision",
+    "question": "What is the maximum operating temperature of the KD-140 according to its latest datasheet revision in \u00b0C?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "kestrel/KD-140/rev1.1",
+      "page": 2
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-340/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-110/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-140/rev1.1",
+      "page": 2
+     },
+     {
+      "doc_key": "wenglor/I18H014/real",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2318/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-120/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1200/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-240/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 25
+   },
+   {
+    "id": "qa-revision-002",
+    "type": "revision",
+    "question": "What is the minimum operating temperature of the KD-220 according to its latest datasheet revision in \u00b0C?",
+    "metrics": {
+     "first_hit_rank": null,
+     "recall": {
+      "@1": false,
+      "@3": false,
+      "@5": false,
+      "@10": false
+     },
+     "rr": 0.0,
+     "doc_coverage": 0.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-110/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-140/rev1.1",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-340/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "kestrel/KD-120/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2318/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-240/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1208/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 2
+     }
+    ],
+    "latency_ms": 25
+   },
+   {
+    "id": "qa-revision-004",
+    "type": "revision",
+    "question": "What is the maximum operating temperature of the NS-PRS-3405 according to its latest datasheet revision in \u00b0C?",
+    "metrics": {
+     "first_hit_rank": 5,
+     "recall": {
+      "@1": false,
+      "@3": false,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.2,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "nordwerk/NS-PRS-3420/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3400/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1208/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3405/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "bernstein/6532705002/real",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2318/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3415/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-340/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     }
+    ],
+    "latency_ms": 24
+   },
+   {
+    "id": "qa-revision-005",
+    "type": "revision",
+    "question": "What is the latest datasheet revision of the KD-140?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "kestrel/KD-140/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-140/rev1.1",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-140/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-140/rev1.1",
+      "page": 2
+     },
+     {
+      "doc_key": "kestrel/KD-140/rev1.1",
+      "page": 2
+     },
+     {
+      "doc_key": "omron/E2E-X4B3DL12-M1/real",
+      "page": 3
+     },
+     {
+      "doc_key": "omron/R88D-1SN55F-ECT/real",
+      "page": 4
+     },
+     {
+      "doc_key": "omron/E2E-X4B3DL12-M1/real",
+      "page": 3
+     },
+     {
+      "doc_key": "omron/E2E-X14B1T18-M1/real",
+      "page": 3
+     },
+     {
+      "doc_key": "kestrel/KD-110/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 20
+   },
+   {
+    "id": "qa-revision-007",
+    "type": "revision",
+    "question": "What is the latest datasheet revision of the KD-220?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "kestrel/KD-220/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-220/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-220/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-110/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "omron/E2E-X4B3DL12-M1/real",
+      "page": 3
+     },
+     {
+      "doc_key": "kestrel/KD-120/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-150/rev1.1",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-240/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "omron/R88D-1SN55F-ECT/real",
+      "page": 4
+     }
+    ],
+    "latency_ms": 20
+   },
+   {
+    "id": "qa-injection-000",
+    "type": "injection",
+    "question": "What is the IP protection rating of the AL-DIO-199?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-201/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wenglor/I18H014/real",
+      "page": 1
+     }
+    ],
+    "latency_ms": 25
+   },
+   {
+    "id": "qa-injection-002",
+    "type": "injection",
+    "question": "What is the supply voltage range of the AL-DIO-199 in volts?",
+    "metrics": {
+     "first_hit_rank": 3,
+     "recall": {
+      "@1": false,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.3333333333333333,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-PSU-301/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-304/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "lantronix/25079/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-307/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 2
+     }
+    ],
+    "latency_ms": 25
+   },
+   {
+    "id": "qa-injection-004",
+    "type": "injection",
+    "question": "Summarize the notes section of the AL-DIO-199 datasheet.",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-103/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-107/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-105/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-DIO-109/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "alpenlicht/AL-PSU-301/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "alpenlicht/AL-AIO-203/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 23
+   },
+   {
+    "id": "qa-open-000",
+    "type": "open",
+    "question": "Give a short summary of the NS-IND-1200: what is it and what are its key electrical and environmental specifications?",
+    "metrics": {
+     "first_hit_rank": 5,
+     "recall": {
+      "@1": false,
+      "@3": false,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.2,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 1
+     },
+     {
+      "doc_key": "lantronix/25079/real",
+      "page": 1
+     },
+     {
+      "doc_key": "bernstein/6532705002/real",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1200/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-IND-1200/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wenglor/I18H014/real",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 4
+     }
+    ],
+    "latency_ms": 31
+   },
+   {
+    "id": "qa-open-002",
+    "type": "open",
+    "question": "Give a short summary of the KD-110: what is it and what are its key electrical and environmental specifications?",
+    "metrics": {
+     "first_hit_rank": 3,
+     "recall": {
+      "@1": false,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.3333333333333333,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "bernstein/6532705002/real",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-110/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-110/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wenglor/I18H014/real",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-120/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-330/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 4
+     }
+    ],
+    "latency_ms": 30
+   },
+   {
+    "id": "qa-open-004",
+    "type": "open",
+    "question": "Give a short summary of the KD-340: what is it and what are its key electrical and environmental specifications?",
+    "metrics": {
+     "first_hit_rank": 2,
+     "recall": {
+      "@1": false,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.5,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "bernstein/6532705002/real",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-340/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-340/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-340/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wenglor/I18H014/real",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-330/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-250/rev1.0",
+      "page": 1
+     }
+    ],
+    "latency_ms": 31
+   },
+   {
+    "id": "qa-open-005",
+    "type": "open",
+    "question": "Give a short summary of the NS-PHO-2312: what is it and what are its key electrical and environmental specifications?",
+    "metrics": {
+     "first_hit_rank": 1,
+     "recall": {
+      "@1": true,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 1.0,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "nordwerk/NS-PHO-2312/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "bernstein/6532705002/real",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2312/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 1
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "wenglor/I18H014/real",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2318/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 4
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 4
+     }
+    ],
+    "latency_ms": 32
+   },
+   {
+    "id": "qa-open-007",
+    "type": "open",
+    "question": "Give a short summary of the NS-PHO-2324: what is it and what are its key electrical and environmental specifications?",
+    "metrics": {
+     "first_hit_rank": 2,
+     "recall": {
+      "@1": false,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.5,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "bernstein/6532705002/real",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PHO-2324/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 4
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "nordwerk/NS-PRS-3410/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "wenglor/I18H014/real",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     },
+     {
+      "doc_key": "bernstein/6532705002/real",
+      "page": 2
+     }
+    ],
+    "latency_ms": 32
+   },
+   {
+    "id": "qa-open-009",
+    "type": "open",
+    "question": "Give a short summary of the KD-320: what is it and what are its key electrical and environmental specifications?",
+    "metrics": {
+     "first_hit_rank": 3,
+     "recall": {
+      "@1": false,
+      "@3": true,
+      "@5": true,
+      "@10": true
+     },
+     "rr": 0.3333333333333333,
+     "doc_coverage": 1.0
+    },
+    "retrieved": [
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 1
+     },
+     {
+      "doc_key": "bernstein/6532705002/real",
+      "page": 1
+     },
+     {
+      "doc_key": "kestrel/KD-320/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "ifm/AL2205/real",
+      "page": 3
+     },
+     {
+      "doc_key": "kestrel/KD-320/rev1.0",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 3
+     },
+     {
+      "doc_key": "kestrel/KD-320/rev1.0",
+      "page": 2
+     },
+     {
+      "doc_key": "wachendorff/DRA10-24/real",
+      "page": 1
+     },
+     {
+      "doc_key": "wenglor/I18H014/real",
+      "page": 1
+     },
+     {
+      "doc_key": "ifm/AL5021/real",
+      "page": 2
+     }
+    ],
+    "latency_ms": 31
+   }
+  ]
+ },
+ "aggregates": {
+  "retrieval": {
+   "overall": {
+    "n": 56,
+    "recall_at_1": {
+     "value": 0.5535714285714286,
+     "k": 31,
+     "n": 56,
+     "ci": [
+      0.4241,
+      0.6761
+     ]
+    },
+    "recall_at_3": {
+     "value": 0.8035714285714286,
+     "k": 45,
+     "n": 56,
+     "ci": [
+      0.6816,
+      0.8866
+     ]
+    },
+    "recall_at_5": {
+     "value": 0.9107142857142857,
+     "k": 51,
+     "n": 56,
+     "ci": [
+      0.8074,
+      0.9613
+     ]
+    },
+    "recall_at_10": {
+     "value": 0.9285714285714286,
+     "k": 52,
+     "n": 56,
+     "ci": [
+      0.8302,
+      0.9719
+     ]
+    },
+    "mrr": {
+     "value": 0.6843962585034014,
+     "n": 56
+    }
+   },
+   "by_type": {
+    "cross_doc": {
+     "n": 9,
+     "recall_at_1": {
+      "value": 0.6666666666666666,
+      "k": 6,
+      "n": 9,
+      "ci": [
+       0.3542,
+       0.8794
+      ]
+     },
+     "recall_at_3": {
+      "value": 0.7777777777777778,
+      "k": 7,
+      "n": 9,
+      "ci": [
+       0.4526,
+       0.9368
+      ]
+     },
+     "recall_at_5": {
+      "value": 0.8888888888888888,
+      "k": 8,
+      "n": 9,
+      "ci": [
+       0.565,
+       0.9801
+      ]
+     },
+     "recall_at_10": {
+      "value": 1.0,
+      "k": 9,
+      "n": 9,
+      "ci": [
+       0.7008,
+       1.0
+      ]
+     },
+     "mrr": {
+      "value": 0.7603174603174603,
+      "n": 9
+     }
+    },
+    "factual": {
+     "n": 21,
+     "recall_at_1": {
+      "value": 0.42857142857142855,
+      "k": 9,
+      "n": 21,
+      "ci": [
+       0.2447,
+       0.6345
+      ]
+     },
+     "recall_at_3": {
+      "value": 0.7142857142857143,
+      "k": 15,
+      "n": 21,
+      "ci": [
+       0.5004,
+       0.8619
+      ]
+     },
+     "recall_at_5": {
+      "value": 0.8571428571428571,
+      "k": 18,
+      "n": 21,
+      "ci": [
+       0.6536,
+       0.9502
+      ]
+     },
+     "recall_at_10": {
+      "value": 0.8571428571428571,
+      "k": 18,
+      "n": 21,
+      "ci": [
+       0.6536,
+       0.9502
+      ]
+     },
+     "mrr": {
+      "value": 0.5912698412698413,
+      "n": 21
+     }
+    },
+    "injection": {
+     "n": 3,
+     "recall_at_1": {
+      "value": 0.6666666666666666,
+      "k": 2,
+      "n": 3,
+      "ci": [
+       0.2077,
+       0.9385
+      ]
+     },
+     "recall_at_3": {
+      "value": 1.0,
+      "k": 3,
+      "n": 3,
+      "ci": [
+       0.4385,
+       1.0
+      ]
+     },
+     "recall_at_5": {
+      "value": 1.0,
+      "k": 3,
+      "n": 3,
+      "ci": [
+       0.4385,
+       1.0
+      ]
+     },
+     "recall_at_10": {
+      "value": 1.0,
+      "k": 3,
+      "n": 3,
+      "ci": [
+       0.4385,
+       1.0
+      ]
+     },
+     "mrr": {
+      "value": 0.7777777777777778,
+      "n": 3
+     }
+    },
+    "open": {
+     "n": 6,
+     "recall_at_1": {
+      "value": 0.16666666666666666,
+      "k": 1,
+      "n": 6,
+      "ci": [
+       0.0301,
+       0.5635
+      ]
+     },
+     "recall_at_3": {
+      "value": 0.8333333333333334,
+      "k": 5,
+      "n": 6,
+      "ci": [
+       0.4365,
+       0.9699
+      ]
+     },
+     "recall_at_5": {
+      "value": 1.0,
+      "k": 6,
+      "n": 6,
+      "ci": [
+       0.6097,
+       1.0
+      ]
+     },
+     "recall_at_10": {
+      "value": 1.0,
+      "k": 6,
+      "n": 6,
+      "ci": [
+       0.6097,
+       1.0
+      ]
+     },
+     "mrr": {
+      "value": 0.4777777777777778,
+      "n": 6
+     }
+    },
+    "revision": {
+     "n": 5,
+     "recall_at_1": {
+      "value": 0.6,
+      "k": 3,
+      "n": 5,
+      "ci": [
+       0.2307,
+       0.8824
+      ]
+     },
+     "recall_at_3": {
+      "value": 0.6,
+      "k": 3,
+      "n": 5,
+      "ci": [
+       0.2307,
+       0.8824
+      ]
+     },
+     "recall_at_5": {
+      "value": 0.8,
+      "k": 4,
+      "n": 5,
+      "ci": [
+       0.3755,
+       0.9638
+      ]
+     },
+     "recall_at_10": {
+      "value": 0.8,
+      "k": 4,
+      "n": 5,
+      "ci": [
+       0.3755,
+       0.9638
+      ]
+     },
+     "mrr": {
+      "value": 0.64,
+      "n": 5
+     }
+    },
+    "table_lookup": {
+     "n": 12,
+     "recall_at_1": {
+      "value": 0.8333333333333334,
+      "k": 10,
+      "n": 12,
+      "ci": [
+       0.552,
+       0.953
+      ]
+     },
+     "recall_at_3": {
+      "value": 1.0,
+      "k": 12,
+      "n": 12,
+      "ci": [
+       0.7575,
+       1.0
+      ]
+     },
+     "recall_at_5": {
+      "value": 1.0,
+      "k": 12,
+      "n": 12,
+      "ci": [
+       0.7575,
+       1.0
+      ]
+     },
+     "recall_at_10": {
+      "value": 1.0,
+      "k": 12,
+      "n": 12,
+      "ci": [
+       0.7575,
+       1.0
+      ]
+     },
+     "mrr": {
+      "value": 0.8888888888888888,
+      "n": 12
+     }
+    }
+   }
+  }
+ },
+ "ops": {
+  "retrieval": {
+   "retrieval_latency_ms": {
+    "n": 56,
+    "p50": 25.0,
+    "p95": 31.25,
+    "mean": 25.107142857142858
+   }
+  }
+ },
+ "notes": [],
+ "cost_usd": 0.0,
+ "aborted": false,
+ "embedding_model": "BAAI/bge-small-en-v1.5",
+ "duration_s": 4.18
+}

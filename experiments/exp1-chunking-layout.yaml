@@ -1,0 +1,4 @@
+name: exp1-chunking-layout
+description: "Exp 1: layout-aware chunking (headings, tables as own chunks, context header). Index main."
+index_name: main
+retrieval: {mode: hybrid}

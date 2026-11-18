@@ -27,14 +27,22 @@ def ingest(
     index: str = typer.Option(None, help="Index name (default: DEFAULT_INDEX)"),
     strategy: str = typer.Option(None, help="fixed | layout (default: CHUNK_STRATEGY)"),
     reingest: bool = typer.Option(False, help="Rebuild chunks for already-ingested documents"),
-    context_header: bool = typer.Option(True, help="Prefix chunks with a context header"),
+    context_header: bool = typer.Option(
+        None,
+        "--context-header/--no-context-header",
+        help="Prefix chunks with a context header (default: on for layout, off for fixed)",
+    ),
 ) -> None:
     """Ingest every PDF under DIRECTORY."""
     from specbridge.ingestion.chunking import ChunkOptions
     from specbridge.ingestion.pipeline import ingest_directory
 
     s = get_settings()
-    opts = ChunkOptions(strategy=strategy or s.chunk_strategy, context_header=context_header)
+    strat = strategy or s.chunk_strategy
+    opts = ChunkOptions(
+        strategy=strat,
+        context_header=(strat == "layout") if context_header is None else context_header,
+    )
     results = ingest_directory(
         directory, index=index or s.default_index, opts=opts, reingest=reingest
     )

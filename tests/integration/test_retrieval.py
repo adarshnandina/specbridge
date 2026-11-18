@@ -104,3 +104,24 @@ def test_rerank_reorders(db, loaded):
 def test_bad_mode(db, loaded):
     with pytest.raises(ValueError):
         retrieve(db, "x", mode="bogus", embedder=EMB)
+
+
+def test_reranker_sees_context_header_and_content(db, loaded):
+    seen = []
+
+    class Spy:
+        def score(self, query, passages):
+            seen.extend(passages)
+            return [0.0] * len(passages)
+
+    retrieve(
+        db,
+        "KD-210 specs",
+        index="main",
+        mode="hybrid",
+        top_k=3,
+        rerank=True,
+        embedder=EMB,
+        reranker=Spy(),
+    )
+    assert seen and all(p.startswith("[") for p in seen)  # header + content, not bare content

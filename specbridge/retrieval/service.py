@@ -47,6 +47,11 @@ class RetrievalResult:
     timings_ms: dict[str, int] = field(default_factory=dict)
 
 
+def _rerank_text(chunk: Chunk) -> str:
+    header = (chunk.meta or {}).get("context_header")
+    return f"{header}\n{chunk.content}" if header else chunk.content
+
+
 def retrieve(
     db: Session,
     query: str,
@@ -115,7 +120,9 @@ def retrieve(
     if rerank and pool:
         t = time.perf_counter()
         rr = reranker or get_reranker()
-        scores = rr.score(query, [rows[i][0].content for i in pool if i in rows])
+        # The reranker must see what the embedder saw: context header + content (a table chunk
+        # alone does not say which part it describes).
+        scores = rr.score(query, [_rerank_text(rows[i][0]) for i in pool if i in rows])
         rerank_scores = dict(zip([i for i in pool if i in rows], scores, strict=True))
         chosen = sorted(rerank_scores, key=lambda i: -rerank_scores[i])[:top_k]
         timings["rerank"] = int((time.perf_counter() - t) * 1000)

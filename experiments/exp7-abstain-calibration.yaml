@@ -1,0 +1,4 @@
+name: exp7-abstain-calibration
+description: "Exp 7: sweep ABSTAIN_MIN_SCORE on the dev split (retrieval score gate, no LLM)."
+index_name: main
+retrieval: {mode: hybrid}

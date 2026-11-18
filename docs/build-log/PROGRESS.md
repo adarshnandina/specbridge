@@ -44,7 +44,7 @@ Status: todo | in progress | done | blocked
 - 4.4 Agent scenario suite (14) — done (2026-11-18, 6af582b)
 ### M5 — Experiments and gating
 - 5.1 eval gate + thresholds — done (2026-11-18, 693f6bb)
-- 5.2 Experiments — todo
+- 5.2 Experiments — done (2026-11-18, 2fe3763)
 - 5.3 Final defaults + baseline — todo
 ### M6 — Hardening and docs
 - 6.1 Rate limiting, upload hardening, redaction tests, pip-audit — todo

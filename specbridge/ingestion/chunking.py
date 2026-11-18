@@ -54,7 +54,7 @@ def _finish(
         d.token_count = count(d.content)
         d.metadata.setdefault("part_numbers", doc.part_numbers)
         d.metadata.setdefault("revision", doc.revision)
-        if opts.context_header and opts.strategy == "layout":
+        if opts.context_header:
             hdr = context_header(doc, d.metadata.get("section"), doc_key)
             d.metadata["context_header"] = hdr
             d.search_text = f"{hdr}\n{d.content}"

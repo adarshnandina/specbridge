@@ -1,0 +1,4 @@
+name: exp2-mode-keyword
+description: "Exp 2: keyword (Postgres full text) only."
+index_name: main
+retrieval: {mode: keyword}

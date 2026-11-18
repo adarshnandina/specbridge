@@ -1,0 +1,3 @@
+name: exp5-extraction-sonnet
+description: "Exp 5: extraction with Sonnet (needs API key: blocked until ANTHROPIC_API_KEY is set)."
+extraction: {model: claude-sonnet-5-5, retry: true, include_real: true}

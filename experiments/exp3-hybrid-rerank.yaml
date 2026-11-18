@@ -1,0 +1,4 @@
+name: exp3-hybrid-rerank
+description: "Exp 3: hybrid + cross-encoder rerank (BAAI/bge-reranker-base) of the fused top 20."
+index_name: main
+retrieval: {mode: hybrid, rerank: true}

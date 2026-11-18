@@ -326,3 +326,15 @@
 **Decisions made:** Added ops_noise_floor (20 ms) because p95 latency of a ~25 ms retrieval stage varies by more than 25% between runs on the same machine
 **Deviations from spec:** extra threshold key ops_noise_floor not in the spec
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:51 — 5.2 Experiments 1-4 and 7 (5-6 blocked: needs API key); docs/EXPERIMENTS.md
+**Goal:** Retrieval-side experiments run on dev and confirmed once on test: chunking (+ a fixed+header control), retrieval mode, reranker (found and fixed a real bug: reranker must see the context header), context header, abstention-threshold calibration (new calibration suite). Tables in docs/EXPERIMENTS.md are generated from run files
+**What I did:** Retrieval-side experiments run on dev and confirmed once on test: chunking (+ a fixed+header control), retrieval mode, reranker (found and fixed a real bug: reranker must see the context header), context header, abstention-threshold calibration (new calibration suite). Tables in docs/EXPERIMENTS.md are generated from run files
+**Files changed:** specbridge/eval/{calibration,experiments}.py experiments/*.yaml docs/EXPERIMENTS.md eval_results/*exp* specbridge/retrieval/service.py specbridge/ingestion/chunking.py specbridge/cli.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** unit test_calibration 2; integration test_retrieval (reranker input includes context header) ; test_chunking (fixed+header)
+**Eval results (if any):** See docs/EXPERIMENTS.md (all run ids). Key results (dev, n=56): header on/off recall@5 0.911 vs 0.429; layout vs fixed 0.911 vs 0.643 but fixed+header 0.857 (within noise of layout); hybrid 0.911 vs vector 0.875 (within noise); rerank fixed: recall@1 0.875 vs 0.554 at ~800 ms; no abstention threshold generalises to test. Exp 5/6: blocked: needs API key
+**Problems and how I solved them:** First reranker run was far worse than no reranker (recall@5 0.589): it scored content without the context header. Fixed, regression-tested, and both runs are kept in the record. Experiment 1 was confounded (header vs layout); added a fixed+header control, which showed the header explains the gain
+**Decisions made:** Defaults unchanged: layout+header, hybrid, rerank off, ABSTAIN_MIN_SCORE=0.0. 'chunk strategy fixed' now accepts a context header too (CLI default: layout on, fixed off)
+**Deviations from spec:** none; 5-6 blocked as allowed by 0.4
+**Next step:** next task in PROGRESS.md

@@ -67,7 +67,7 @@ def test_multi_page_layout_keeps_pages(corpus):
 
 def test_fixed_chunks_bounded_with_overlap(corpus):
     doc, _ = parsed(corpus, "nordwerk/NS-IND-1200/rev1.0")
-    small = ChunkOptions("fixed", target_tokens=40, overlap_tokens=10)
+    small = ChunkOptions("fixed", context_header=False, target_tokens=40, overlap_tokens=10)
     ch = make_chunks(doc, small, EMB.token_count)
     assert len(ch) > 1 and all(c.token_count <= 45 for c in ch)
     a, b = ch[0].content.split(), ch[1].content.split()
@@ -98,3 +98,10 @@ def test_storage_validation():
     assert (
         sanitize_filename("../a b.pdf") == "b.pdf" or sanitize_filename("../a b.pdf") == "a_b.pdf"
     )
+
+
+def test_fixed_chunks_can_carry_the_context_header_too(corpus):
+    doc, _ = parsed(corpus, "nordwerk/NS-IND-1200/rev1.0")
+    ch = make_chunks(doc, ChunkOptions("fixed", context_header=True), EMB.token_count, "k")
+    assert all(c.search_text.startswith("[Nordwerk Sensorik | NS-IND-1200") for c in ch)
+    assert all(not c.content.startswith("[") for c in ch)  # display text stays clean

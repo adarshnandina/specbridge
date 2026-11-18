@@ -1,0 +1,4 @@
+name: exp2-mode-vector
+description: "Exp 2: vector (pgvector cosine) only."
+index_name: main
+retrieval: {mode: vector}
