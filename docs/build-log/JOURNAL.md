@@ -290,3 +290,15 @@
 **Decisions made:** none
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:42 — 4.3 Agent API routes and UI: approvals page and run timeline
+**Goal:** POST/GET /agent/runs, steps, retry; GET /approvals, approve/reject; UI /ui/runs (start form + list), /ui/runs/{id} timeline with tool calls, status, latency, outputs and state transitions, /ui/approvals with evidence quotes and role-aware approve/reject, retry button for failed commits
+**What I did:** POST/GET /agent/runs, steps, retry; GET /approvals, approve/reject; UI /ui/runs (start form + list), /ui/runs/{id} timeline with tool calls, status, latency, outputs and state transitions, /ui/approvals with evidence quotes and role-aware approve/reject, retry button for failed commits
+**Files changed:** specbridge/api/routers/agent.py specbridge/api/routers/ui.py specbridge/ui/templates/{approvals,runs,run_detail}.html tests/integration/test_api_agent_ui.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** integration test_api_agent_ui 4 passed (RBAC incl. viewer 403, engineer cannot approve, requester-approver four-eyes 403, double decision 409, failed commit then retry endpoint, UI flow)
+**Eval results (if any):** n/a
+**Problems and how I solved them:** none
+**Decisions made:** none
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md

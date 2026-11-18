@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Approvals · SpecBridge{% endblock %}
+{% block content %}
+<h1>Change request approvals</h1>
+<p class="meta">Four-eyes rule: you cannot approve a request that you started yourself.</p>
+{% for a in approvals %}
+<section class="card">
+  <h3>{{ a.change_request.original_part }} &rarr; <strong>{{ a.change_request.proposed_part }}</strong>
+    <span class="badge {{ 'warn' if a.status=='pending' else ('ok' if a.status=='approved' else 'bad') }}">{{ a.status }}</span></h3>
+  <p>{{ a.change_request.rationale }}</p>
+  {% if a.change_request.evidence %}<ul>
+    {% for e in a.change_request.evidence %}<li><code>{{ e.doc_key }}</code> p.{{ e.page }}: <em>{{ e.quote }}</em></li>{% endfor %}</ul>{% endif %}
+  <p class="meta">requested by {{ a.requested_by }} · run <a href="/ui/runs/{{ a.run_id }}">{{ a.run_id }}</a>
+    {% if a.decided_by %}· decided by {{ a.decided_by }}{% endif %}</p>
+  {% if a.status == 'pending' and can_approve %}
+  <form method="post" action="/ui/approvals/{{ a.id }}/decide">
+    <input name="comment" placeholder="Comment (optional)" maxlength="500">
+    <button name="decision" value="approve">Approve</button>
+    <button name="decision" value="reject" class="danger">Reject</button>
+  </form>
+  {% endif %}
+</section>
+{% else %}<p>No approvals yet.</p>{% endfor %}
+{% endblock %}

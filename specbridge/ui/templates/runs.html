@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Agent · SpecBridge{% endblock %}
+{% block content %}
+<h1>Part-substitution agent</h1>
+{% if can_write %}
+<form method="post" action="/ui/runs" class="card">
+  <textarea name="request" rows="2" maxlength="1000" required placeholder="e.g. Find a replacement for discontinued part KD-240 that supports EtherCAT"></textarea>
+  <button type="submit">Start run</button>
+</form>
+{% endif %}
+<table>
+  <thead><tr><th>Started</th><th>Request</th><th>By</th><th>State</th><th></th></tr></thead>
+  <tbody>
+  {% for r in runs %}
+  <tr><td>{{ r.created_at.strftime('%Y-%m-%d %H:%M') }}</td><td>{{ r.request_text }}</td><td>{{ r.requested_by }}</td>
+    <td><span class="badge {{ 'ok' if r.state=='DONE' else ('bad' if r.state in ('FAILED','REJECTED') else 'warn') }}">{{ r.state }}</span></td>
+    <td><a href="/ui/runs/{{ r.id }}">timeline</a></td></tr>
+  {% else %}<tr><td colspan="5">No runs yet.</td></tr>{% endfor %}
+  </tbody>
+</table>
+{% endblock %}

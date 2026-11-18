@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Run {{ run.id }} · SpecBridge{% endblock %}
+{% block content %}
+<h1>Agent run <span class="badge {{ 'ok' if run.state=='DONE' else ('bad' if run.state in ('FAILED','REJECTED') else 'warn') }}">{{ run.state }}</span></h1>
+<p><strong>{{ run.request_text }}</strong><br>
+<span class="meta">by {{ run.requested_by }} ({{ run.requester_role }}) · LLM calls used {{ run.llm_calls_used }}/6</span></p>
+{% if run.error %}<div class="flash error">{{ run.error }}</div>{% endif %}
+{% if run.state == 'FAILED' and (run.result or {}).get('retryable') and can_write %}
+<form method="post" action="/ui/runs/{{ run.id }}/retry"><button>Retry commit</button></form>
+{% endif %}
+{% set cr = (run.result or {}).get('change_request') %}
+{% if cr %}<div class="card"><h3>Proposed change</h3>
+  <p>{{ cr.original_part }} &rarr; <strong>{{ cr.proposed_part }}</strong></p><p>{{ cr.rationale }}</p>
+  {% if approval %}<p class="meta">approval: {{ approval.status }}{% if approval.decided_by %} by {{ approval.decided_by }}{% endif %}
+    · <a href="/ui/approvals">open approvals</a></p>{% endif %}
+  {% set erpcr = (run.result or {}).get('erp_change_request') %}
+  {% if erpcr %}<p class="meta">ERP change request {{ erpcr.id }}</p>{% endif %}</div>{% endif %}
+<h2>Timeline</h2>
+<ol class="timeline">
+  {% for st in steps %}
+  <li><span class="badge">{{ st.state }}</span>
+    {% if st.tool_name %}<code>{{ st.tool_name }}</code>{% endif %}
+    <span class="badge {{ 'ok' if st.status=='ok' else 'bad' }}">{{ st.status }}</span>
+    <small>{{ st.latency_ms }} ms{% if st.attempt > 1 %} · attempt {{ st.attempt }}{% endif %}</small>
+    {% if st.error %}<div class="meta">{{ st.error }}</div>{% endif %}
+    {% if st.tool_output %}<details><summary>output</summary><pre>{{ st.tool_output | tojson(indent=1) }}</pre></details>{% endif %}
+  </li>
+  {% endfor %}
+</ol>
+<h2>State transitions</h2>
+<p class="meta">{{ transitions | join(' → ') }}</p>
+{% endblock %}

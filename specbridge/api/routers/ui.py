@@ -14,16 +14,18 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from specbridge import audit
+from specbridge.agent.runner import AgentRunner
 from specbridge.api.deps import audit_denied, get_erp, get_keystore
+from specbridge.api.routers.agent import get_runner
 from specbridge.api.routers.documents import page_image_bytes
 from specbridge.api.routers.query import get_llm
 from specbridge.auth.api_keys import Principal
 from specbridge.auth.rbac import has_permission
 from specbridge.config import get_settings
-from specbridge.db.models import Document, Extraction
+from specbridge.db.models import AgentRun, AgentStep, Approval, AuditLog, Document, Extraction
 from specbridge.db.session import get_db
 from specbridge.erp_client.client import ErpClient
-from specbridge.errors import AppError
+from specbridge.errors import AppError, NotFoundError
 from specbridge.extraction import review as rv
 from specbridge.extraction.extractor import extract_document
 from specbridge.extraction.fields import ALL_FIELDS, DIM_FIELD, LIST_FIELDS, NUMERIC_FIELDS
@@ -345,3 +347,94 @@ def review_push(
 ) -> Response:
     rv.push(db, rv.get_or_404(db, extraction_id), p, erp)
     return RedirectResponse(f"/ui/review/{extraction_id}", status_code=303)
+
+
+# ------------------------------------------------------------------- agent UI
+@router.get("/approvals", response_class=HTMLResponse)
+def approvals_page(
+    request: Request, db: Session = Depends(get_db), p: Principal = Depends(ui_require("read"))
+) -> HTMLResponse:
+    items = list(
+        db.scalars(
+            select(Approval).order_by(Approval.status != "pending", Approval.created_at.desc())
+        )
+    )
+    return render(
+        request, "approvals.html", p, approvals=items, can_approve=has_permission(p.role, "approve")
+    )
+
+
+@router.post("/approvals/{approval_id}/decide")
+def approvals_decide(
+    approval_id: uuid.UUID,
+    decision: str = Form(...),
+    comment: str = Form(""),
+    runner: AgentRunner = Depends(get_runner),
+    p: Principal = Depends(ui_require("approve")),
+) -> Response:
+    if decision not in ("approve", "reject"):
+        raise AppError("decision must be approve or reject", code="invalid_decision")
+    runner.decide(approval_id, p, decision == "approve", comment[:500])
+    return RedirectResponse("/ui/approvals", status_code=303)
+
+
+@router.get("/runs", response_class=HTMLResponse)
+def runs_page(
+    request: Request, db: Session = Depends(get_db), p: Principal = Depends(ui_require("read"))
+) -> HTMLResponse:
+    runs = list(db.scalars(select(AgentRun).order_by(AgentRun.created_at.desc()).limit(50)))
+    return render(request, "runs.html", p, runs=runs, can_write=has_permission(p.role, "write"))
+
+
+@router.post("/runs")
+def runs_start(
+    request: str = Form(..., min_length=5, max_length=1000),
+    runner: AgentRunner = Depends(get_runner),
+    p: Principal = Depends(ui_require("write")),
+) -> Response:
+    run = runner.start(p, request)
+    return RedirectResponse(f"/ui/runs/{run.id}", status_code=303)
+
+
+@router.get("/runs/{run_id}", response_class=HTMLResponse)
+def run_detail(
+    request: Request,
+    run_id: uuid.UUID,
+    db: Session = Depends(get_db),
+    p: Principal = Depends(ui_require("read")),
+) -> HTMLResponse:
+    run = db.get(AgentRun, run_id)
+    if run is None:
+        raise NotFoundError("Agent run not found")
+    steps = list(
+        db.scalars(select(AgentStep).where(AgentStep.run_id == run_id).order_by(AgentStep.step_no))
+    )
+    approval = db.scalar(select(Approval).where(Approval.run_id == run_id))
+    transitions = ["RECEIVED"] + [
+        a.details.get("to", "?")
+        for a in db.scalars(
+            select(AuditLog)
+            .where(AuditLog.action == "agent.state_transition", AuditLog.resource_id == str(run_id))
+            .order_by(AuditLog.ts)
+        )
+    ]
+    return render(
+        request,
+        "run_detail.html",
+        p,
+        run=run,
+        steps=steps,
+        approval=approval,
+        transitions=transitions,
+        can_write=has_permission(p.role, "write"),
+    )
+
+
+@router.post("/runs/{run_id}/retry")
+def run_retry(
+    run_id: uuid.UUID,
+    runner: AgentRunner = Depends(get_runner),
+    p: Principal = Depends(ui_require("write")),
+) -> Response:
+    runner.retry(run_id, p)
+    return RedirectResponse(f"/ui/runs/{run_id}", status_code=303)
