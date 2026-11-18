@@ -18,3 +18,5 @@ htmlcov/
 # Runtime data and logs
 data/
 logs/
+
+.claude/
