@@ -110,3 +110,15 @@
 **Decisions made:** Where a datasheet gives only nominal or ambiguous values the label is null or the highest rating, documented in each record's notes field
 **Deviations from spec:** 9 real datasheets instead of 10-20 (logged in Needs user)
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:08 — 1.4 ERP mock service, seed, fault injection
+**Goal:** Separate FastAPI+SQLite mock ERP: parts, change requests, mandatory Idempotency-Key (replay same body, 409 on different body), fault injection (failure rate, fail first N writes, latency) via env and /_admin/faults, seed from synthetic ground truth, structured request logs
+**What I did:** Separate FastAPI+SQLite mock ERP: parts, change requests, mandatory Idempotency-Key (replay same body, 409 on different body), fault injection (failure rate, fail first N writes, latency) via env and /_admin/faults, seed from synthetic ground truth, structured request logs
+**Files changed:** erp_mock/* tests/unit/test_erp_mock.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** tests/unit/test_erp_mock.py 6 passed
+**Eval results (if any):** n/a
+**Problems and how I solved them:** none
+**Decisions made:** Fault injection applies to write calls only so lookups still work when the ERP is 'down for writes' (agent scenarios 8/9); failed (503) writes never record an idempotency key
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md
