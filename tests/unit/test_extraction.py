@@ -1,4 +1,3 @@
-
 from specbridge.config import Settings
 from specbridge.extraction.extractor import build_message, run_extraction, select_pages
 from specbridge.extraction.normalize import normalize_spec

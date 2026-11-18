@@ -230,3 +230,15 @@
 **Decisions made:** Per-call model override in LLMService.structured() instead of mutating shared settings. A quote with a one-digit difference fuzzy-matches, so a separate number-in-quote check is required (validated records can still be semantically wrong; measured as precision of validated records in 3.4)
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:27 — 3.2 Review queue, approval and ERP push with idempotency
+**Goal:** ERP client (tenacity retries on 5xx/timeouts, mandatory idempotency keys); review service: audited field edits (old/new), re-validation on save, mark reviewed, approve (unreviewed pending items blocked), reject, push with key=sha256(extraction_id+schema_version) and retryable push_failed
+**What I did:** ERP client (tenacity retries on 5xx/timeouts, mandatory idempotency keys); review service: audited field edits (old/new), re-validation on save, mark reviewed, approve (unreviewed pending items blocked), reject, push with key=sha256(extraction_id+schema_version) and retryable push_failed
+**Files changed:** specbridge/erp_client/client.py specbridge/extraction/review.py tests/integration/test_extraction_flow.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** integration test_extraction_flow 7 passed: extract->validated, validation failure->review->edit->approve->push, edit type/unknown-field guards, reject/state guards, transient ERP failures -> exactly one ERP write, permanent failure -> push_failed -> retry -> exactly one write, audit order error then allowed
+**Eval results (if any):** n/a
+**Problems and how I solved them:** none
+**Decisions made:** Approving a pending_review extraction requires that a human marked it reviewed; no four-eyes rule for extraction approvals (spec requires it only for agent change requests); pushing an already-pushed extraction is a no-op
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md

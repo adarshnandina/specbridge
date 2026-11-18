@@ -34,7 +34,7 @@ Status: todo | in progress | done | blocked
 - 2.7 First retrieval baseline + QA fake run — done (2026-11-18, 95550ed)
 ### M3 — Extraction
 - 3.1 Schema, extractor, units, validators, retry — done (2026-11-18, 4b9a0b0)
-- 3.2 Review queue, approve/reject, push — todo
+- 3.2 Review queue, approve/reject, push — done (2026-11-18, 113be86)
 - 3.3 API routes + UI review — todo
 - 3.4 Extraction eval suite — todo
 ### M4 — Agent
