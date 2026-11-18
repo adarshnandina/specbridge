@@ -15,7 +15,7 @@ Status: todo | in progress | done | blocked
 - 0.4 config, logging, middleware, /health /ready /metrics — done (2026-11-18, 09b929c)
 - 0.5 docker-compose db + Alembic + initial migration — done (2026-11-18, f7c6e05)
 - 0.6 LLM provider layer — done (2026-11-18, 0d925bf)
-- 0.7 Auth + RBAC + audit — todo
+- 0.7 Auth + RBAC + audit — done (2026-11-18, 05d9f56)
 ### M1 — Corpus and datasets
 - 1.1 Synthetic datasheet generator + ground truth — todo
 - 1.2 Real datasheet manifest + fetch + provisional labels — todo

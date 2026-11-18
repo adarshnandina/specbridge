@@ -74,3 +74,15 @@
 **Decisions made:** LLMService wraps providers; fake provider costs 0; unknown priced model raises
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:01 — 0.7 Auth, RBAC, audit
+**Goal:** API key store with constant-time compare, permission matrix, FastAPI require() dependency, append-only audit log, denials audited in separate transaction
+**What I did:** API key store with constant-time compare, permission matrix, FastAPI require() dependency, append-only audit log, denials audited in separate transaction
+**Files changed:** specbridge/auth/* audit.py api/deps.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** tests/unit/test_auth.py pass; integration test_audit_and_denied_survive
+**Eval results (if any):** n/a
+**Problems and how I solved them:** Code committed together with 0.2 in commit 59692d6 (batched staging); this commit records the task. Denial audit uses its own session so the request rollback cannot drop it.
+**Decisions made:** none
+**Deviations from spec:** none
+**Next step:** M1.1 synthetic datasheet generator
