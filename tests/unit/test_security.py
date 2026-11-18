@@ -112,3 +112,25 @@ def test_health_and_metrics_are_not_rate_limited(app_factory):
     c = app_factory(RATE_LIMIT="2/minute")
     assert all(c.get("/health", headers={"X-API-Key": "k"}).status_code == 200 for _ in range(6))
     assert all(c.get("/metrics").status_code == 200 for _ in range(6))
+
+
+def test_storage_paths_are_relative_and_resolve_after_a_move(tmp_path, monkeypatch):
+    from specbridge.ingestion import storage
+
+    monkeypatch.setenv("DATA_DIR", str(tmp_path / "data1"))
+    get_settings.cache_clear()
+    data = b"%PDF-1.4 minimal"
+    sha = storage.validate_pdf_bytes(data)
+    abs_path = storage.store_pdf(data, sha)
+    rel = storage.relative_path(sha)
+    assert rel == f"documents/{sha}.pdf" and abs_path.read_bytes() == data
+    assert storage.resolve_path(rel, sha) == abs_path
+    # a legacy absolute path from another machine still resolves through DATA_DIR
+    assert storage.resolve_path(f"/Users/someone/else/{sha}.pdf", sha) == abs_path
+    # data dir moved
+    monkeypatch.setenv("DATA_DIR", str(tmp_path / "data2"))
+    get_settings.cache_clear()
+    (tmp_path / "data2" / "documents").mkdir(parents=True)
+    (tmp_path / "data2" / "documents" / f"{sha}.pdf").write_bytes(data)
+    assert storage.resolve_path(rel, sha) == tmp_path / "data2" / "documents" / f"{sha}.pdf"
+    get_settings.cache_clear()

@@ -12,30 +12,44 @@ services:
       interval: 5s
       timeout: 3s
       retries: 20
+
   erp-mock:
     build: { context: ., dockerfile: docker/Dockerfile }
-    command: ["uvicorn", "erp_mock.app:app", "--host", "0.0.0.0", "--port", "8100"]
+    image: specbridge:local
+    command: ["sh", "-c", "python -m erp_mock.seed && exec uvicorn erp_mock.app:app --host 0.0.0.0 --port 8100"]
     environment:
+      RUN_MIGRATIONS: "0"
       ERP_DB_PATH: /app/data/erp.sqlite
       ERP_FAILURE_RATE: ${ERP_FAILURE_RATE:-0.0}
       ERP_FAIL_FIRST_N: ${ERP_FAIL_FIRST_N:-0}
       ERP_LATENCY_MS: ${ERP_LATENCY_MS:-0}
     ports: ["8100:8100"]
-    volumes: ["appdata:/app/data"]
+    volumes: ["erpdata:/app/data"]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8100/health', timeout=3).status == 200 else 1)"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
   api:
     build: { context: ., dockerfile: docker/Dockerfile }
+    image: specbridge:local
     env_file: [.env]
     environment:
+      APP_ENV: dev
       DATABASE_URL: postgresql+psycopg://specbridge:specbridge@db:5432/specbridge
       ERP_BASE_URL: http://erp-mock:8100
       DATA_DIR: /app/data
       LOG_DIR: /app/logs
+      LLM_PROVIDER: ${LLM_PROVIDER:-fake}
     depends_on:
       db: { condition: service_healthy }
-      erp-mock: { condition: service_started }
+      erp-mock: { condition: service_healthy }
     ports: ["8000:8000"]
-    volumes: ["appdata:/app/data", "applogs:/app/logs", "./eval:/app/eval:ro"]
+    volumes: ["appdata:/app/data", "applogs:/app/logs"]
+
 volumes:
   pgdata:
+  erpdata:
   appdata:
   applogs:

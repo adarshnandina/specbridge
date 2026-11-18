@@ -48,7 +48,7 @@ Status: todo | in progress | done | blocked
 - 5.3 Final defaults + baseline — done (2026-11-18, c397129)
 ### M6 — Hardening and docs
 - 6.1 Rate limiting, upload hardening, redaction tests, pip-audit — done (2026-11-18, 46822cc)
-- 6.2 Dockerfile, compose, prod compose, e2e — todo
+- 6.2 Dockerfile, compose, prod compose, e2e — done (2026-11-18, fd1d68e)
 - 6.3 CI workflow — todo
 - 6.4 Documentation + ADRs — todo
 - 6.5 Final verification — todo

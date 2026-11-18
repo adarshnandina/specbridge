@@ -1,0 +1,13 @@
+# Reverse proxy with automatic TLS (Let's Encrypt) - documentation only, see docs/DEPLOYMENT.md
+{$SITE_ADDRESS} {
+	encode gzip
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options nosniff
+		-Server
+	}
+	request_body {
+		max_size 25MB
+	}
+	reverse_proxy api:8000
+}

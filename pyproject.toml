@@ -16,6 +16,7 @@ dependencies = [
   "pgvector>=0.3",
   "pymupdf>=1.24",
   "sentence-transformers>=3.0",
+  "torch>=2.4",
   "anthropic[bedrock]>=0.40",
   "pint>=0.24",
   "rapidfuzz>=3.9",
@@ -82,3 +83,12 @@ addopts = "-m 'not e2e'"
 [tool.coverage.run]
 source = ["specbridge"]
 omit = ["specbridge/ui/*"]
+
+# CPU-only PyTorch on Linux (the default PyPI wheel drags in ~2 GB of CUDA libraries); macOS uses PyPI.
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

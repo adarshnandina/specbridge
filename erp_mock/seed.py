@@ -30,6 +30,21 @@ def seed(db_path: str, gt_path: Path | str = GT_PATH) -> int:
     return len(records)
 
 
+def is_seeded(db_path: str) -> bool:
+    if not Path(db_path).exists():
+        return False
+    c = sqlite3.connect(db_path)
+    try:
+        return bool(c.execute("SELECT COUNT(*) FROM parts").fetchone()[0])
+    except sqlite3.Error:
+        return False
+    finally:
+        c.close()
+
+
 if __name__ == "__main__":
     path = os.environ.get("ERP_DB_PATH", "data/erp.sqlite")
-    print(f"seeded {seed(path)} parts into {path}")
+    if os.environ.get("SEED_FORCE") != "1" and is_seeded(path):
+        print(f"{path} already seeded; set SEED_FORCE=1 to re-seed")
+    else:
+        print(f"seeded {seed(path)} parts into {path}")

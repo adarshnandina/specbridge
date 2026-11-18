@@ -362,3 +362,15 @@
 **Decisions made:** Rate limit key = X-API-Key (client IP if absent) across all endpoints; pip-audit: 'No known vulnerabilities found' (only our own package skipped, not on PyPI)
 **Deviations from spec:** slowapi (spec stack) replaced by its underlying 'limits' library; same behaviour, documented
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 14:05 — 6.2 Dockerfile, compose, prod compose, e2e tests, CLI resume/logs, storage paths
+**Goal:** Multi-stage non-root Dockerfile (uv, CPU-only torch on Linux, embedding model baked into the image, HEALTHCHECK, migrations in entrypoint); docker-compose with db, erp-mock (seeded once) and api with health-gated dependencies; docker-compose.prod.yml + Caddyfile (documentation only, never run); e2e tests against the running stack; 'specbridge agent resume|show' and 'specbridge logs tail --event'; PDF paths stored relative to DATA_DIR with fallback; Makefile coverage-check (unit+integration >= 80%)
+**What I did:** Multi-stage non-root Dockerfile (uv, CPU-only torch on Linux, embedding model baked into the image, HEALTHCHECK, migrations in entrypoint); docker-compose with db, erp-mock (seeded once) and api with health-gated dependencies; docker-compose.prod.yml + Caddyfile (documentation only, never run); e2e tests against the running stack; 'specbridge agent resume|show' and 'specbridge logs tail --event'; PDF paths stored relative to DATA_DIR with fallback; Makefile coverage-check (unit+integration >= 80%)
+**Files changed:** docker/* docker-compose*.yml tests/e2e/test_e2e.py specbridge/cli.py specbridge/ingestion/{storage,pipeline}.py Makefile pyproject.toml uv.lock erp_mock/seed.py tests/unit/test_cli.py tests/unit/test_security.py tests/integration/test_foundations.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** make test-e2e: 3 passed against 'docker compose up' (health/ready/metrics+auth, upload->query->highlighted PNG, agent happy path with approval by a different user and exactly one ERP change request). unit 212, integration 93 passed; combined coverage 91% (>=80%)
+**Eval results (if any):** n/a
+**Problems and how I solved them:** (1) uv.lock did not use the CPU torch index until torch was a direct dependency (tool.uv.sources only applies to direct deps); CUDA wheels would have added ~2 GB. (2) First e2e run failed: documents ingested on the host had absolute host paths so the container could not render pages; paths are now relative to DATA_DIR, resolved with a fallback, and a duplicate upload re-stores a missing file. (3) test_ready_reports_erp_down assumed no ERP was running; it now pins an unreachable ERP URL
+**Decisions made:** ADR-0009: embedding model baked into the image. Image is 2.67 GB (venv 1.7 GB incl. torch CPU 0.7 GB)
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md

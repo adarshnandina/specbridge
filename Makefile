@@ -1,4 +1,4 @@
-.PHONY: setup fmt lint typecheck test test-int test-e2e audit ci up down logs migrate seed-erp corpus ingest eval-retrieval eval-all gate-retrieval experiments
+.PHONY: setup fmt lint typecheck test test-int coverage-check test-e2e audit ci up down logs migrate seed-erp corpus ingest eval-retrieval eval-all gate-retrieval experiments
 UV ?= uv run
 
 setup:
@@ -15,10 +15,15 @@ typecheck:
 	$(UV) mypy
 
 test:
-	$(UV) pytest tests/unit -q --cov=specbridge --cov-report=term-missing:skip-covered
+	$(UV) coverage erase
+	$(UV) pytest tests/unit -q --cov=specbridge --cov-report=
 
 test-int:
-	$(UV) pytest tests/integration -q -m "not e2e"
+	$(UV) pytest tests/integration -q -m "not e2e" --cov=specbridge --cov-append --cov-report=
+
+# Combined unit + integration coverage of specbridge/ (UI excluded via pyproject), must be >= 80%
+coverage-check:
+	$(UV) coverage report --fail-under=80 --skip-covered
 
 test-e2e:
 	$(UV) pytest tests/e2e -q -m e2e
@@ -26,7 +31,7 @@ test-e2e:
 audit:
 	$(UV) pip-audit
 
-ci: lint typecheck test test-int audit eval-retrieval gate-retrieval
+ci: lint typecheck test test-int coverage-check audit eval-retrieval gate-retrieval
 
 up:
 	docker compose up -d --build

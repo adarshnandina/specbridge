@@ -1,0 +1,46 @@
+# PRODUCTION OVERRIDES - DOCUMENTATION ONLY. This file is never executed by the build or by CI.
+# Usage on a Linux VM (see docs/DEPLOYMENT.md):
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml --env-file .env.prod up -d
+services:
+  db:
+    restart: unless-stopped
+    ports: []                      # not exposed; only the api reaches it
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set a strong password}
+    deploy:
+      resources: { limits: { cpus: "2", memory: 2G } }
+
+  erp-mock:
+    restart: unless-stopped
+    ports: []                      # the mock ERP is internal only (a real ERP replaces it)
+    deploy:
+      resources: { limits: { cpus: "0.5", memory: 256M } }
+
+  api:
+    restart: unless-stopped
+    ports: []                      # traffic enters through Caddy
+    environment:
+      APP_ENV: prod
+      LOG_LLM_PAYLOADS: "false"    # never write prompts/responses to disk in production
+      LOG_LEVEL: INFO
+      DATABASE_URL: postgresql+psycopg://specbridge:${POSTGRES_PASSWORD}@db:5432/specbridge
+      SESSION_SECRET: ${SESSION_SECRET:?set a random secret}
+      API_KEYS: ${API_KEYS:?set real keys as key:user:role,...}
+    deploy:
+      resources: { limits: { cpus: "2", memory: 3G } }
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    volumes:
+      - ./docker/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on: [api]
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS:?e.g. specbridge.example.com}
+
+volumes:
+  caddy_data:
+  caddy_config:

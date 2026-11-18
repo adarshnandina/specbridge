@@ -18,7 +18,12 @@ from specbridge.errors import UploadError
 from specbridge.ingestion.chunking import ChunkOptions, make_chunks
 from specbridge.ingestion.embeddings import Embedder, get_embedder
 from specbridge.ingestion.parser import ParsedDocument, parse_pdf
-from specbridge.ingestion.storage import sanitize_filename, store_pdf, validate_pdf_bytes
+from specbridge.ingestion.storage import (
+    relative_path,
+    sanitize_filename,
+    store_pdf,
+    validate_pdf_bytes,
+)
 from specbridge.logging_setup import get_logger
 
 log = get_logger("specbridge.ingest")
@@ -140,6 +145,7 @@ def ingest_bytes(
     embedder = embedder or get_embedder()
     existing = db.scalar(select(Document).where(Document.sha256 == sha))
     if existing is not None:
+        store_pdf(data, sha)  # heal a missing file (e.g. data dir moved or a fresh volume)
         n = (
             db.scalar(
                 select(func.count())
@@ -176,7 +182,7 @@ def ingest_bytes(
     parsed = parse_pdf(data)
     if len(parsed.pages) > MAX_PAGES:
         raise UploadError(f"PDF has {len(parsed.pages)} pages; the limit is {MAX_PAGES}")
-    path = store_pdf(data, sha)
+    store_pdf(data, sha)
     manifest = real_manifest().get(sha)
     if manifest:
         source_type, source_url = "real", manifest["url"]
@@ -189,7 +195,7 @@ def ingest_bytes(
         doc_key=_unique_doc_key(db, key, sha),
         sha256=sha,
         filename=filename,
-        storage_path=str(path),
+        storage_path=relative_path(sha),
         vendor=vendor,
         title=parsed.title,
         part_numbers=parsed.part_numbers,

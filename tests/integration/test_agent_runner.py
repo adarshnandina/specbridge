@@ -271,3 +271,31 @@ def test_approval_flow_four_eyes_and_double_decision(ctx):
         with pytest.raises(ConflictError):
             runner(ctx, s).decide(s.scalars(select(Approval)).one().id, CAROL, True)
     assert json.dumps(ctx["env"].erp_http.get("/change-requests").json()).count("KD-240") >= 1
+
+
+def test_cli_agent_resume_continues_a_crashed_run(ctx):
+    from typer.testing import CliRunner
+
+    from specbridge.agent.runner import SimulatedCrash
+    from specbridge.api.deps import set_erp
+    from specbridge.api.routers import query as qrouter
+    from specbridge.cli import app
+
+    with session_scope() as s, pytest.raises(SimulatedCrash):
+        runner(ctx, s, crash_after=State.LOOKUP_PART).start(BOB, REQ)
+    with session_scope() as s:
+        run = s.scalars(select(AgentRun)).one()
+        assert run.state == "LOOKUP_PART"
+        rid = str(run.id)
+    set_erp(ctx["erp"])
+    qrouter.set_llm(ctx["llm"])
+    try:
+        res = CliRunner().invoke(app, ["agent", "resume", rid])
+        assert res.exit_code == 0, res.output
+        assert "state=AWAITING_APPROVAL" in res.output
+        shown = CliRunner().invoke(app, ["agent", "show", rid])
+        assert shown.exit_code == 0 and "search_parts" in shown.output
+        assert CliRunner().invoke(app, ["agent", "resume", "not-a-uuid"]).exit_code == 1
+    finally:
+        set_erp(None)
+        qrouter.set_llm(None)

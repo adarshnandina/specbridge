@@ -1,0 +1,56 @@
+# Written for completeness. It mirrors `make ci` and is NOT pushed, triggered or run from the build
+# environment (see CLAUDE.md hard rule 1).
+name: ci
+on:
+  push:
+  pull_request:
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: specbridge
+          POSTGRES_PASSWORD: specbridge
+          POSTGRES_DB: specbridge
+        ports: ["5433:5432"]
+        options: >-
+          --health-cmd "pg_isready -U specbridge" --health-interval 5s
+          --health-timeout 3s --health-retries 20
+    env:
+      DATABASE_URL: postgresql+psycopg://specbridge:specbridge@localhost:5433/specbridge
+      LLM_PROVIDER: fake
+      LOG_LLM_PAYLOADS: "false"
+      API_KEYS: dev-viewer-key:alice:viewer,dev-engineer-key:bob:engineer,dev-approver-key:carol:approver,dev-engineer2-key:erin:engineer,dev-admin-key:dave:admin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with: { python-version: "3.12" }
+      - name: Install
+        run: uv sync
+      - name: Lint
+        run: make lint
+      - name: Typecheck
+        run: make typecheck
+      - name: Unit tests
+        run: make test
+      - name: Migrate
+        run: make migrate
+      - name: Integration tests
+        run: make test-int
+      - name: Coverage gate (unit + integration >= 80% on specbridge/, ui excluded)
+        run: make coverage-check
+      - name: Dependency audit
+        run: make audit
+      - name: Generate synthetic corpus and ingest
+        run: |
+          make corpus
+          make ingest
+      - name: Retrieval eval (no LLM calls) and regression gate
+        run: make eval-retrieval gate-retrieval
+      - name: Upload eval results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with: { name: eval-results, path: eval_results/ }

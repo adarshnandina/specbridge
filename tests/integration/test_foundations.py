@@ -60,9 +60,16 @@ def test_llm_call_rows_and_budget(db):
     assert db_spent_today() == 0.0
 
 
-def test_ready_reports_erp_down_and_db_ok(db):
-    c = TestClient(create_app())
-    r = c.get("/ready")
-    assert r.json()["checks"]["database"] == "ok"
-    assert r.json()["checks"]["embedding_model"] == "ok"
-    assert r.status_code == 503  # no ERP running in this test
+def test_ready_reports_erp_down_and_db_ok(db, monkeypatch):
+    from specbridge.config import get_settings
+
+    monkeypatch.setenv("ERP_BASE_URL", "http://127.0.0.1:9")  # nothing listens here
+    get_settings.cache_clear()
+    try:
+        r = TestClient(create_app()).get("/ready")
+        assert r.json()["checks"]["database"] == "ok"
+        assert r.json()["checks"]["embedding_model"] == "ok"
+        assert r.json()["checks"]["erp"].startswith("error")
+        assert r.status_code == 503
+    finally:
+        get_settings.cache_clear()

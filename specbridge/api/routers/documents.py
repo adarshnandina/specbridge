@@ -18,7 +18,7 @@ from specbridge.db.models import Chunk, Document
 from specbridge.errors import NotFoundError, UploadError
 from specbridge.ingestion.chunking import ChunkOptions
 from specbridge.ingestion.pipeline import ingest_bytes
-from specbridge.ingestion.storage import validate_pdf_bytes
+from specbridge.ingestion.storage import resolve_path, validate_pdf_bytes
 
 router = APIRouter(tags=["documents"])
 
@@ -148,7 +148,7 @@ def page_image_bytes(
     if cache_file.exists():
         return cache_file.read_bytes()
     try:
-        png = render_page_png(doc.storage_path, page_no, bboxes)
+        png = render_page_png(str(resolve_path(doc.storage_path, doc.sha256)), page_no, bboxes)
     except NotFoundError:
         raise
     except Exception as exc:

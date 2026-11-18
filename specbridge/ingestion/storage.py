@@ -25,9 +25,27 @@ def validate_pdf_bytes(data: bytes, max_mb: int | None = None) -> str:
 
 
 def store_pdf(data: bytes, sha256: str) -> Path:
-    d = get_settings().data_dir / "documents"
-    d.mkdir(parents=True, exist_ok=True)
-    path = d / f"{sha256}.pdf"
+    """Write the PDF under DATA_DIR/documents/<sha>.pdf if missing; returns the absolute path."""
+    path = get_settings().data_dir / relative_path(sha256)
+    path.parent.mkdir(parents=True, exist_ok=True)
     if not path.exists():
         path.write_bytes(data)
     return path
+
+
+def relative_path(sha256: str) -> str:
+    return f"documents/{sha256}.pdf"
+
+
+def resolve_path(storage_path: str, sha256: str) -> Path:
+    """Locate a stored PDF. Paths are stored relative to DATA_DIR; legacy absolute paths still work,
+    and if the recorded location is gone (data dir moved, other host) fall back to DATA_DIR."""
+    data_dir = get_settings().data_dir
+    candidates = (
+        [Path(storage_path)] if Path(storage_path).is_absolute() else [data_dir / storage_path]
+    )
+    candidates.append(data_dir / relative_path(sha256))
+    for c in candidates:
+        if c.exists():
+            return c
+    return candidates[0]

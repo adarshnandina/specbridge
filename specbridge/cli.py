@@ -157,5 +157,102 @@ def eval_validate() -> None:
         raise typer.Exit(1)
 
 
+agent_app = typer.Typer(help="Part-substitution agent", no_args_is_help=True)
+app.add_typer(agent_app, name="agent")
+logs_app = typer.Typer(help="Application logs", no_args_is_help=True)
+app.add_typer(logs_app, name="logs")
+
+
+@agent_app.command("resume")
+def agent_resume(run_id: str = typer.Argument(..., help="Agent run id")) -> None:
+    """Explicitly resume a run from its last persisted state (never automatic on startup)."""
+    import uuid
+
+    from specbridge.agent.runner import AgentRunner
+    from specbridge.api.deps import get_erp
+    from specbridge.api.routers.query import get_llm
+    from specbridge.auth.api_keys import Principal
+    from specbridge.db.session import session_scope
+    from specbridge.errors import AppError
+
+    try:
+        with session_scope() as db:
+            run = AgentRunner(db, get_llm(), get_erp()).resume(
+                uuid.UUID(run_id), Principal("cli", "admin")
+            )
+            console.print(f"run {run.id}: state={run.state} error={run.error or '-'}")
+    except (AppError, ValueError) as exc:
+        console.print(f"[red]{getattr(exc, 'message', exc)}[/red]")
+        raise typer.Exit(1) from exc
+
+
+@agent_app.command("show")
+def agent_show(run_id: str) -> None:
+    """Print a run's state and steps."""
+    import uuid
+
+    from sqlalchemy import select
+
+    from specbridge.db.models import AgentRun, AgentStep
+    from specbridge.db.session import session_scope
+
+    with session_scope() as db:
+        run = db.get(AgentRun, uuid.UUID(run_id))
+        if run is None:
+            console.print("[red]run not found[/red]")
+            raise typer.Exit(1)
+        console.print(f"{run.id} state={run.state} requested_by={run.requested_by}")
+        t = Table("#", "state", "tool", "status", "ms", "error")
+        for st in db.scalars(
+            select(AgentStep).where(AgentStep.run_id == run.id).order_by(AgentStep.step_no)
+        ):
+            t.add_row(
+                str(st.step_no),
+                st.state,
+                st.tool_name or "",
+                st.status,
+                str(st.latency_ms),
+                (st.error or "")[:50],
+            )
+        console.print(t)
+
+
+@logs_app.command("tail")
+def logs_tail(
+    event: str = typer.Option(None, "--event", "-e", help="Glob on the event name, e.g. 'agent.*'"),
+    lines: int = typer.Option(20, "--lines", "-n"),
+    follow: bool = typer.Option(False, "--follow", "-f"),
+    file: Path = typer.Option(None, help="Log file (default: LOG_DIR/app.jsonl)"),
+) -> None:
+    """Show recent structured log lines, optionally filtered by event pattern."""
+    import fnmatch
+    import json
+    import time
+
+    path = file or (get_settings().log_dir / "app.jsonl")
+    if not path.exists():
+        console.print(f"[red]no log file at {path}[/red]")
+        raise typer.Exit(1)
+
+    def match(line: str) -> bool:
+        if not event:
+            return True
+        try:
+            return fnmatch.fnmatch(str(json.loads(line).get("event", "")), event)
+        except ValueError:
+            return False
+
+    with path.open(encoding="utf-8") as fh:
+        recent = [ln for ln in fh if match(ln)][-lines:]
+        for ln in recent:
+            typer.echo(ln.rstrip())
+        while follow:
+            ln = fh.readline()
+            if not ln:
+                time.sleep(0.5)
+            elif match(ln):
+                typer.echo(ln.rstrip())
+
+
 if __name__ == "__main__":
     app()
