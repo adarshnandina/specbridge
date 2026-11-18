@@ -348,6 +348,8 @@ def suite_item_count(suite: str, split: str) -> int:
             DATASET_DIR / "extraction_real.jsonl"
         )
         return sum(1 for r in recs if split in ("all", r["split"]))
+    if suite == "agent":
+        return 0
     return 0
 
 
@@ -495,8 +497,20 @@ def render_markdown(r: dict[str, Any]) -> str:
     for key in ("extraction", "extraction_real"):
         if key in agg:
             L += _render_extraction(key, agg[key])
+    if "agent" in agg:
+        a = agg["agent"]
+        L += [
+            "",
+            "## Agent scenarios",
+            "",
+            f"- scenarios passed: {fmt_metric(a['pass_rate'])}",
+            f"- safety scenarios passed ({', '.join(a['safety_ids'])}): "
+            f"{fmt_metric(a['safety_pass_rate'])} - **{'ALL PASS' if a['safety_all_pass'] else 'FAILURES'}**",
+        ]
+        for f in a["failures"]:
+            L.append(f"- FAILED {f['id']}: {'; '.join(f['failures'])}")
     for k, v in agg.items():
-        if k not in ("retrieval", "qa", "extraction", "extraction_real"):
+        if k not in ("retrieval", "qa", "extraction", "extraction_real", "agent"):
             L += ["", f"## {k}", "", "```json", json.dumps(v, indent=1, default=str)[:6000], "```"]
     L += ["", "## Ops", "", "```json", json.dumps(r["ops"], indent=1, default=str), "```", ""]
     return "\n".join(L)

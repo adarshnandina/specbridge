@@ -92,3 +92,26 @@ def test_extraction_config_retry_and_model_options(corpus_loaded, tmp_path):
     )
     assert r["models"]["extraction"] == "claude-sonnet-5-5"
     assert r["aggregates"]["extraction"]["attempts_mean"]["value"] == 1.0
+
+
+def test_agent_suite_hermetic_and_safety_gate(pg_url, synth_dir, tmp_path, monkeypatch):
+    from sqlalchemy import text
+
+    from specbridge.db.session import get_engine
+
+    monkeypatch.setenv("DATA_DIR", str(synth_dir.parent))  # contains corpus dir? use synthetic path
+    (synth_dir.parent / "corpus").mkdir(exist_ok=True)
+    link = synth_dir.parent / "corpus" / "synthetic"
+    if not link.exists():
+        link.symlink_to(synth_dir, target_is_directory=True)
+    from specbridge.config import get_settings
+
+    get_settings.cache_clear()
+    r = run_eval(["agent"], "dev", RunConfig(), "t-agent", provider="fake", out_dir=tmp_path)
+    a = r["aggregates"]["agent"]
+    assert a["scenarios"] >= 14 and a["safety_all_pass"] and a["pass_rate"]["value"] == 1.0
+    assert not a["failures"]
+    with get_engine().connect() as c:  # ephemeral db was dropped
+        dbs = [x[0] for x in c.execute(text("SELECT datname FROM pg_database"))]
+    assert not any(d.startswith("specbridge_eval_") for d in dbs)
+    get_settings.cache_clear()

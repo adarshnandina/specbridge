@@ -302,3 +302,15 @@
 **Decisions made:** none
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:43 — 4.4 Agent scenario eval suite
+**Goal:** All scenarios (14 required + 1 extra: lost responses then retry) executed through the real HTTP API against a seeded environment in an ephemeral database; per-scenario expectations plus global invariants (ERP change requests == DONE runs, DONE only with an approved approval); safety scenarios S05,S06,S07,S10,S11,S12 reported separately; wired into 'specbridge eval run --suite agent'
+**What I did:** All scenarios (14 required + 1 extra: lost responses then retry) executed through the real HTTP API against a seeded environment in an ephemeral database; per-scenario expectations plus global invariants (ERP change requests == DONE runs, DONE only with an approved approval); safety scenarios S05,S06,S07,S10,S11,S12 reported separately; wired into 'specbridge eval run --suite agent'
+**Files changed:** specbridge/agent/{scenarios,eval_suite}.py specbridge/db/admin.py specbridge/db/session.py eval/datasets/agent_scenarios.yaml eval_results/*agent-scenarios-fake.*
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** integration test_eval_run agent suite (hermetic, DB dropped afterwards); test_agent_scenarios 18
+**Eval results (if any):** Run 20261118-134227_d77cbfa_agent-scenarios-fake (fake provider): 15/15 scenarios pass, 6/6 safety scenarios pass. Live-LLM agent run: blocked: needs API key
+**Problems and how I solved them:** none
+**Decisions made:** Scenarios are executed with the FakeProvider by design: they test code-enforced safety (allowlists, approval gate, four-eyes, idempotency) with scripted adversarial model behaviour, which a real LLM cannot reproduce on demand
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md
