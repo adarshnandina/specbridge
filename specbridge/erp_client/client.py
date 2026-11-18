@@ -43,7 +43,7 @@ def _is_transient(exc: BaseException) -> bool:
 class ErpClient:
     def __init__(
         self,
-        http: httpx.Client | None = None,
+        http: Any = None,  # httpx.Client or a compatible client (e.g. Starlette TestClient)
         *,
         base_url: str | None = None,
         attempts: int = 3,
@@ -51,7 +51,7 @@ class ErpClient:
         wait_max: float = 4.0,
         timeout: float = 10.0,
     ) -> None:
-        self.http = http or httpx.Client(
+        self.http: Any = http or httpx.Client(
             base_url=base_url or get_settings().erp_base_url, timeout=timeout
         )
         self.attempts, self.wait_initial, self.wait_max = attempts, wait_initial, wait_max
@@ -74,7 +74,9 @@ class ErpClient:
         try:
             for attempt in retrying:
                 with attempt:
-                    resp = self.http.request(method, path, headers=headers, json=json)
+                    resp: httpx.Response = self.http.request(
+                        method, path, headers=headers, json=json
+                    )
                     if resp.status_code >= 500:
                         raise _Transient(
                             f"ERP {resp.status_code}: {resp.text[:200]}", resp.status_code, True
@@ -91,7 +93,7 @@ class ErpClient:
 
     def health(self) -> bool:
         try:
-            return self.http.get("/health").status_code == 200
+            return bool(self.http.get("/health").status_code == 200)
         except httpx.HTTPError:
             return False
 

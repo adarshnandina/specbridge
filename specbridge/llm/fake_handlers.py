@@ -66,3 +66,14 @@ def register_default_handlers(fake: FakeProvider) -> FakeProvider:
 def judge_handler(req: LLMRequest) -> dict[str, Any]:
     """Constant mid score: the fake judge is a pipeline check only (never a quality signal)."""
     return {"score": 2, "rationale": "fake judge (pipeline check)"}
+
+
+def register_all_handlers(fake: FakeProvider) -> FakeProvider:
+    """QA, judge, extraction and agent responders (all deterministic, offline)."""
+    from specbridge.agent.fake import register_agent_handlers
+    from specbridge.extraction.fake import register_extraction_handlers
+
+    register_default_handlers(fake)
+    register_extraction_handlers(fake)
+    register_agent_handlers(fake)
+    return fake

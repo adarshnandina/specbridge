@@ -9,10 +9,29 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from specbridge.config import get_settings
 
+_override_url: str | None = None
+
 
 @lru_cache
 def get_engine() -> Engine:
-    return create_engine(get_settings().database_url, pool_pre_ping=True, future=True)
+    return create_engine(
+        _override_url or get_settings().database_url, pool_pre_ping=True, future=True
+    )
+
+
+@contextmanager
+def use_database(url: str) -> Iterator[None]:
+    """Temporarily point the process-wide engine at another database (eval/tests)."""
+    global _override_url
+    prev = _override_url
+    reset_engine()
+    _override_url = url
+    try:
+        yield
+    finally:
+        get_engine().dispose()
+        reset_engine()
+        _override_url = prev
 
 
 def reset_engine() -> None:

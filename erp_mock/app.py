@@ -100,7 +100,8 @@ def create_app(db_path: str | None = None, faults: Faults | None = None) -> Fast
         )
         return resp
 
-    def inject_write_faults() -> None:
+    def inject_write_faults() -> bool:
+        """Returns True if the response must be lost AFTER the write executes."""
         with state.lock:
             state.write_calls += 1
             n = state.write_calls
@@ -110,6 +111,13 @@ def create_app(db_path: str | None = None, faults: Faults | None = None) -> Fast
         if n <= f.fail_first_n or (f.failure_rate and random.random() < f.failure_rate):
             _log("fault.injected", write_call=n)
             raise HTTPException(503, "injected ERP failure")
+        return f.fail_first_n < n <= f.fail_first_n + f.lose_response_first_n
+
+    def maybe_lose(lose: bool, resp: JSONResponse) -> JSONResponse:
+        if lose:
+            _log("fault.response_lost", status=resp.status_code)
+            raise HTTPException(503, "injected: response lost after write")
+        return resp
 
     def idempotent(scope: str, key: str | None, body: Any, produce) -> JSONResponse:  # type: ignore[no-untyped-def]
         if not key:
@@ -166,7 +174,7 @@ def create_app(db_path: str | None = None, faults: Faults | None = None) -> Fast
     def put_part(
         part_number: str, body: PartUpsert, idempotency_key: str | None = Header(default=None)
     ) -> JSONResponse:
-        inject_write_faults()
+        lose = inject_write_faults()
 
         def produce(c: sqlite3.Connection) -> tuple[int, dict[str, Any]]:
             old = c.execute(
@@ -183,13 +191,16 @@ def create_app(db_path: str | None = None, faults: Faults | None = None) -> Fast
                 "status": "updated" if old else "created",
             }
 
-        return idempotent(f"PUT /parts/{part_number}", idempotency_key, body.model_dump(), produce)
+        return maybe_lose(
+            lose,
+            idempotent(f"PUT /parts/{part_number}", idempotency_key, body.model_dump(), produce),
+        )
 
     @app.post("/change-requests")
     def create_cr(
         body: ChangeRequestIn, idempotency_key: str | None = Header(default=None)
     ) -> JSONResponse:
-        inject_write_faults()
+        lose = inject_write_faults()
 
         def produce(c: sqlite3.Connection) -> tuple[int, dict[str, Any]]:
             cid = str(uuid.uuid4())
@@ -199,7 +210,9 @@ def create_app(db_path: str | None = None, faults: Faults | None = None) -> Fast
             )
             return 201, {"id": cid, "status": "created"}
 
-        return idempotent("POST /change-requests", idempotency_key, body.model_dump(), produce)
+        return maybe_lose(
+            lose, idempotent("POST /change-requests", idempotency_key, body.model_dump(), produce)
+        )
 
     def cr_row(r: sqlite3.Row) -> dict[str, Any]:
         return {"id": r["id"], "status": r["status"], **json.loads(r["body"])}

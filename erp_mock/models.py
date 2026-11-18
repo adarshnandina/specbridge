@@ -22,4 +22,7 @@ class ChangeRequestIn(BaseModel):
 class Faults(BaseModel):
     failure_rate: float = Field(0.0, ge=0, le=1)
     fail_first_n: int = Field(0, ge=0)
+    # After fail_first_n failures, the next N write calls EXECUTE the write but the response is
+    # lost (503) - the case that creates duplicates unless idempotency keys work.
+    lose_response_first_n: int = Field(0, ge=0)
     latency_ms: int = Field(0, ge=0)

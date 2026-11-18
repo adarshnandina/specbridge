@@ -23,7 +23,7 @@ from specbridge.eval.datasets import QAItem, dataset_hashes, load_qa
 from specbridge.eval.judge import judge_answer
 from specbridge.ingestion.embeddings import Embedder, get_embedder
 from specbridge.llm.cache import ResponseCache
-from specbridge.llm.fake_handlers import register_default_handlers
+from specbridge.llm.fake_handlers import register_all_handlers
 from specbridge.llm.fake_provider import FakeProvider
 from specbridge.llm.pricing import compute_cost
 from specbridge.llm.usage import (
@@ -106,10 +106,7 @@ def make_llm(settings: Settings, provider_name: str, use_cache: bool) -> tuple[L
     s = settings.model_copy(update={"llm_provider": provider_name, "log_llm_payloads": False})
     provider = build_provider(s)
     if isinstance(provider, FakeProvider):
-        register_default_handlers(provider)
-        from specbridge.extraction.fake import register_extraction_handlers  # noqa: PLC0415
-
-        register_extraction_handlers(provider)
+        register_all_handlers(provider)
     cache = ResponseCache(s.data_dir / "cache" / "llm_cache.sqlite") if use_cache else None
     if provider_name == "fake":
         ledger = MemoryLedger()

@@ -51,3 +51,27 @@ def record(
         resource_type=resource_type,
         resource_id=str(resource_id) if resource_id else None,
     )
+
+
+def record_denied(
+    actor: str | None,
+    role: str | None,
+    action: str,
+    resource_type: str | None = None,
+    resource_id: Any = None,
+    details: dict[str, Any] | None = None,
+) -> None:
+    """Record a denial in its OWN transaction so a request rollback cannot lose it."""
+    from specbridge.db.session import session_scope
+
+    with session_scope() as s:
+        record(
+            s,
+            actor=actor,
+            role=role,
+            action=action,
+            outcome="denied",
+            resource_type=resource_type,
+            resource_id=resource_id,
+            details=details,
+        )

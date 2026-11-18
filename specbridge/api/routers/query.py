@@ -22,14 +22,11 @@ def get_llm() -> LLMService:
     if _llm is None:
         provider = build_provider()
         if provider.name == "fake":
-            from specbridge.llm.fake_handlers import register_default_handlers
+            from specbridge.llm.fake_handlers import register_all_handlers
             from specbridge.llm.fake_provider import FakeProvider
 
             assert isinstance(provider, FakeProvider)
-            register_default_handlers(provider)
-            from specbridge.extraction.fake import register_extraction_handlers
-
-            register_extraction_handlers(provider)
+            register_all_handlers(provider)
         _llm = LLMService(provider)
     return _llm
 

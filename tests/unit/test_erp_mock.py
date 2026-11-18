@@ -76,3 +76,17 @@ def test_latency(client):
     t = time.perf_counter()
     client.post("/change-requests", json=CR, headers=H)
     assert time.perf_counter() - t >= 0.05
+
+
+def test_lost_response_still_writes_and_replay_does_not_duplicate(client):
+    client.post("/_admin/faults", json={"fail_first_n": 1, "lose_response_first_n": 1})
+    assert client.post("/change-requests", json=CR, headers=H).status_code == 503  # fails pre-write
+    assert client.post("/change-requests", json=CR, headers=H).status_code == 503  # written, lost
+    assert len(client.get("/change-requests").json()) == 1  # but it exists
+    r = client.post("/change-requests", json=CR, headers=H)  # replay
+    assert r.status_code == 201 and len(client.get("/change-requests").json()) == 1
+    # a different key after a lost response WOULD duplicate: proves why the key matters
+    client.post("/_admin/faults", json={"lose_response_first_n": 1})
+    client.post("/change-requests", json=CR, headers={"Idempotency-Key": "k2"})
+    client.post("/change-requests", json=CR, headers={"Idempotency-Key": "k3"})
+    assert len(client.get("/change-requests").json()) == 3

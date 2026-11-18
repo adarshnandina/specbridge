@@ -266,3 +266,15 @@
 **Decisions made:** none
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:41 — 4.1 Agent state machine, tools, allowlists, limits
+**Goal:** Explicit persisted state machine (RECEIVED..DONE, REJECTED/FAILED/ESCALATED) with transition table; per-state tool allowlists (write tool only in COMMITTING and only with an approved approval row); deterministic search_parts via parameterised SQLAlchemy (category, temp range, voltage overlap, IP>=, constraints, ERP lifecycle exclusion, max 10); COMPARE loop with max 3 evidence calls, ranking validation (candidate whitelist, citation verification, uncited claims removed, escalate if no verified evidence); max 6 LLM calls; 120s step limit; untrusted evidence wrapped as data
+**What I did:** Explicit persisted state machine (RECEIVED..DONE, REJECTED/FAILED/ESCALATED) with transition table; per-state tool allowlists (write tool only in COMMITTING and only with an approved approval row); deterministic search_parts via parameterised SQLAlchemy (category, temp range, voltage overlap, IP>=, constraints, ERP lifecycle exclusion, max 10); COMPARE loop with max 3 evidence calls, ranking validation (candidate whitelist, citation verification, uncited claims removed, escalate if no verified evidence); max 6 LLM calls; 120s step limit; untrusted evidence wrapped as data
+**Files changed:** specbridge/agent/{states,permissions,models,tools,runner,fake}.py specbridge/prompts/agent_*.md tests/unit/test_agent_units.py tests/integration/test_agent_runner.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** unit test_agent_units 12; integration test_agent_runner 9 (write guard, step/audit persistence, evidence cap, LLM-call cap -> ESCALATED, hallucinated parts/uncited claims dropped, no-evidence escalation, step timeout, explicit resume)
+**Eval results (if any):** n/a
+**Problems and how I solved them:** Implemented together with 4.2 in one working tree; this commit holds both, 4.2 records its own behaviour.
+**Decisions made:** Candidate must have >=1 verified claim or the run ESCALATES (never propose on unverified rationale). Agent scenarios seed approved extractions from ground truth so they test the agent, not the extractor. ADR-0002 will cover state machine vs framework
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md

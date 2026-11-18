@@ -10,7 +10,7 @@ from specbridge import audit
 from specbridge.auth.api_keys import KeyStore, Principal
 from specbridge.auth.rbac import has_permission
 from specbridge.config import get_settings
-from specbridge.db.session import get_db, session_scope
+from specbridge.db.session import get_db
 from specbridge.erp_client.client import ErpClient
 from specbridge.errors import AuthError, ForbiddenError
 from specbridge.logging_setup import bind_request, get_logger
@@ -40,18 +40,7 @@ def audit_denied(
     resource_id: str | None = None,
     details: dict[str, object] | None = None,
 ) -> None:
-    """Denials are committed in their own transaction so the request rollback can't lose them."""
-    with session_scope() as s:
-        audit.record(
-            s,
-            actor=p.user,
-            role=p.role,
-            action=action,
-            outcome="denied",
-            resource_type=resource_type,
-            resource_id=resource_id,
-            details=dict(details or {}),
-        )
+    audit.record_denied(p.user, p.role, action, resource_type, resource_id, dict(details or {}))
     log.warning("auth.denied", actor=p.user, role=p.role, action=action)
 
 
