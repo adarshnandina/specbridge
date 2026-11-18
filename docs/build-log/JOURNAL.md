@@ -254,3 +254,15 @@
 **Decisions made:** none
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:30 — 3.4 Extraction eval suite
+**Goal:** Suite scoring per-field and micro P/R/F1 (1% numeric tolerance, null handling, set comparison for lists), evidence validity rate, % auto-validated vs needing review, precision of validated records (doc-level and field-level), attempts, cost per document; synthetic labels + provisional real labels reported separately; config options model/retry/include_real for experiments; compact markdown report
+**What I did:** Suite scoring per-field and micro P/R/F1 (1% numeric tolerance, null handling, set comparison for lists), evidence validity rate, % auto-validated vs needing review, precision of validated records (doc-level and field-level), attempts, cost per document; synthetic labels + provisional real labels reported separately; config options model/retry/include_real for experiments; compact markdown report
+**Files changed:** specbridge/extraction/eval_suite.py specbridge/eval/runner.py tests/unit/test_extraction_eval.py tests/integration/test_eval_run.py eval_results/*extraction-fake-pipeline.*
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** unit test_extraction_eval 4; integration test_eval_run 7 (adds extraction suite + config options)
+**Eval results (if any):** Fake-provider extraction run 20261118-132949_2cf9cda_extraction-fake-pipeline (dev, 33 synthetic docs): PIPELINE CHECK ONLY - the 'model' is a rule-based regex extractor. Real extraction run: blocked: needs API key
+**Problems and how I solved them:** none
+**Decisions made:** none
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md

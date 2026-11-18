@@ -1,0 +1,5540 @@
+{
+ "run_id": "20261118-132949_2cf9cda_extraction-fake-pipeline",
+ "created_at": "2026-11-18T13:29:49",
+ "git_sha": "2cf9cda",
+ "tag": "extraction-fake-pipeline",
+ "suites": [
+  "extraction"
+ ],
+ "split": "dev",
+ "provider": "fake",
+ "config": {
+  "name": "default",
+  "description": "",
+  "index_name": null,
+  "retrieval": {},
+  "qa": {},
+  "extraction": {},
+  "agent": {}
+ },
+ "estimated_cost_usd": 0.0,
+ "datasets": {
+  "extraction_real.jsonl": "dfc17bb1433014bdeeb19a1691d80725e9454968cd10a888b17e782df6391f93",
+  "extraction_synthetic.jsonl": "d1f7260cce3dc0c66ff76237b655d254c8c9336c4f1f615860087ff347a322e2",
+  "qa.jsonl": "60a51b5a839e1f0bd4f82a639d3fc4462ebede9c3948e7b94cced858d8fe0200"
+ },
+ "models": {
+  "extraction": "claude-haiku-5-5"
+ },
+ "prompt_versions": [
+  "extraction.v1"
+ ],
+ "items": {
+  "extraction": [
+   {
+    "doc_key": "alpenlicht/AL-AIO-201/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "alpenlicht/AL-AIO-205/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 16,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 16,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "alpenlicht/AL-AIO-209/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 16,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 16,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "alpenlicht/AL-DIO-101/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 16,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 16,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "alpenlicht/AL-DIO-105/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 16,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 16,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "alpenlicht/AL-DIO-109/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 16,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 16,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "alpenlicht/AL-DIO-199/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 16,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 16,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "alpenlicht/AL-PSU-304/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 14,
+    "fp": 1,
+    "fn": 1,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [
+     "power_w"
+    ],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "alpenlicht/AL-PSU-310/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 1,
+    "fn": 1,
+    "pred_fields": 16,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [
+     "power_w"
+    ],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "alpenlicht/AL-PSU-313/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 14,
+    "fp": 1,
+    "fn": 1,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [
+     "power_w"
+    ],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "kestrel/KD-120/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 16,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 16,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "kestrel/KD-140/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "kestrel/KD-140/rev1.1",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "kestrel/KD-150/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "kestrel/KD-150/rev1.1",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "kestrel/KD-220/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 16,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 16,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "kestrel/KD-220/rev1.1",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 1,
+    "fn": 1,
+    "pred_fields": 16,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [
+     "certifications"
+    ],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "kestrel/KD-240/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 16,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 16,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "kestrel/KD-250/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 16,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 16,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "kestrel/KD-320/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "kestrel/KD-340/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 16,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 16,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "kestrel/KD-350/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 16,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 16,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "nordwerk/NS-IND-1204/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "nordwerk/NS-IND-1212/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "nordwerk/NS-IND-1216/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "nordwerk/NS-IND-1216/rev1.1",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "nordwerk/NS-PHO-2306/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "nordwerk/NS-PHO-2318/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "nordwerk/NS-PHO-2324/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "nordwerk/NS-PRS-3405/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "nordwerk/NS-PRS-3405/rev1.1",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "nordwerk/NS-PRS-3415/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "nordwerk/NS-PRS-3420/rev1.0",
+    "status": "validated",
+    "attempts": 1,
+    "fields": {
+     "part_number": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "manufacturer": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "product_name": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "category": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "pred_fields": 15,
+    "evidence_errors": 0,
+    "errors": [],
+    "wrong_fields": [],
+    "cost_usd": 0.0,
+    "latency_ms": 1,
+    "cache_hit": false,
+    "dataset": "synthetic"
+   },
+   {
+    "doc_key": "ifm/AL2205/real",
+    "status": "pending_review",
+    "attempts": 2,
+    "fields": {
+     "part_number": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "manufacturer": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "product_name": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "category": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "supply_voltage_min_v": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "supply_voltage_max_v": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "rated_current_a": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": false
+     },
+     "power_w": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "operating_temp_max_c": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "ip_rating": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "weight_g": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "dimensions_mm": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     }
+    },
+    "tp": 0,
+    "fp": 5,
+    "fn": 12,
+    "pred_fields": 5,
+    "evidence_errors": 1,
+    "errors": [
+     "part_number:required",
+     "ip_rating:ip_format",
+     "ip_rating:evidence_value"
+    ],
+    "wrong_fields": [
+     "part_number",
+     "manufacturer",
+     "product_name",
+     "category",
+     "supply_voltage_min_v",
+     "supply_voltage_max_v",
+     "rated_current_a",
+     "power_w",
+     "operating_temp_min_c",
+     "operating_temp_max_c",
+     "ip_rating",
+     "weight_g",
+     "certifications",
+     "interfaces",
+     "dimensions_mm"
+    ],
+    "cost_usd": 0.0,
+    "latency_ms": 2,
+    "cache_hit": false,
+    "dataset": "real"
+   },
+   {
+    "doc_key": "ifm/AL5021/real",
+    "status": "pending_review",
+    "attempts": 2,
+    "fields": {
+     "part_number": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "manufacturer": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "product_name": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "category": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "supply_voltage_min_v": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "supply_voltage_max_v": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "operating_temp_max_c": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "ip_rating": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "weight_g": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "dimensions_mm": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     }
+    },
+    "tp": 0,
+    "fp": 3,
+    "fn": 12,
+    "pred_fields": 3,
+    "evidence_errors": 1,
+    "errors": [
+     "part_number:required",
+     "ip_rating:ip_format",
+     "ip_rating:evidence_value"
+    ],
+    "wrong_fields": [
+     "part_number",
+     "manufacturer",
+     "product_name",
+     "category",
+     "supply_voltage_min_v",
+     "supply_voltage_max_v",
+     "operating_temp_min_c",
+     "operating_temp_max_c",
+     "ip_rating",
+     "weight_g",
+     "certifications",
+     "interfaces",
+     "dimensions_mm"
+    ],
+    "cost_usd": 0.0,
+    "latency_ms": 2,
+    "cache_hit": false,
+    "dataset": "real"
+   },
+   {
+    "doc_key": "lantronix/25079/real",
+    "status": "pending_review",
+    "attempts": 2,
+    "fields": {
+     "part_number": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "manufacturer": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "product_name": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "category": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "supply_voltage_min_v": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "supply_voltage_max_v": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "operating_temp_max_c": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "ip_rating": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 3,
+    "fp": 5,
+    "fn": 10,
+    "pred_fields": 8,
+    "evidence_errors": 1,
+    "errors": [
+     "part_number:required",
+     "ip_rating:ip_format",
+     "ip_rating:evidence_value"
+    ],
+    "wrong_fields": [
+     "part_number",
+     "manufacturer",
+     "product_name",
+     "category",
+     "supply_voltage_min_v",
+     "supply_voltage_max_v",
+     "operating_temp_min_c",
+     "operating_temp_max_c",
+     "ip_rating",
+     "weight_g",
+     "certifications"
+    ],
+    "cost_usd": 0.0,
+    "latency_ms": 2,
+    "cache_hit": false,
+    "dataset": "real"
+   },
+   {
+    "doc_key": "omron/E2E-X14B1T18-M1/real",
+    "status": "pending_review",
+    "attempts": 2,
+    "fields": {
+     "part_number": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "manufacturer": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "product_name": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "category": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 1,
+    "fp": 0,
+    "fn": 5,
+    "pred_fields": 1,
+    "evidence_errors": 0,
+    "errors": [
+     "part_number:required"
+    ],
+    "wrong_fields": [
+     "part_number",
+     "manufacturer",
+     "product_name",
+     "category",
+     "interfaces"
+    ],
+    "cost_usd": 0.0,
+    "latency_ms": 2,
+    "cache_hit": false,
+    "dataset": "real"
+   },
+   {
+    "doc_key": "wachendorff/DRA10-24/real",
+    "status": "pending_review",
+    "attempts": 2,
+    "fields": {
+     "part_number": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "manufacturer": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "product_name": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "category": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "supply_voltage_min_v": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "supply_voltage_max_v": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "rated_current_a": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "power_w": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "operating_temp_min_c": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "operating_temp_max_c": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "ip_rating": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "weight_g": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "interfaces": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "dimensions_mm": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     }
+    },
+    "tp": 0,
+    "fp": 2,
+    "fn": 14,
+    "pred_fields": 2,
+    "evidence_errors": 1,
+    "errors": [
+     "part_number:required",
+     "ip_rating:ip_format",
+     "ip_rating:evidence_value"
+    ],
+    "wrong_fields": [
+     "part_number",
+     "manufacturer",
+     "product_name",
+     "category",
+     "supply_voltage_min_v",
+     "supply_voltage_max_v",
+     "rated_current_a",
+     "power_w",
+     "operating_temp_min_c",
+     "operating_temp_max_c",
+     "ip_rating",
+     "weight_g",
+     "certifications",
+     "dimensions_mm"
+    ],
+    "cost_usd": 0.0,
+    "latency_ms": 2,
+    "cache_hit": false,
+    "dataset": "real"
+   },
+   {
+    "doc_key": "wenglor/I18H014/real",
+    "status": "pending_review",
+    "attempts": 2,
+    "fields": {
+     "part_number": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "manufacturer": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "product_name": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "category": {
+      "correct": false,
+      "tp": false,
+      "fp": false,
+      "fn": true
+     },
+     "supply_voltage_min_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "supply_voltage_max_v": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "rated_current_a": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": false
+     },
+     "power_w": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_min_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "operating_temp_max_c": {
+      "correct": true,
+      "tp": true,
+      "fp": false,
+      "fn": false
+     },
+     "ip_rating": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "weight_g": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "datasheet_revision": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "certifications": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     },
+     "interfaces": {
+      "correct": false,
+      "tp": false,
+      "fp": true,
+      "fn": true
+     },
+     "dimensions_mm": {
+      "correct": true,
+      "tp": false,
+      "fp": false,
+      "fn": false
+     }
+    },
+    "tp": 4,
+    "fp": 3,
+    "fn": 6,
+    "pred_fields": 7,
+    "evidence_errors": 1,
+    "errors": [
+     "part_number:required",
+     "ip_rating:ip_format",
+     "ip_rating:evidence_value"
+    ],
+    "wrong_fields": [
+     "part_number",
+     "manufacturer",
+     "product_name",
+     "category",
+     "rated_current_a",
+     "ip_rating",
+     "interfaces"
+    ],
+    "cost_usd": 0.0,
+    "latency_ms": 2,
+    "cache_hit": false,
+    "dataset": "real"
+   }
+  ]
+ },
+ "aggregates": {
+  "extraction": {
+   "micro": {
+    "precision": {
+     "value": 0.9921414538310412,
+     "k": 505,
+     "n": 509,
+     "ci": [
+      0.98,
+      0.9969
+     ]
+    },
+    "recall": {
+     "value": 0.9921414538310412,
+     "k": 505,
+     "n": 509,
+     "ci": [
+      0.98,
+      0.9969
+     ]
+    },
+    "f1": {
+     "value": 0.9921414538310412,
+     "n": 513
+    }
+   },
+   "micro_f1": {
+    "value": 0.9921414538310412,
+    "n": 513
+   },
+   "per_field": {
+    "part_number": {
+     "precision": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "f1": {
+      "value": 1.0,
+      "n": 33
+     }
+    },
+    "manufacturer": {
+     "precision": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "f1": {
+      "value": 1.0,
+      "n": 33
+     }
+    },
+    "product_name": {
+     "precision": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "f1": {
+      "value": 1.0,
+      "n": 33
+     }
+    },
+    "category": {
+     "precision": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "f1": {
+      "value": 1.0,
+      "n": 33
+     }
+    },
+    "supply_voltage_min_v": {
+     "precision": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "f1": {
+      "value": 1.0,
+      "n": 33
+     }
+    },
+    "supply_voltage_max_v": {
+     "precision": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "f1": {
+      "value": 1.0,
+      "n": 33
+     }
+    },
+    "rated_current_a": {
+     "precision": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "f1": {
+      "value": 1.0,
+      "n": 33
+     }
+    },
+    "power_w": {
+     "precision": {
+      "value": 0.8846153846153846,
+      "k": 23,
+      "n": 26,
+      "ci": [
+       0.7102,
+       0.96
+      ]
+     },
+     "recall": {
+      "value": 0.8846153846153846,
+      "k": 23,
+      "n": 26,
+      "ci": [
+       0.7102,
+       0.96
+      ]
+     },
+     "f1": {
+      "value": 0.8846153846153846,
+      "n": 29
+     }
+    },
+    "operating_temp_min_c": {
+     "precision": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "f1": {
+      "value": 1.0,
+      "n": 33
+     }
+    },
+    "operating_temp_max_c": {
+     "precision": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "f1": {
+      "value": 1.0,
+      "n": 33
+     }
+    },
+    "ip_rating": {
+     "precision": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "f1": {
+      "value": 1.0,
+      "n": 33
+     }
+    },
+    "weight_g": {
+     "precision": {
+      "value": 1.0,
+      "k": 26,
+      "n": 26,
+      "ci": [
+       0.8713,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 1.0,
+      "k": 26,
+      "n": 26,
+      "ci": [
+       0.8713,
+       1.0
+      ]
+     },
+     "f1": {
+      "value": 1.0,
+      "n": 26
+     }
+    },
+    "datasheet_revision": {
+     "precision": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "f1": {
+      "value": 1.0,
+      "n": 33
+     }
+    },
+    "certifications": {
+     "precision": {
+      "value": 0.9696969696969697,
+      "k": 32,
+      "n": 33,
+      "ci": [
+       0.8468,
+       0.9946
+      ]
+     },
+     "recall": {
+      "value": 0.9696969696969697,
+      "k": 32,
+      "n": 33,
+      "ci": [
+       0.8468,
+       0.9946
+      ]
+     },
+     "f1": {
+      "value": 0.9696969696969697,
+      "n": 34
+     }
+    },
+    "interfaces": {
+     "precision": {
+      "value": 1.0,
+      "k": 28,
+      "n": 28,
+      "ci": [
+       0.8794,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 1.0,
+      "k": 28,
+      "n": 28,
+      "ci": [
+       0.8794,
+       1.0
+      ]
+     },
+     "f1": {
+      "value": 1.0,
+      "n": 28
+     }
+    },
+    "dimensions_mm": {
+     "precision": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 1.0,
+      "k": 33,
+      "n": 33,
+      "ci": [
+       0.8957,
+       1.0
+      ]
+     },
+     "f1": {
+      "value": 1.0,
+      "n": 33
+     }
+    }
+   },
+   "evidence_validity": {
+    "value": 1.0,
+    "k": 509,
+    "n": 509,
+    "ci": [
+     0.9925,
+     1.0
+    ]
+   },
+   "auto_validated_rate": {
+    "value": 1.0,
+    "k": 33,
+    "n": 33,
+    "ci": [
+     0.8957,
+     1.0
+    ]
+   },
+   "needs_review_rate": {
+    "value": 0.0,
+    "k": 0,
+    "n": 33,
+    "ci": [
+     0.0,
+     0.1043
+    ]
+   },
+   "validated_doc_precision": {
+    "value": 0.8787878787878788,
+    "k": 29,
+    "n": 33,
+    "ci": [
+     0.7267,
+     0.9518
+    ]
+   },
+   "validated_field_precision": {
+    "value": 0.9921414538310412,
+    "k": 505,
+    "n": 509,
+    "ci": [
+     0.98,
+     0.9969
+    ]
+   },
+   "attempts_mean": {
+    "value": 1.0,
+    "n": 33
+   },
+   "n_documents": 33
+  },
+  "extraction_real": {
+   "micro": {
+    "precision": {
+     "value": 0.3076923076923077,
+     "k": 8,
+     "n": 26,
+     "ci": [
+      0.165,
+      0.4999
+     ]
+    },
+    "recall": {
+     "value": 0.11940298507462686,
+     "k": 8,
+     "n": 67,
+     "ci": [
+      0.0618,
+      0.2183
+     ]
+    },
+    "f1": {
+     "value": 0.17204301075268816,
+     "n": 85
+    }
+   },
+   "micro_f1": {
+    "value": 0.17204301075268816,
+    "n": 85
+   },
+   "per_field": {
+    "part_number": {
+     "precision": {
+      "value": null,
+      "k": 0,
+      "n": 0,
+      "ci": [
+       0.0,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 0.0,
+      "k": 0,
+      "n": 6,
+      "ci": [
+       0.0,
+       0.3903
+      ]
+     },
+     "f1": {
+      "value": 0.0,
+      "n": 6
+     }
+    },
+    "manufacturer": {
+     "precision": {
+      "value": null,
+      "k": 0,
+      "n": 0,
+      "ci": [
+       0.0,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 0.0,
+      "k": 0,
+      "n": 6,
+      "ci": [
+       0.0,
+       0.3903
+      ]
+     },
+     "f1": {
+      "value": 0.0,
+      "n": 6
+     }
+    },
+    "product_name": {
+     "precision": {
+      "value": null,
+      "k": 0,
+      "n": 0,
+      "ci": [
+       0.0,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 0.0,
+      "k": 0,
+      "n": 6,
+      "ci": [
+       0.0,
+       0.3903
+      ]
+     },
+     "f1": {
+      "value": 0.0,
+      "n": 6
+     }
+    },
+    "category": {
+     "precision": {
+      "value": null,
+      "k": 0,
+      "n": 0,
+      "ci": [
+       0.0,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 0.0,
+      "k": 0,
+      "n": 6,
+      "ci": [
+       0.0,
+       0.3903
+      ]
+     },
+     "f1": {
+      "value": 0.0,
+      "n": 6
+     }
+    },
+    "supply_voltage_min_v": {
+     "precision": {
+      "value": 0.5,
+      "k": 1,
+      "n": 2,
+      "ci": [
+       0.0945,
+       0.9055
+      ]
+     },
+     "recall": {
+      "value": 0.2,
+      "k": 1,
+      "n": 5,
+      "ci": [
+       0.0362,
+       0.6245
+      ]
+     },
+     "f1": {
+      "value": 0.28571428571428575,
+      "n": 6
+     }
+    },
+    "supply_voltage_max_v": {
+     "precision": {
+      "value": 0.5,
+      "k": 1,
+      "n": 2,
+      "ci": [
+       0.0945,
+       0.9055
+      ]
+     },
+     "recall": {
+      "value": 0.2,
+      "k": 1,
+      "n": 5,
+      "ci": [
+       0.0362,
+       0.6245
+      ]
+     },
+     "f1": {
+      "value": 0.28571428571428575,
+      "n": 6
+     }
+    },
+    "rated_current_a": {
+     "precision": {
+      "value": 0.3333333333333333,
+      "k": 1,
+      "n": 3,
+      "ci": [
+       0.0615,
+       0.7923
+      ]
+     },
+     "recall": {
+      "value": 0.5,
+      "k": 1,
+      "n": 2,
+      "ci": [
+       0.0945,
+       0.9055
+      ]
+     },
+     "f1": {
+      "value": 0.4,
+      "n": 4
+     }
+    },
+    "power_w": {
+     "precision": {
+      "value": 0.3333333333333333,
+      "k": 1,
+      "n": 3,
+      "ci": [
+       0.0615,
+       0.7923
+      ]
+     },
+     "recall": {
+      "value": 0.5,
+      "k": 1,
+      "n": 2,
+      "ci": [
+       0.0945,
+       0.9055
+      ]
+     },
+     "f1": {
+      "value": 0.4,
+      "n": 4
+     }
+    },
+    "operating_temp_min_c": {
+     "precision": {
+      "value": 0.5,
+      "k": 1,
+      "n": 2,
+      "ci": [
+       0.0945,
+       0.9055
+      ]
+     },
+     "recall": {
+      "value": 0.2,
+      "k": 1,
+      "n": 5,
+      "ci": [
+       0.0362,
+       0.6245
+      ]
+     },
+     "f1": {
+      "value": 0.28571428571428575,
+      "n": 6
+     }
+    },
+    "operating_temp_max_c": {
+     "precision": {
+      "value": 0.5,
+      "k": 1,
+      "n": 2,
+      "ci": [
+       0.0945,
+       0.9055
+      ]
+     },
+     "recall": {
+      "value": 0.2,
+      "k": 1,
+      "n": 5,
+      "ci": [
+       0.0362,
+       0.6245
+      ]
+     },
+     "f1": {
+      "value": 0.28571428571428575,
+      "n": 6
+     }
+    },
+    "ip_rating": {
+     "precision": {
+      "value": 0.16666666666666666,
+      "k": 1,
+      "n": 6,
+      "ci": [
+       0.0301,
+       0.5635
+      ]
+     },
+     "recall": {
+      "value": 0.2,
+      "k": 1,
+      "n": 5,
+      "ci": [
+       0.0362,
+       0.6245
+      ]
+     },
+     "f1": {
+      "value": 0.1818181818181818,
+      "n": 10
+     }
+    },
+    "weight_g": {
+     "precision": {
+      "value": null,
+      "k": 0,
+      "n": 0,
+      "ci": [
+       0.0,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 0.0,
+      "k": 0,
+      "n": 4,
+      "ci": [
+       0.0,
+       0.4899
+      ]
+     },
+     "f1": {
+      "value": 0.0,
+      "n": 4
+     }
+    },
+    "datasheet_revision": {
+     "precision": {
+      "value": null,
+      "k": 0,
+      "n": 0,
+      "ci": [
+       0.0,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": null,
+      "k": 0,
+      "n": 0,
+      "ci": [
+       0.0,
+       1.0
+      ]
+     },
+     "f1": {
+      "value": 0.0,
+      "n": 0
+     }
+    },
+    "certifications": {
+     "precision": {
+      "value": 0.0,
+      "k": 0,
+      "n": 2,
+      "ci": [
+       0.0,
+       0.6576
+      ]
+     },
+     "recall": {
+      "value": 0.0,
+      "k": 0,
+      "n": 2,
+      "ci": [
+       0.0,
+       0.6576
+      ]
+     },
+     "f1": {
+      "value": 0.0,
+      "n": 4
+     }
+    },
+    "interfaces": {
+     "precision": {
+      "value": 0.0,
+      "k": 0,
+      "n": 3,
+      "ci": [
+       0.0,
+       0.5615
+      ]
+     },
+     "recall": {
+      "value": 0.0,
+      "k": 0,
+      "n": 4,
+      "ci": [
+       0.0,
+       0.4899
+      ]
+     },
+     "f1": {
+      "value": 0.0,
+      "n": 7
+     }
+    },
+    "dimensions_mm": {
+     "precision": {
+      "value": 1.0,
+      "k": 1,
+      "n": 1,
+      "ci": [
+       0.2065,
+       1.0
+      ]
+     },
+     "recall": {
+      "value": 0.25,
+      "k": 1,
+      "n": 4,
+      "ci": [
+       0.0456,
+       0.6994
+      ]
+     },
+     "f1": {
+      "value": 0.4,
+      "n": 4
+     }
+    }
+   },
+   "evidence_validity": {
+    "value": 0.8076923076923077,
+    "k": 21,
+    "n": 26,
+    "ci": [
+     0.6212,
+     0.9149
+    ]
+   },
+   "auto_validated_rate": {
+    "value": 0.0,
+    "k": 0,
+    "n": 6,
+    "ci": [
+     0.0,
+     0.3903
+    ]
+   },
+   "needs_review_rate": {
+    "value": 1.0,
+    "k": 6,
+    "n": 6,
+    "ci": [
+     0.6097,
+     1.0
+    ]
+   },
+   "validated_doc_precision": {
+    "value": null,
+    "k": 0,
+    "n": 0,
+    "ci": [
+     0.0,
+     1.0
+    ]
+   },
+   "validated_field_precision": {
+    "value": null,
+    "k": 0,
+    "n": 0,
+    "ci": [
+     0.0,
+     1.0
+    ]
+   },
+   "attempts_mean": {
+    "value": 2.0,
+    "n": 6
+   },
+   "n_documents": 6
+  }
+ },
+ "ops": {
+  "extraction": {
+   "latency_ms": {
+    "n": 33,
+    "p50": 1.0,
+    "p95": 1.0,
+    "mean": 1.0
+   },
+   "cost_usd": 0.0,
+   "cost_per_document": 0.0,
+   "llm_calls": 45,
+   "input_tokens": 32185,
+   "output_tokens": 15181
+  }
+ },
+ "notes": [
+  "fake provider: rule-based regex extractor - pipeline check only, NOT a model quality result",
+  "extraction_real: labels are PROVISIONAL (verified_by_human=false); metrics on them are provisional"
+ ],
+ "cost_usd": 0.0,
+ "aborted": false,
+ "embedding_model": "BAAI/bge-small-en-v1.5",
+ "duration_s": 0.21
+}

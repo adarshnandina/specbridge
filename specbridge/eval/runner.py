@@ -344,6 +344,13 @@ def register_suite(name: str, fn: Callable[[SuiteContext], SuiteOutput]) -> None
 def suite_item_count(suite: str, split: str) -> int:
     if suite in ("retrieval", "qa"):
         return len(load_qa(split=split))
+    if suite == "extraction":
+        from specbridge.eval.datasets import DATASET_DIR, read_jsonl
+
+        recs = read_jsonl(DATASET_DIR / "extraction_synthetic.jsonl") + read_jsonl(
+            DATASET_DIR / "extraction_real.jsonl"
+        )
+        return sum(1 for r in recs if split in ("all", r["split"]))
     return 0
 
 
@@ -488,11 +495,47 @@ def render_markdown(r: dict[str, Any]) -> str:
         L += ["", "| type | accuracy |", "|---|---|"]
         for t, v in q["accuracy_by_type"].items():
             L.append(f"| {t} | {fmt_metric(v)} |")
+    for key in ("extraction", "extraction_real"):
+        if key in agg:
+            L += _render_extraction(key, agg[key])
     for k, v in agg.items():
-        if k not in ("retrieval", "qa"):
+        if k not in ("retrieval", "qa", "extraction", "extraction_real"):
             L += ["", f"## {k}", "", "```json", json.dumps(v, indent=1, default=str)[:6000], "```"]
     L += ["", "## Ops", "", "```json", json.dumps(r["ops"], indent=1, default=str), "```", ""]
     return "\n".join(L)
+
+
+def _render_extraction(key: str, e: dict[str, Any]) -> list[str]:
+    title = "Extraction (PROVISIONAL labels)" if key.endswith("real") else "Extraction"
+    L = [
+        "",
+        f"## {title}",
+        "",
+        f"documents: {e['n_documents']}",
+        "",
+        "| metric | value [95% CI] |",
+        "|---|---|",
+        f"| micro precision | {fmt_metric(e['micro']['precision'])} |",
+        f"| micro recall | {fmt_metric(e['micro']['recall'])} |",
+        f"| micro F1 | {e['micro_f1']['value']:.3f} |",
+        f"| evidence validity | {fmt_metric(e['evidence_validity'])} |",
+        f"| auto-validated | {fmt_metric(e['auto_validated_rate'])} |",
+        f"| needs review | {fmt_metric(e['needs_review_rate'])} |",
+        f"| precision of validated docs (all fields right) | {fmt_metric(e['validated_doc_precision'])} |",
+        f"| precision of validated fields | {fmt_metric(e['validated_field_precision'])} |",
+        f"| mean attempts | {e['attempts_mean']['value']:.2f} |",
+        "",
+        "| field | precision | recall | F1 |",
+        "|---|---|---|---|",
+    ]
+    for f, v in e["per_field"].items():
+        pv, rv = v["precision"]["value"], v["recall"]["value"]
+        L.append(
+            f"| {f} | {'n/a' if pv is None else f'{pv:.3f}'} (n={v['precision']['n']}) | "
+            f"{'n/a' if rv is None else f'{rv:.3f}'} (n={v['recall']['n']}) | "
+            f"{v['f1']['value']:.3f} |"
+        )
+    return L
 
 
 def latest_run(out_dir: Path = RESULTS_DIR, tag: str | None = None) -> Path:

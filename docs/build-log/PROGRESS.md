@@ -36,7 +36,7 @@ Status: todo | in progress | done | blocked
 - 3.1 Schema, extractor, units, validators, retry — done (2026-11-18, 4b9a0b0)
 - 3.2 Review queue, approve/reject, push — done (2026-11-18, 113be86)
 - 3.3 API routes + UI review — done (2026-11-18, bfe898b)
-- 3.4 Extraction eval suite — todo
+- 3.4 Extraction eval suite — done (2026-11-18, 8a5cf69)
 ### M4 — Agent
 - 4.1 State machine, tools, allowlists, limits — todo
 - 4.2 Approval flow, four-eyes, retries, resume — todo

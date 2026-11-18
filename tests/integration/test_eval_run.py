@@ -69,3 +69,26 @@ def test_missing_index_fails_clearly(db, tmp_path):
 def test_paid_provider_without_key_is_blocked(db, tmp_path):
     with pytest.raises(RuntimeError, match="ANTHROPIC_API_KEY"):
         run_eval(["qa"], "dev", RunConfig(), "x", provider="anthropic", out_dir=tmp_path)
+
+
+def test_extraction_suite_fake_pipeline(corpus_loaded, tmp_path):
+    r = run_eval(["extraction"], "dev", RunConfig(), "t-ex", provider="fake", out_dir=tmp_path)
+    e = r["aggregates"]["extraction"]
+    assert e["n_documents"] > 10 and 0.9 < e["micro_f1"]["value"] <= 1.0
+    assert e["validated_doc_precision"]["n"] > 0
+    assert any("pipeline check only" in n for n in r["notes"])
+    md = (tmp_path / f"{r['run_id']}.md").read_text()
+    assert "## Extraction" in md and "| field | precision |" in md
+
+
+def test_extraction_config_retry_and_model_options(corpus_loaded, tmp_path):
+    r = run_eval(
+        ["extraction"],
+        "dev",
+        RunConfig(extraction={"retry": False, "model": "claude-sonnet-5-5"}),
+        "t-ex2",
+        provider="fake",
+        out_dir=tmp_path,
+    )
+    assert r["models"]["extraction"] == "claude-sonnet-5-5"
+    assert r["aggregates"]["extraction"]["attempts_mean"]["value"] == 1.0
