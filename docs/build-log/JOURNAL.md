@@ -218,3 +218,15 @@
 **Decisions made:** none
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:26 — 3.1 Extraction schema, extractor, normalisation, validators, retry loop
+**Goal:** ComponentSpec schema (FieldValue with page+quote, no confidence field); pint-based unit normalisation (decimal commas, en-dash and ellipsis ranges, mA/kW/kg, IP forms, interface/cert alias maps); deterministic validators (required, min<=max, plausibility, IP regex, evidence quote on cited page >=85, numbers supported by quote, category warnings); extractor with page selection, untrusted-data page tags, one retry with errors, status validated|pending_review; rule-based fake extractor
+**What I did:** ComponentSpec schema (FieldValue with page+quote, no confidence field); pint-based unit normalisation (decimal commas, en-dash and ellipsis ranges, mA/kW/kg, IP forms, interface/cert alias maps); deterministic validators (required, min<=max, plausibility, IP regex, evidence quote on cited page >=85, numbers supported by quote, category warnings); extractor with page selection, untrusted-data page tags, one retry with errors, status validated|pending_review; rule-based fake extractor
+**Files changed:** specbridge/extraction/* specbridge/prompts/extraction.v1.md specbridge/llm/usage.py tests/unit/test_units.py tests/unit/test_extraction.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** unit: test_units 56, test_extraction 13 (normalisation, every validator rule, retry loop success/failure, page selection, escaping). Whole unit suite green
+**Eval results (if any):** n/a
+**Problems and how I solved them:** Sign regex char class '[+-–]' formed a range and swallowed digits; empty-string-in-str bug made a leading minus lose its sign. Both found by tests and fixed
+**Decisions made:** Per-call model override in LLMService.structured() instead of mutating shared settings. A quote with a one-digit difference fuzzy-matches, so a separate number-in-quote check is required (validated records can still be semantically wrong; measured as precision of validated records in 3.4)
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md
