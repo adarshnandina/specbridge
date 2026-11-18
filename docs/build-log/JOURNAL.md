@@ -278,3 +278,15 @@
 **Decisions made:** Candidate must have >=1 verified claim or the run ESCALATES (never propose on unverified rationale). Agent scenarios seed approved extractions from ground truth so they test the agent, not the extractor. ADR-0002 will cover state machine vs framework
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:41 — 4.2 Approval flow, four-eyes, commit retries/idempotency, explicit resume
+**Goal:** approvals row created in AWAITING_APPROVAL (idempotent); POST /approvals/{id}/approve|reject; four-eyes rule (requester cannot decide, denial audited in its own transaction); COMMITTING uses idempotency key = run id with tenacity retries (3 attempts) -> FAILED(retryable) -> POST /agent/runs/{id}/retry; resume after crash via AgentRunner.resume; ERP fault 'lose_response_first_n' (write executes, response lost) added to prove idempotency
+**What I did:** approvals row created in AWAITING_APPROVAL (idempotent); POST /approvals/{id}/approve|reject; four-eyes rule (requester cannot decide, denial audited in its own transaction); COMMITTING uses idempotency key = run id with tenacity retries (3 attempts) -> FAILED(retryable) -> POST /agent/runs/{id}/retry; resume after crash via AgentRunner.resume; ERP fault 'lose_response_first_n' (write executes, response lost) added to prove idempotency
+**Files changed:** specbridge/api/routers/agent.py specbridge/agent/runner.py erp_mock/* specbridge/audit.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** integration test_agent_runner approval/four-eyes/double-decision + resume tests; scenario S08/S09/S13/S15. Mutation checks performed manually: removing allowlist entry, four-eyes check, discontinued filter, or stable idempotency key each makes a scenario FAIL (see journal)
+**Eval results (if any):** n/a
+**Problems and how I solved them:** First harness version did not detect a random (non-stable) idempotency key because the mock ERP only stored successful writes; added lose_response_first_n fault and scenario S15 so a lost-response + explicit-retry sequence would create a duplicate without a stable key
+**Decisions made:** none
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md

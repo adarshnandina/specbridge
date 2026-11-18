@@ -39,7 +39,7 @@ Status: todo | in progress | done | blocked
 - 3.4 Extraction eval suite — done (2026-11-18, 8a5cf69)
 ### M4 — Agent
 - 4.1 State machine, tools, allowlists, limits — done (2026-11-18, 276415a)
-- 4.2 Approval flow, four-eyes, retries, resume — todo
+- 4.2 Approval flow, four-eyes, retries, resume — done (2026-11-18, eb9e745)
 - 4.3 API routes + UI approvals/timeline — todo
 - 4.4 Agent scenario suite (14) — todo
 ### M5 — Experiments and gating
