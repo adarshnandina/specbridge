@@ -2,7 +2,6 @@
 
 ## Needs user
 - Restart Claude Code (and approve the hooks in `/hooks` if prompted) so tool-call logging becomes active.
-- (Docker blocker from 2026-11-18 resolved: daemon running.)
 - Model IDs (`claude-haiku-5-5`, `claude-sonnet-5-5`) come from the build environment; the pricing page lists names and prices only. Prices verified 2026-11-18 (see `config/pricing.yaml`). Please re-check model IDs on the models overview page before the first paid run.
 
 - Verify real-datasheet labels in `eval/datasets/extraction_real.jsonl` (all `verified_by_human: false`; metrics on them are provisional). Only 9 of the 10-20 target real datasheets were obtainable (Baumer, ifm AL2301, Parker, Mean Well blocked automated downloads).
@@ -54,4 +53,4 @@ Status: todo | in progress | done | blocked
 - 6.2 Dockerfile, compose, prod compose, e2e — done (2026-11-18, fd1d68e)
 - 6.3 CI workflow — done (2026-11-18, 33c97cd)
 - 6.4 Documentation + ADRs — done (2026-11-18, c7358a9)
-- 6.5 Final verification — todo
+- 6.5 Final verification — done (2026-11-18, 7ce6d05)
