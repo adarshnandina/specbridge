@@ -50,3 +50,15 @@
 **Decisions made:** none
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:01 — 0.5 Postgres+pgvector, Alembic, initial migration
+**Goal:** SQLAlchemy models for all Section 6 tables, docker-compose db service, Alembic env, migration 0001 with vector extension, HNSW and GIN indexes, generated tsvector
+**What I did:** SQLAlchemy models for all Section 6 tables, docker-compose db service, Alembic env, migration 0001 with vector extension, HNSW and GIN indexes, generated tsvector
+**Files changed:** specbridge/db/* alembic/* docker-compose.yml
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** integration test_migrations_up_down_up passes against testcontainers pgvector
+**Eval results (if any):** n/a
+**Problems and how I solved them:** Code committed together with 0.2 in commit 59692d6 (batched staging); this commit records the task.
+**Decisions made:** chunks has extra search_text column so the context header is FTS-indexed while content stays clean for citations
+**Deviations from spec:** added chunks.search_text column (spec: content_tsv generated from content; header must be indexed per 7.3)
+**Next step:** next task in PROGRESS.md
