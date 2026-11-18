@@ -52,3 +52,57 @@ def db(pg_url: str) -> Iterator[object]:
 @pytest.fixture(scope="session")
 def raw_engine(pg_url: str):  # type: ignore[no-untyped-def]
     return create_engine(pg_url)
+
+
+H = {
+    "viewer": {"X-API-Key": "dev-viewer-key"},
+    "engineer": {"X-API-Key": "dev-engineer-key"},
+    "engineer2": {"X-API-Key": "dev-engineer2-key"},
+    "approver": {"X-API-Key": "dev-approver-key"},
+    "admin": {"X-API-Key": "dev-admin-key"},
+}
+
+
+@pytest.fixture
+def headers() -> dict[str, dict[str, str]]:
+    return H
+
+
+@pytest.fixture(scope="session")
+def synth_dir(tmp_path_factory):  # type: ignore[no-untyped-def]
+    from corpus.synthetic.generator import generate
+
+    d = tmp_path_factory.mktemp("synth_shared")
+    generate(42, d / "synthetic", d / "gt.jsonl")
+    return d / "synthetic"
+
+
+@pytest.fixture
+def client(db, tmp_path, monkeypatch):  # type: ignore[no-untyped-def]
+    """TestClient with a fake LLM; DATA_DIR isolated per test."""
+    from fastapi.testclient import TestClient
+
+    from specbridge.api.main import create_app
+    from specbridge.api.routers import query as qrouter
+    from specbridge.config import Settings, get_settings
+    from specbridge.llm.budget import BudgetGuard
+    from specbridge.llm.fake_provider import FakeProvider
+    from specbridge.llm.usage import LLMService, MemoryLedger
+
+    monkeypatch.setenv("DATA_DIR", str(tmp_path / "data"))
+    get_settings.cache_clear()
+    ledger = MemoryLedger()
+    provider = FakeProvider()
+    llm = LLMService(
+        provider,
+        settings=Settings(_env_file=None, log_llm_payloads=False),
+        recorder=ledger.record,
+        budget=BudgetGuard(5, ledger.spent),
+    )
+    qrouter.set_llm(llm)
+    c = TestClient(create_app())
+    c.fake = provider  # type: ignore[attr-defined]
+    c.ledger = ledger  # type: ignore[attr-defined]
+    yield c
+    qrouter.set_llm(None)
+    get_settings.cache_clear()

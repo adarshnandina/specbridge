@@ -170,3 +170,15 @@
 **Decisions made:** Fake QA responder is extractive and only a pipeline check; its accuracy numbers are not a quality benchmark
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:17 — 2.4 API routes: documents, query, highlighted page images
+**Goal:** POST/GET /documents (magic-byte + size checks, bounded read, audit), POST /query (Pydantic validated, whitelisted modes), GET page image PNG with cited bboxes highlighted and cached under data/cache/pages; shared integration fixtures (TestClient with fake LLM, isolated DATA_DIR)
+**What I did:** POST/GET /documents (magic-byte + size checks, bounded read, audit), POST /query (Pydantic validated, whitelisted modes), GET page image PNG with cited bboxes highlighted and cached under data/cache/pages; shared integration fixtures (TestClient with fake LLM, isolated DATA_DIR)
+**Files changed:** specbridge/api/routers/{documents,query}.py specbridge/api/main.py tests/integration/conftest.py tests/integration/test_api_docs_query.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** integration test_api_docs_query 8 passed (401/403 + audited denial, upload/list/get/idempotent, non-PDF and oversize rejected, query + highlighted image differs from plain + cache hit, validation, abstain on empty corpus)
+**Eval results (if any):** n/a
+**Problems and how I solved them:** none
+**Decisions made:** none
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md

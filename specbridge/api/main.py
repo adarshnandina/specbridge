@@ -8,7 +8,7 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
 
 from specbridge.api.middleware import RequestContextMiddleware
-from specbridge.api.routers import health
+from specbridge.api.routers import documents, health, query
 from specbridge.config import get_settings
 from specbridge.errors import AppError
 from specbridge.logging_setup import get_logger, setup_logging
@@ -58,6 +58,8 @@ def create_app() -> FastAPI:
         return _error(request, 500, "internal_error", "Internal server error")
 
     app.include_router(health.router)
+    app.include_router(documents.router)
+    app.include_router(query.router)
     return app
 
 

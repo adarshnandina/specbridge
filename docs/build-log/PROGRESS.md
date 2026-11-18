@@ -27,7 +27,7 @@ Status: todo | in progress | done | blocked
 - 2.1 Parser, chunking, embeddings, ingestion pipeline, CLI — done (2026-11-18, b88aa3b)
 - 2.2 Retrieval — done (2026-11-18, 44314e7)
 - 2.3 Q&A service — done (2026-11-18, 0caf647)
-- 2.4 API routes documents/query + page images — todo
+- 2.4 API routes documents/query + page images — done (2026-11-18, e3eae9a)
 - 2.5 UI login/ask/documents — todo
 - 2.6 Eval core + retrieval/QA suites — todo
 - 2.7 First retrieval baseline + QA fake run — todo
