@@ -62,3 +62,15 @@
 **Decisions made:** chunks has extra search_text column so the context header is FTS-indexed while content stays clean for citations
 **Deviations from spec:** added chunks.search_text column (spec: content_tsv generated from content; header must be indexed per 7.3)
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:01 — 0.6 LLM provider layer
+**Goal:** LLMProvider protocol; Fake/Anthropic/Bedrock providers; tenacity retries; pricing.yaml (prices verified from platform.claude.com 2026-11-18); budget guard; SQLite response cache; usage accounting; forced-tool structured output with one retry
+**What I did:** LLMProvider protocol; Fake/Anthropic/Bedrock providers; tenacity retries; pricing.yaml (prices verified from platform.claude.com 2026-11-18); budget guard; SQLite response cache; usage accounting; forced-tool structured output with one retry
+**Files changed:** specbridge/llm/* specbridge/prompts/__init__.py config/pricing.yaml
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** tests/unit/test_llm.py 10 passed; integration llm_calls row + db budget
+**Eval results (if any):** n/a
+**Problems and how I solved them:** Code committed together with 0.2 in commit 59692d6 (batched staging); this commit records the task. Test bug: 1M tokens exceeded Haiku long-context threshold; fixed the test not the code.
+**Decisions made:** LLMService wraps providers; fake provider costs 0; unknown priced model raises
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md

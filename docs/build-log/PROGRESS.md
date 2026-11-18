@@ -14,7 +14,7 @@ Status: todo | in progress | done | blocked
 - 0.3 pyproject/uv/ruff/mypy/pytest/pre-commit/Makefile — done (2026-11-18, 6391ee0)
 - 0.4 config, logging, middleware, /health /ready /metrics — done (2026-11-18, 09b929c)
 - 0.5 docker-compose db + Alembic + initial migration — done (2026-11-18, f7c6e05)
-- 0.6 LLM provider layer — todo
+- 0.6 LLM provider layer — done (2026-11-18, 0d925bf)
 - 0.7 Auth + RBAC + audit — todo
 ### M1 — Corpus and datasets
 - 1.1 Synthetic datasheet generator + ground truth — todo
