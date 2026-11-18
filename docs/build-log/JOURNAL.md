@@ -158,3 +158,15 @@
 **Decisions made:** Natural-language questions are turned into an OR query of content words (stop words dropped); AND semantics of websearch_to_tsquery would match nothing. Abstention uses best vector cosine similarity regardless of mode (RRF scores are rank-based and not calibratable)
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:16 — 2.3 Q&A service with citation verification and abstention
+**Goal:** Versioned prompt qa_answer.v1 (sources untrusted, verbatim quotes), sources wrapped in <source> tags with closing-tag escaping, forced submit_answer tool, rapidfuzz citation verification (partial_ratio>=90 after dash/ellipsis/pipe normalisation), dropped invalid citations, unsupported-answer blocking, retrieval-score abstention without an LLM call, query_logs row; deterministic extractive fake responder for pipeline checks
+**What I did:** Versioned prompt qa_answer.v1 (sources untrusted, verbatim quotes), sources wrapped in <source> tags with closing-tag escaping, forced submit_answer tool, rapidfuzz citation verification (partial_ratio>=90 after dash/ellipsis/pipe normalisation), dropped invalid citations, unsupported-answer blocking, retrieval-score abstention without an LLM call, query_logs row; deterministic extractive fake responder for pipeline checks
+**Files changed:** specbridge/qa/* specbridge/prompts/qa_answer.v1.md specbridge/llm/fake_handlers.py tests/unit/test_citations.py tests/integration/test_qa.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** unit test_citations 6 passed; integration test_qa 7 passed (valid citation + query log, invalid dropped, unsupported blocked, model-unanswerable, low-score abstain w/o LLM call, injection text only inside source tags, fake end-to-end). Whole suite 93 passed
+**Eval results (if any):** n/a
+**Problems and how I solved them:** My first tests quoted the part number, but table chunks keep the context header in metadata (by design) so the quote was correctly rejected; tests now quote real S1 text
+**Decisions made:** Fake QA responder is extractive and only a pipeline check; its accuracy numbers are not a quality benchmark
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md
