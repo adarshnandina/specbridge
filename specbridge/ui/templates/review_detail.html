@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Extraction · SpecBridge{% endblock %}
+{% block content %}
+<h1>{{ doc_key }} <span class="badge">{{ ex.status }}</span></h1>
+<p class="meta">model {{ ex.model }} · prompt {{ ex.prompt_version }} · attempts {{ ex.attempts }}
+ {% if ex.reviewed_by %}· reviewed by {{ ex.reviewed_by }}{% endif %}
+ {% if ex.approved_by %}· approved by {{ ex.approved_by }}{% endif %}</p>
+{% set errs = ex.validation_errors | selectattr('severity','equalto','error') | list %}
+{% set warns = ex.validation_errors | selectattr('severity','equalto','warning') | list %}
+{% if errs %}<div class="flash error"><strong>Validation errors</strong><ul>
+  {% for i in errs %}<li><code>{{ i.field }}</code> — {{ i.message }} <small>({{ i.rule }})</small></li>{% endfor %}</ul></div>{% endif %}
+{% if warns %}<div class="flash"><strong>Warnings</strong><ul>
+  {% for i in warns %}<li><code>{{ i.field }}</code> — {{ i.message }}</li>{% endfor %}</ul></div>{% endif %}
+{% set editable = ex.status in ('validated','pending_review') and can_write %}
+<form method="post" action="/ui/review/{{ ex.id }}/edit">
+<table>
+  <thead><tr><th>Field</th><th>Value</th><th>Evidence quote</th><th>Page</th></tr></thead>
+  <tbody>
+  {% for f in fields %}
+  {% set ev = ex.evidence.get(f) or {} %}
+  <tr>
+    <td><code>{{ f }}</code></td>
+    <td>{% if editable %}<input name="v__{{ f }}" value="{{ display(ex.data.get(f)) }}">{% else %}{{ display(ex.data.get(f)) }}{% endif %}</td>
+    <td>{% if editable %}<input name="q__{{ f }}" value="{{ ev.get('quote') or '' }}">{% else %}{{ ev.get('quote') or '' }}{% endif %}</td>
+    <td>{% if editable %}<input name="p__{{ f }}" value="{{ ev.get('page') or '' }}" size="3">{% else %}{{ ev.get('page') or '' }}{% endif %}
+      {% if ev.get('page') %}<a target="_blank" href="/ui/page/{{ ex.document_id }}/{{ ev.get('page') }}">view page</a>{% endif %}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% if editable %}
+<label><input type="checkbox" name="mark_reviewed" value="1" style="width:auto"> Mark as reviewed</label>
+<button type="submit">Save (re-runs validation)</button>
+{% endif %}
+</form>
+<div class="card">
+  {% if can_approve and ex.status in ('validated','pending_review') %}
+  <form method="post" action="/ui/review/{{ ex.id }}/approve" style="display:inline"><button>Approve</button></form>
+  <form method="post" action="/ui/review/{{ ex.id }}/reject" style="display:inline"><button class="danger">Reject</button></form>
+  {% endif %}
+  {% if can_approve and ex.status in ('approved','push_failed') %}
+  <form method="post" action="/ui/review/{{ ex.id }}/push" style="display:inline"><button>Push to ERP</button></form>
+  {% endif %}
+  {% if ex.erp_response %}<pre>{{ ex.erp_response }}</pre>{% endif %}
+</div>
+{% endblock %}

@@ -27,6 +27,9 @@ def get_llm() -> LLMService:
 
             assert isinstance(provider, FakeProvider)
             register_default_handlers(provider)
+            from specbridge.extraction.fake import register_extraction_handlers
+
+            register_extraction_handlers(provider)
         _llm = LLMService(provider)
     return _llm
 

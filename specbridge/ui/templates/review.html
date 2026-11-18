@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Review queue · SpecBridge{% endblock %}
+{% block content %}
+<h1>Extraction review queue</h1>
+<form method="post" action="/ui/review/extract" class="card">
+  <label>Document to extract
+    <select name="document_id" required>
+      {% for d in docs %}<option value="{{ d.id }}">{{ d.doc_key }}</option>{% endfor %}
+    </select>
+  </label>
+  <button type="submit">Run extraction</button>
+</form>
+<table>
+  <thead><tr><th>Document</th><th>Part</th><th>Status</th><th>Errors</th><th>Attempts</th><th></th></tr></thead>
+  <tbody>
+  {% for e in items %}
+  <tr>
+    <td>{{ docs_by_id.get(e.document_id, '?') }}</td>
+    <td>{{ e.data.get('part_number') or '' }}</td>
+    <td><span class="badge {{ 'ok' if e.status in ('validated','approved','pushed') else ('bad' if e.status in ('rejected','push_failed') else 'warn') }}">{{ e.status }}</span></td>
+    <td>{{ e.validation_errors | selectattr('severity','equalto','error') | list | length }}</td>
+    <td>{{ e.attempts }}</td>
+    <td><a href="/ui/review/{{ e.id }}">open</a></td>
+  </tr>
+  {% else %}<tr><td colspan="6">Nothing to review.</td></tr>{% endfor %}
+  </tbody>
+</table>
+{% endblock %}

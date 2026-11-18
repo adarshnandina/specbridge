@@ -242,3 +242,15 @@
 **Decisions made:** Approving a pending_review extraction requires that a human marked it reviewed; no four-eyes rule for extraction approvals (spec requires it only for agent change requests); pushing an already-pushed extraction is a no-op
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:29 — 3.3 Extraction API routes and review UI
+**Goal:** POST/GET/PATCH /extractions, approve/reject/push with RBAC (engineer edits; approver approves/pushes), consistent errors; /ui/review queue + detail page with value, evidence quote, page link, validation errors, editable fields, role-aware buttons
+**What I did:** POST/GET/PATCH /extractions, approve/reject/push with RBAC (engineer edits; approver approves/pushes), consistent errors; /ui/review queue + detail page with value, evidence quote, page link, validation errors, editable fields, role-aware buttons
+**Files changed:** specbridge/api/routers/extractions.py specbridge/api/routers/ui.py specbridge/ui/templates/review*.html tests/integration/test_api_extractions.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** integration test_api_extractions 4 passed: role matrix incl. audited denials, push exactly once, PATCH revalidation, push failure then retry, UI review flow
+**Eval results (if any):** n/a
+**Problems and how I solved them:** UI edit handler would have blanked fields missing from a partial form post; now only submitted fields are edited
+**Decisions made:** none
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md

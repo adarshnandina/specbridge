@@ -11,6 +11,7 @@ from specbridge.auth.api_keys import KeyStore, Principal
 from specbridge.auth.rbac import has_permission
 from specbridge.config import get_settings
 from specbridge.db.session import get_db, session_scope
+from specbridge.erp_client.client import ErpClient
 from specbridge.errors import AuthError, ForbiddenError
 from specbridge.logging_setup import bind_request, get_logger
 
@@ -66,4 +67,19 @@ def require(permission: str) -> Callable[..., Principal]:
     return dep
 
 
-__all__ = ["Session", "get_db", "require", "authenticate", "audit_denied"]
+_erp: ErpClient | None = None
+
+
+def get_erp() -> ErpClient:
+    global _erp
+    if _erp is None:
+        _erp = ErpClient()
+    return _erp
+
+
+def set_erp(client: ErpClient | None) -> None:
+    global _erp
+    _erp = client
+
+
+__all__ = ["get_erp", "set_erp", "Session", "get_db", "require", "authenticate", "audit_denied"]
