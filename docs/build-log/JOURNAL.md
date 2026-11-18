@@ -122,3 +122,15 @@
 **Decisions made:** Fault injection applies to write calls only so lookups still work when the ERP is 'down for writes' (agent scenarios 8/9); failed (503) writes never record an idempotency key
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:09 — 1.3 QA dataset generator and dataset validation
+**Goal:** 108 QA items generated programmatically from ground truth (factual 35, table_lookup 20, cross_doc 15, revision 8, unanswerable 15, injection 5, open 10), 60/40 dev/test; loader + validate_datasets()
+**What I did:** 108 QA items generated programmatically from ground truth (factual 35, table_lookup 20, cross_doc 15, revision 8, unanswerable 15, injection 5, open 10), 60/40 dev/test; loader + validate_datasets()
+**Files changed:** corpus/synthetic/qa_dataset.py specbridge/eval/datasets.py eval/datasets/qa.jsonl tests/unit/test_datasets.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** tests/unit/test_datasets.py 6 passed; validate_datasets() returns no problems
+**Eval results (if any):** n/a
+**Problems and how I solved them:** none
+**Decisions made:** Extra item fields beyond spec: expect_abstain, forbidden (injection), superseded_value, unit/tolerance. Unanswerable: 10 absent-attribute, 3 nonexistent part, 2 null-field questions
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md
