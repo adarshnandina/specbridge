@@ -19,7 +19,7 @@ from specbridge.errors import StructuredOutputError
 from specbridge.llm.base import LLMProvider, LLMRequest, LLMResult, forced, pydantic_tool
 from specbridge.llm.budget import BudgetGuard
 from specbridge.llm.cache import ResponseCache, cache_key
-from specbridge.llm.pricing import compute_cost
+from specbridge.llm.pricing import compute_cost, ensure_priced
 from specbridge.logging_setup import get_logger, redact_text
 
 log = get_logger("specbridge.llm")
@@ -80,6 +80,8 @@ class LLMService:
     def complete(self, req: LLMRequest) -> LLMResult:
         if not req.model:
             req.model = self.settings.model_for(req.purpose)
+        if self.provider.name != "fake":
+            ensure_priced(req.model, self.pricing)
         self.budget.check()
         key = cache_key(self.provider.name, req) if self.cache else None
         status, error = "ok", None
@@ -135,6 +137,7 @@ class LLMService:
             metrics.LLM_TOKENS.labels(req.purpose, req.model, "input").inc(in_t)
             metrics.LLM_TOKENS.labels(req.purpose, req.model, "output").inc(out_t)
             metrics.LLM_COST.labels(req.purpose, req.model).inc(cost)
+            metrics.BUDGET_REMAINING.set(self.budget.remaining())
             log.info(
                 "llm.call",
                 purpose=req.purpose,

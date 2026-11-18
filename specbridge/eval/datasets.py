@@ -128,6 +128,15 @@ def validate_datasets(dataset_dir: Path = DATASET_DIR) -> list[str]:
         for r in read_jsonl(real_path):
             if r.get("verified_by_human") is not False:
                 problems.append(f"{r['doc_key']}: real labels must be verified_by_human=false")
+    jc = dataset_dir / "judge_calibration.jsonl"
+    if jc.exists():
+        rows = read_jsonl(jc)
+        if len(rows) < 20:
+            problems.append(f"judge_calibration: {len(rows)} items (<20)")
+        if any(r.get("human_score") not in (None, 1, 2, 3) for r in rows):
+            problems.append("judge_calibration: human_score must be empty or 1-3")
+    else:
+        problems.append("judge_calibration.jsonl is missing")
     scen = dataset_dir / "agent_scenarios.yaml"
     if scen.exists():
         data = yaml.safe_load(scen.read_text())

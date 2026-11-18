@@ -157,3 +157,26 @@ def test_upload_hardening_page_limit_and_filename(client, headers, synth_dir, mo
             headers=headers["engineer"],
         )
     assert r.status_code == 400 and "pages" in r.json()["error"]["message"]
+
+
+def test_audit_endpoint_admin_only_with_filters(client, headers, synth_dir):
+    upload(client, headers, synth_dir / "kestrel/KD-210_rev1.0.pdf")  # allowed
+    upload(client, headers, synth_dir / "kestrel/KD-110_rev1.0.pdf", who="viewer")  # denied
+    for who in ("viewer", "engineer", "approver"):
+        assert client.get("/audit", headers=headers[who]).status_code == 403
+    assert client.get("/audit").status_code == 401
+    rows = client.get("/audit", headers=headers["admin"]).json()
+    assert {r["outcome"] for r in rows} >= {"allowed", "denied"}
+    assert any(r["action"] == "document.upload" and r["actor"] == "bob" for r in rows)
+    denied = client.get("/audit?outcome=denied", headers=headers["admin"]).json()
+    assert denied and all(r["outcome"] == "denied" for r in denied)
+    assert all(
+        r["actor"] == "alice"
+        for r in client.get("/audit?actor=alice", headers=headers["admin"]).json()
+    )
+    by_action = client.get("/audit?action=document.upload", headers=headers["admin"]).json()
+    assert by_action and {r["action"] for r in by_action} == {"document.upload"}
+    assert client.get("/audit?since=2999-01-01T00:00:00Z", headers=headers["admin"]).json() == []
+    assert client.get("/audit?outcome=bogus", headers=headers["admin"]).status_code == 422
+    assert client.get("/audit?limit=1", headers=headers["admin"]).json().__len__() == 1
+    assert all(r["request_id"] for r in rows[:1])

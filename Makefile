@@ -1,4 +1,4 @@
-.PHONY: setup fmt lint typecheck test test-int coverage-check test-e2e audit ci up down logs migrate seed-erp corpus ingest eval-retrieval eval-all gate-retrieval experiments
+.PHONY: setup fmt lint typecheck test test-int coverage-check test-e2e audit ci db-up up down logs migrate seed-erp corpus corpus-synthetic ingest eval-retrieval eval-all gate-retrieval experiments
 UV ?= uv run
 
 setup:
@@ -31,7 +31,11 @@ test-e2e:
 audit:
 	$(UV) pip-audit
 
-ci: lint typecheck test test-int coverage-check audit eval-retrieval gate-retrieval
+# Self-contained: needs Docker only (starts the db, migrates, generates + ingests the corpus).
+ci: lint typecheck test test-int coverage-check audit db-up migrate ingest eval-retrieval gate-retrieval
+
+db-up:
+	docker compose up -d --wait db
 
 up:
 	docker compose up -d --build
@@ -48,11 +52,13 @@ migrate:
 seed-erp:
 	$(UV) python -m erp_mock.seed
 
-corpus:
+corpus-synthetic:
 	$(UV) python -m corpus.synthetic.generator --seed 42
+
+corpus: corpus-synthetic
 	-$(UV) python -m corpus.real.fetch
 
-ingest:
+ingest: corpus-synthetic
 	$(UV) specbridge ingest data/corpus --index main --strategy layout
 
 eval-retrieval:

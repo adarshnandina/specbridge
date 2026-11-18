@@ -153,3 +153,27 @@ def test_retryable_classification():
 
     assert is_retryable(status(503)) and is_retryable(status(429))
     assert not is_retryable(status(400)) and not is_retryable(ValueError())
+
+
+def test_unpriced_model_is_refused_before_any_call():
+    from specbridge.llm.base import LLMResult
+    from specbridge.llm.pricing import ensure_priced, resolve_model
+
+    class Paid(FakeProvider):
+        name = "anthropic"
+
+    p = Paid()
+    p.script("qa", "hi")
+    svc, ledger = make(p)
+    svc.pricing = PRICING
+    with pytest.raises(KeyError, match="no pricing"):
+        svc.complete(LLMRequest(messages=[], purpose="qa", model="some.bedrock.model-v1"))
+    assert p.calls == [] and ledger.rows == []  # nothing was called or spent
+    aliased = {**PRICING, "aliases": {"some.bedrock.model-v1": "m"}}
+    ensure_priced("some.bedrock.model-v1", aliased)
+    assert resolve_model("some.bedrock.model-v1", aliased) == "m"
+    assert compute_cost("some.bedrock.model-v1", 1_000_000, 0, aliased) == pytest.approx(1.0)
+    svc.pricing = aliased
+    res = svc.complete(LLMRequest(messages=[], purpose="qa", model="some.bedrock.model-v1"))
+    assert isinstance(res, LLMResult)
+    assert ledger.rows[0]["cost_usd"] > 0 and ledger.rows[0]["model"] == "some.bedrock.model-v1"

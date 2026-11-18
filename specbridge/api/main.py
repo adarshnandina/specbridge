@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from specbridge.api.middleware import RateLimitMiddleware, RequestContextMiddleware
-from specbridge.api.routers import agent, documents, extractions, health, query, ui
+from specbridge.api.routers import agent, audit, documents, extractions, health, query, ui
 from specbridge.config import get_settings
 from specbridge.errors import AppError
 from specbridge.logging_setup import get_logger, setup_logging
@@ -70,6 +70,7 @@ def create_app() -> FastAPI:
     app.include_router(documents.router)
     app.include_router(extractions.router)
     app.include_router(agent.router)
+    app.include_router(audit.router)
     app.include_router(query.router)
     return app
 

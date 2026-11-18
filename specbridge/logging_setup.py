@@ -51,6 +51,15 @@ def _redact_processor(
     return out  # type: ignore[no-any-return]
 
 
+def _ensure_context_fields(
+    _: Any, __: str, event_dict: MutableMapping[str, Any]
+) -> MutableMapping[str, Any]:
+    """Every line carries request_id/actor/role (null outside a request)."""
+    for k in ("request_id", "actor", "role"):
+        event_dict.setdefault(k, None)
+    return event_dict
+
+
 def _add_module(_: Any, __: str, event_dict: MutableMapping[str, Any]) -> MutableMapping[str, Any]:
     event_dict.setdefault("module", event_dict.pop("logger", None) or "specbridge")
     return event_dict
@@ -94,6 +103,7 @@ def setup_logging(force: bool = False, stdout_level: str | None = None) -> None:
             structlog.processors.TimeStamper(fmt="iso", utc=True, key="ts"),
             structlog.stdlib.add_logger_name,
             _add_module,
+            _ensure_context_fields,
             _redact_processor,
             structlog.processors.format_exc_info,
             structlog.processors.JSONRenderer(default=str),

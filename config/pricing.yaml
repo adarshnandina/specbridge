@@ -20,3 +20,9 @@ models:
 fake:
   input: 0.0
   output: 0.0
+
+# Bedrock (and any other id) -> priced model. Bedrock has independent regional pricing: verify the
+# model id and price on the AWS Bedrock docs/pricing pages, then add e.g.
+#   eu.anthropic.<haiku-id>: claude-haiku-5-5
+# A model id with no price (or alias) is refused before any call is made.
+aliases: {}

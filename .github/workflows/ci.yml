@@ -44,7 +44,7 @@ jobs:
         run: make coverage-check
       - name: Dependency audit
         run: make audit
-      - name: Generate synthetic corpus and ingest
+      - name: Generate corpus (synthetic + real) and ingest
         run: |
           make corpus
           make ingest

@@ -7,6 +7,9 @@
 
 - Verify real-datasheet labels in `eval/datasets/extraction_real.jsonl` (all `verified_by_human: false`; metrics on them are provisional). Only 9 of the 10-20 target real datasheets were obtainable (Baumer, ifm AL2301, Parker, Mean Well blocked automated downloads).
 - **API key needed for paid runs** (`ANTHROPIC_API_KEY` in `.env`, or AWS credentials + `BEDROCK_MODEL_*` for Bedrock). Blocked until then: real QA eval (2.7), real extraction eval (3.4), live agent run (4.4), experiments 5-6 (5.2), real test-split final evaluation (5.3). Everything else runs on the fake provider. Estimated cost of one real dev QA run is printed by `specbridge eval run --dry-run --provider anthropic --suite qa`.
+- **Score the judge calibration items** in `eval/datasets/judge_calibration.jsonl` (20 programmatic candidate answers, `human_score` empty). Until then judge results are uncalibrated.
+- Hooks: restart Claude Code and approve the project hooks (`/hooks`) so `logs/dev/claude_tool_calls.jsonl` starts filling.
+- Dev DB (docker volume `specbridge_pgdata`) holds a local ingestion + e2e test data; `docker compose down -v` resets it.
 
 ## Tasks
 Status: todo | in progress | done | blocked
@@ -50,5 +53,5 @@ Status: todo | in progress | done | blocked
 - 6.1 Rate limiting, upload hardening, redaction tests, pip-audit — done (2026-11-18, 46822cc)
 - 6.2 Dockerfile, compose, prod compose, e2e — done (2026-11-18, fd1d68e)
 - 6.3 CI workflow — done (2026-11-18, 33c97cd)
-- 6.4 Documentation + ADRs — todo
+- 6.4 Documentation + ADRs — done (2026-11-18, c7358a9)
 - 6.5 Final verification — todo
