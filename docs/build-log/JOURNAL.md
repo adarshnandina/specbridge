@@ -14,3 +14,15 @@
 **Decisions made:** none yet
 **Deviations from spec:** none
 **Next step:** user starts Docker, then continue with 0.2.
+
+## 2026-11-18 13:00 — 0.2 Hook logger and settings
+**Goal:** Claude Code hook script logging redacted tool calls to logs/dev, plus .claude/settings.json
+**What I did:** Claude Code hook script logging redacted tool calls to logs/dev, plus .claude/settings.json
+**Files changed:** scripts/dev/log_tool_call.py .claude/settings.json tests/unit/test_hook_logger.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** 3 passed (tests/unit/test_hook_logger.py: truncation, redaction, always exit 0)
+**Eval results (if any):** n/a
+**Problems and how I solved them:** none
+**Decisions made:** none
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md

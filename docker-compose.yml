@@ -1,0 +1,41 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: specbridge
+      POSTGRES_PASSWORD: specbridge
+      POSTGRES_DB: specbridge
+    ports: ["5433:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U specbridge"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  erp-mock:
+    build: { context: ., dockerfile: docker/Dockerfile }
+    command: ["uvicorn", "erp_mock.app:app", "--host", "0.0.0.0", "--port", "8100"]
+    environment:
+      ERP_DB_PATH: /app/data/erp.sqlite
+      ERP_FAILURE_RATE: ${ERP_FAILURE_RATE:-0.0}
+      ERP_FAIL_FIRST_N: ${ERP_FAIL_FIRST_N:-0}
+      ERP_LATENCY_MS: ${ERP_LATENCY_MS:-0}
+    ports: ["8100:8100"]
+    volumes: ["appdata:/app/data"]
+  api:
+    build: { context: ., dockerfile: docker/Dockerfile }
+    env_file: [.env]
+    environment:
+      DATABASE_URL: postgresql+psycopg://specbridge:specbridge@db:5432/specbridge
+      ERP_BASE_URL: http://erp-mock:8100
+      DATA_DIR: /app/data
+      LOG_DIR: /app/logs
+    depends_on:
+      db: { condition: service_healthy }
+      erp-mock: { condition: service_started }
+    ports: ["8000:8000"]
+    volumes: ["appdata:/app/data", "applogs:/app/logs", "./eval:/app/eval:ro"]
+volumes:
+  pgdata:
+  appdata:
+  applogs:

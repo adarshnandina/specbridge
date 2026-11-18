@@ -1,0 +1,22 @@
+# Prices in USD per million tokens. Never hard-code prices in Python.
+verified_on: 2026-11-18
+source_url: https://platform.claude.com/docs/en/about-claude/pricing   # docs.claude.com redirects here
+notes:
+  - Model IDs are NOT listed on the pricing page; they come from the model list given to the
+    build environment (claude-haiku-5-5, claude-sonnet-5-5) and should be re-checked on the models overview page.
+  - Haiku 5.5 is priced by prompt length (tier applies when the prompt is over 100,000 tokens).
+  - Bedrock has independent regional pricing (https://aws.amazon.com/bedrock/pricing/); Bedrock model ids
+    are not verified -> bedrock costs are estimated with the direct-API prices and flagged as such.
+models:
+  claude-haiku-5-5:
+    input: 0.10
+    output: 0.50
+    long_context_threshold_tokens: 100000
+    long_context_input: 0.50
+    long_context_output: 2.50
+  claude-sonnet-5-5:
+    input: 2.00
+    output: 10.00
+fake:
+  input: 0.0
+  output: 0.0
