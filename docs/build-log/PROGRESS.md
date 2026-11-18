@@ -12,7 +12,7 @@ Status: todo | in progress | done | blocked
 - 0.1 Prereqs, git, .gitignore, CLAUDE.md, build-log — done (2026-11-18, c04b9e8)
 - 0.2 Hook logger + settings + tests — done (2026-11-18, 7dcf02f)
 - 0.3 pyproject/uv/ruff/mypy/pytest/pre-commit/Makefile — done (2026-11-18, 6391ee0)
-- 0.4 config, logging, middleware, /health /ready /metrics — todo
+- 0.4 config, logging, middleware, /health /ready /metrics — done (2026-11-18, 09b929c)
 - 0.5 docker-compose db + Alembic + initial migration — todo
 - 0.6 LLM provider layer — todo
 - 0.7 Auth + RBAC + audit — todo

@@ -38,3 +38,15 @@
 **Decisions made:** Flat layout specbridge/ at repo root instead of pre-initialised src/ layout (matches spec Section 4); uv_build module-root=''. Python pinned >=3.12,<3.13.
 **Deviations from spec:** Python upper bound pinned <3.13 for dependency compatibility
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:01 — 0.4 Config, logging, middleware, health endpoints
+**Goal:** pydantic-settings config with fail-fast validation, structlog JSON logging with redaction, request-id middleware, error format, rate limiting, /health /ready /metrics
+**What I did:** pydantic-settings config with fail-fast validation, structlog JSON logging with redaction, request-id middleware, error format, rate limiting, /health /ready /metrics
+**Files changed:** specbridge/config.py logging_setup.py metrics.py errors.py api/*
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** tests/unit/test_config.py, test_logging.py, test_api_basic.py pass
+**Eval results (if any):** n/a
+**Problems and how I solved them:** Code committed together with 0.2 in commit 59692d6 (batched staging); this commit records the task.
+**Decisions made:** none
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md
