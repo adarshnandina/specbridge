@@ -13,7 +13,7 @@ This list is meant to be read before trusting any number in this repository.
   run. Commands to produce them are in `docs/EVALUATION.md` and `docs/EXPERIMENTS.md`; one dev QA run
   is estimated at about $0.035 by the runner.
 - **Retrieval numbers are real but come from a small, synthetic benchmark:** dev n=56, test n=37.
-  A recall@5 of 0.91 has a 95% interval of roughly 0.81-0.96 (dev) and 0.72-0.94 (test). Only large
+  A recall@5 of 0.91 has a 95% interval of roughly 0.81-0.96 (dev, `20261118-135200_e64a52b_baseline-dev-all`) and 0.72-0.94 (test, `20261118-135217_e64a52b_final-test-all`). Only large
   effects are resolved (header on/off, fixed vs layout without header, keyword-only). Differences such
   as hybrid vs vector-only or layout vs fixed-with-header are **within noise** and are reported that way.
 - **The judge is uncalibrated.** `eval/datasets/judge_calibration.jsonl` has empty `human_score`
@@ -48,7 +48,7 @@ This list is meant to be read before trusting any number in this repository.
   always the full drawn grid. Fixed-size chunks highlight one union box over several blocks.
 - **Keyword search is Postgres full-text search** (`websearch_to_tsquery('simple', ...)`,
   `ts_rank_cd`), **not BM25**; the OR-combined content-word query is a weak ranker (keyword-only recall@5 0.536
-  on dev). Part numbers are matched as tokens, not by edit distance.
+  on dev, `20261118-134617_ba6fde4_exp2-mode-keyword`). Part numbers are matched as tokens, not by edit distance.
 - **Hybrid vs vector:** the default (hybrid) is a judgement call; on this corpus vector-only was
   numerically equal or better (see EXPERIMENTS.md, experiment 2).
 - **Abstention.** The retrieval-score threshold does not generalise from dev to test, so it is disabled
@@ -58,7 +58,7 @@ This list is meant to be read before trusting any number in this repository.
   normalisation). It proves the quote exists in the source, not that it supports the claim.
 - **English only.** Prompts, alias maps, unit words and question templates are English; German decimal
   commas and dashes are handled, German prose is not.
-- **Reranker:** `bge-reranker-base` on CPU adds ~800 ms per query; it is off by default.
+- **Reranker:** `bge-reranker-base` on CPU adds ~800 ms per query (p50 810 ms vs 26 ms for plain hybrid, runs `20261118-134750_ba6fde4_exp3-hybrid-rerank` and `20261118-134618_ba6fde4_exp2-mode-hybrid`); it is off by default.
 
 ## Extraction
 

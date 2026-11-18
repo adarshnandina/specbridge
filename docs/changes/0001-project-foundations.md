@@ -1,4 +1,4 @@
-# Project foundations (0.1)
+# 0.1 Project foundations
 ## Summary
 CLAUDE.md, .gitignore, build log files.
 ## Why

@@ -1,6 +1,6 @@
 # SpecBridge build journal (append-only)
 
-## 2026-11-18 — 0.1 Prerequisites, git, CLAUDE.md, build log
+## 2026-11-18 12:50 — 0.1 Prerequisites, git, CLAUDE.md, build log
 **Goal:** Check prerequisites and lay down project rules and logs.
 **What I did:**
 - Checked tools: Python 3.12 available via uv (system python is 3.14.7, project pins 3.12), uv 0.13.5, make 3.81, git 2.56, Docker CLI 29.8.1 + Compose v5.5.1.

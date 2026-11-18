@@ -64,14 +64,17 @@ def test_secrets_redacted_in_log_values_and_headers():
 def test_request_logs_never_contain_api_key(app_factory, tmp_path, monkeypatch, capsys):
     c = app_factory(LOG_DIR=str(tmp_path / "logs"), LOG_LEVEL="INFO")
     setup_logging(force=True)
-    secret = "dev-viewer-key"
-    c.get("/documents", headers={"X-API-Key": secret})  # 401 path would log too
-    c.get("/health", headers={"X-API-Key": secret, "Authorization": "Bearer supersecrettoken"})
+    valid, wrong = "dev-viewer-key", "not-a-real-key-9f3a"
+    # No database access in a unit test: public pages and a rejected (401) key only.
+    c.get("/ui/login", headers={"X-API-Key": valid})
+    c.get("/health", headers={"X-API-Key": valid, "Authorization": "Bearer supersecrettoken"})
+    assert c.get("/documents", headers={"X-API-Key": wrong}).status_code == 401
     for h in logging.getLogger().handlers:
         h.flush()
     text = (tmp_path / "logs" / "app.jsonl").read_text() + capsys.readouterr().out
-    assert "http.request" in text
-    assert secret not in text and "supersecrettoken" not in text
+    assert "http.request" in text and "auth.denied" in text
+    for secret in (valid, wrong, "supersecrettoken"):
+        assert secret not in text
 
 
 def test_llm_payload_log_redacts_configured_key(tmp_path):
