@@ -59,4 +59,10 @@ def qa_handler(req: LLMRequest) -> dict[str, Any]:
 
 def register_default_handlers(fake: FakeProvider) -> FakeProvider:
     fake.register("qa", qa_handler)
+    fake.register("judge", judge_handler)
     return fake
+
+
+def judge_handler(req: LLMRequest) -> dict[str, Any]:
+    """Constant mid score: the fake judge is a pipeline check only (never a quality signal)."""
+    return {"score": 2, "rationale": "fake judge (pipeline check)"}

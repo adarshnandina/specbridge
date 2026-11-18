@@ -16,8 +16,9 @@ console = Console()
 
 
 @app.callback()
-def _root() -> None:
-    setup_logging()
+def _root(verbose: bool = typer.Option(False, "--verbose", "-v", help="Log to stdout")) -> None:
+    # Full JSON logs always go to logs/app.jsonl; stdout only shows warnings unless --verbose.
+    setup_logging(stdout_level=None if verbose else "WARNING")
 
 
 @app.command()
@@ -52,6 +53,74 @@ def ingest(
     failed = [r for r in results if r.status == "failed"]
     console.print(f"{len(results)} files, {len(failed)} failed")
     if failed:
+        raise typer.Exit(1)
+
+
+eval_app = typer.Typer(help="Evaluation framework", no_args_is_help=True)
+app.add_typer(eval_app, name="eval")
+
+
+@eval_app.command("run")
+def eval_run(
+    suite: str = typer.Option("retrieval", help="retrieval|qa|extraction|agent|all"),
+    split: str = typer.Option("dev", help="dev|test"),
+    config: Path = typer.Option(None, help="experiments/<x>.yaml"),
+    tag: str = typer.Option("run", help="Run tag (part of the run id)"),
+    use_cache: bool = typer.Option(False, "--use-cache", help="Use the LLM response cache"),
+    provider: str = typer.Option(None, help="fake|anthropic|bedrock (default: LLM_PROVIDER)"),
+    dry_run: bool = typer.Option(False, help="Only print the cost estimate"),
+) -> None:
+    """Run an evaluation suite and write eval_results/<run_id>.json/.md."""
+    from specbridge.eval.runner import SUITES, EvalBudgetError, load_config, run_eval
+
+    suites = list(SUITES) if suite == "all" else [suite]
+    try:
+        res = run_eval(
+            suites,
+            split,
+            load_config(config),
+            tag,
+            use_cache=use_cache,
+            provider=provider,
+            dry_run=dry_run,
+        )
+    except (EvalBudgetError, RuntimeError) as exc:
+        console.print(f"[red]{exc}[/red]")
+        raise typer.Exit(2) from exc
+    if not dry_run:
+        console.print(f"run id: [bold]{res['run_id']}[/bold]  cost ${res['cost_usd']:.4f}")
+
+
+@eval_app.command("compare")
+def eval_compare(run_a: str, run_b: str) -> None:
+    """Markdown comparison of two runs (deltas, CIs, within-noise flags)."""
+    from specbridge.eval.compare import compare_runs, load_run
+
+    console.print(compare_runs(load_run(run_a), load_run(run_b)))
+
+
+@eval_app.command("set-baseline")
+def eval_set_baseline(run: str) -> None:
+    """Copy a run to eval_results/baseline.json."""
+    import shutil
+
+    from specbridge.eval.compare import load_run
+
+    data = load_run(run)
+    shutil.copyfile(Path("eval_results") / f"{data['run_id']}.json", "eval_results/baseline.json")
+    console.print(f"baseline set to {data['run_id']}")
+
+
+@eval_app.command("validate-datasets")
+def eval_validate() -> None:
+    """Validate eval/datasets/*."""
+    from specbridge.eval.datasets import validate_datasets
+
+    problems = validate_datasets()
+    for p in problems:
+        console.print(f"[red]{p}[/red]")
+    console.print("datasets OK" if not problems else f"{len(problems)} problems")
+    if problems:
         raise typer.Exit(1)
 
 

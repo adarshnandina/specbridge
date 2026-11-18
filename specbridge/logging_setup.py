@@ -59,7 +59,7 @@ def _add_module(_: Any, __: str, event_dict: MutableMapping[str, Any]) -> Mutabl
 _configured = False
 
 
-def setup_logging(force: bool = False) -> None:
+def setup_logging(force: bool = False, stdout_level: str | None = None) -> None:
     global _configured
     if _configured and not force:
         return
@@ -80,6 +80,8 @@ def setup_logging(force: bool = False) -> None:
         pass
     for h in handlers:
         h.setFormatter(logging.Formatter("%(message)s"))
+    if stdout_level:
+        handlers[0].setLevel(getattr(logging, stdout_level.upper(), logging.WARNING))
     root = logging.getLogger()
     root.handlers = handlers
     root.setLevel(level)

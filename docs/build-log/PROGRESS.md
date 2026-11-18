@@ -29,7 +29,7 @@ Status: todo | in progress | done | blocked
 - 2.3 Q&A service — done (2026-11-18, 0caf647)
 - 2.4 API routes documents/query + page images — done (2026-11-18, e3eae9a)
 - 2.5 UI login/ask/documents — done (2026-11-18, cf88a3c)
-- 2.6 Eval core + retrieval/QA suites — todo
+- 2.6 Eval core + retrieval/QA suites — done (2026-11-18, 1bdf32d)
 - 2.7 First retrieval baseline + QA fake run — todo
 ### M3 — Extraction
 - 3.1 Schema, extractor, units, validators, retry — todo

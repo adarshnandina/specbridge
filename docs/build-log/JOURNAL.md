@@ -194,3 +194,15 @@
 **Decisions made:** Page images need cookie auth in the UI because browsers cannot send X-API-Key on <img>; added /ui/page route sharing page_image_bytes() with the API
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:22 — 2.6 Eval core: stats, metrics, judge, runner, compare, CLI
+**Goal:** Wilson CIs and noise flags; answer matching (numeric with units/decimal commas, sets with aliases, contains, exact), retrieval recall@k/MRR by type, QA accuracy/abstention P&R/injection resistance/citation precision+coverage/stale-revision rate; LLM judge (uncalibrated); runner with cost estimate and abort, result json+md with dataset hashes, config, models, prompt versions; compare; 'specbridge eval run|compare|set-baseline|validate-datasets'
+**What I did:** Wilson CIs and noise flags; answer matching (numeric with units/decimal commas, sets with aliases, contains, exact), retrieval recall@k/MRR by type, QA accuracy/abstention P&R/injection resistance/citation precision+coverage/stale-revision rate; LLM judge (uncalibrated); runner with cost estimate and abort, result json+md with dataset hashes, config, models, prompt versions; compare; 'specbridge eval run|compare|set-baseline|validate-datasets'
+**Files changed:** specbridge/eval/{stats,metrics,judge,runner,compare,suites_extra}.py specbridge/cli.py specbridge/prompts/judge_usefulness.v1.md tests/unit/test_eval_*.py tests/integration/test_eval_run.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** unit: test_eval_metrics 17, test_eval_runner_units 5; integration test_eval_run 5 (retrieval deterministic, modes differ, fake QA pipeline, missing index, paid provider without key blocked)
+**Eval results (if any):** n/a
+**Problems and how I solved them:** none
+**Decisions made:** Noise flag: significant=disjoint 95% CIs, weak=<50% overlap of narrower CI, within noise=>=50%. Retrieval hit = chunk from an expected doc_key AND expected page. CLI keeps full JSON logs in logs/app.jsonl and only warnings on stdout unless -v
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md
