@@ -11,6 +11,10 @@ from specbridge.llm.fake_provider import FakeProvider
 from specbridge.llm.usage import LLMService, MemoryLedger
 from specbridge.logging_setup import get_logger, redact_text, redact_value, setup_logging
 
+# Key-shaped fixtures are assembled at runtime so secret scanners never see a literal.
+FAKE_ANT = "sk-" + "ant-"
+FAKE_AWS = "AK" + "IA" + "ABCDEFGHIJKLMNOP"
+
 
 @pytest.fixture
 def app_factory(monkeypatch):
@@ -41,8 +45,8 @@ def test_rate_limit_is_per_api_key(app_factory):
 
 
 def test_secrets_redacted_in_log_values_and_headers():
-    assert "sk-ant-api03-abc" not in redact_text("key=sk-ant-api03-abc_DEF-1")
-    assert "AKIAABCDEFGHIJKLMNOP" not in redact_text("AKIAABCDEFGHIJKLMNOP")
+    assert FAKE_ANT + "api03-abc" not in redact_text(f"key={FAKE_ANT}api03-abc_DEF-1")
+    assert FAKE_AWS not in redact_text(FAKE_AWS)
     assert "hunter2" not in redact_text("aws_secret_access_key = hunter2")
     out = redact_value(
         {
@@ -71,7 +75,7 @@ def test_request_logs_never_contain_api_key(app_factory, tmp_path, monkeypatch, 
 
 
 def test_llm_payload_log_redacts_configured_key(tmp_path):
-    key = "sk-ant-api03-SUPERSECRETVALUE"
+    key = FAKE_ANT + "api03-SUPERSECRETVALUE"
     s = Settings(_env_file=None, log_llm_payloads=True, log_dir=tmp_path, anthropic_api_key=key)
     ledger = MemoryLedger()
     p = FakeProvider()
@@ -86,7 +90,7 @@ def test_llm_payload_log_redacts_configured_key(tmp_path):
 
 
 def test_error_logging_of_provider_failure_is_redacted(tmp_path):
-    key = "sk-ant-api03-LEAKYERROR"
+    key = FAKE_ANT + "api03-LEAKYERROR"
     s = Settings(_env_file=None, log_llm_payloads=False, log_dir=tmp_path)
     ledger = MemoryLedger()
     p = FakeProvider()
