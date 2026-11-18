@@ -26,3 +26,15 @@
 **Decisions made:** none
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:01 — 0.3 Tooling: pyproject, uv, ruff, mypy, pytest, Makefile
+**Goal:** uv project with flat specbridge/ layout, ruff, strict mypy, pytest, pre-commit config, Makefile targets, .env.example
+**What I did:** uv project with flat specbridge/ layout, ruff, strict mypy, pytest, pre-commit config, Makefile targets, .env.example
+**Files changed:** pyproject.toml Makefile .pre-commit-config.yaml .env.example .dockerignore
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** uv sync ok; ruff/mypy clean
+**Eval results (if any):** n/a
+**Problems and how I solved them:** Code committed together with 0.2 in commit 59692d6 (batched staging); this commit records the task.
+**Decisions made:** Flat layout specbridge/ at repo root instead of pre-initialised src/ layout (matches spec Section 4); uv_build module-root=''. Python pinned >=3.12,<3.13.
+**Deviations from spec:** Python upper bound pinned <3.13 for dependency compatibility
+**Next step:** next task in PROGRESS.md
