@@ -133,3 +133,27 @@ def test_documents_in_db(client, headers, synth_dir):
     upload(client, headers, synth_dir / "kestrel/KD-210_rev1.0.pdf")
     with session_scope() as s:
         assert s.scalars(select(Document)).one().source_type == "upload"
+
+
+def test_upload_hardening_page_limit_and_filename(client, headers, synth_dir, monkeypatch):
+    from specbridge.ingestion import pipeline
+
+    path = synth_dir / "kestrel/KD-210_rev1.0.pdf"
+    with open(path, "rb") as fh:
+        r = client.post(
+            "/documents",
+            files={"file": ("../../etc/passwd.pdf", fh, "application/pdf")},
+            headers=headers["engineer"],
+        )
+    assert r.status_code == 201
+    doc = r.json()["document"]
+    assert doc["filename"] == "passwd.pdf"  # path components stripped
+    monkeypatch.setattr(pipeline, "MAX_PAGES", 0)
+    other = synth_dir / "kestrel/KD-110_rev1.0.pdf"
+    with open(other, "rb") as fh:
+        r = client.post(
+            "/documents",
+            files={"file": ("a.pdf", fh, "application/pdf")},
+            headers=headers["engineer"],
+        )
+    assert r.status_code == 400 and "pages" in r.json()["error"]["message"]

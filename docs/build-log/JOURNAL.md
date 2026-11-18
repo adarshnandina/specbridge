@@ -350,3 +350,15 @@
 **Decisions made:** Baseline is the dev run because the CI gate runs on dev; test is reported once, never gated
 **Deviations from spec:** Spec says run the full test-split evaluation then set the final baseline; the baseline is the dev run so that gating stays comparable and never touches test. The test-split full run exists as a separate final report
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:56 — 6.1 Rate limiting, upload hardening, redaction tests, pip-audit
+**Goal:** Per-API-key moving-window rate limit middleware (limits library; /health /ready /metrics exempt; error format with request id); upload hardening: magic bytes, size limit with bounded read, filename sanitisation, page-count cap (400); redaction tests (log values, headers, LLM payload log, provider error text, request logs never contain X-API-Key/Authorization); pip-audit run
+**What I did:** Per-API-key moving-window rate limit middleware (limits library; /health /ready /metrics exempt; error format with request id); upload hardening: magic bytes, size limit with bounded read, filename sanitisation, page-count cap (400); redaction tests (log values, headers, LLM payload log, provider error text, request logs never contain X-API-Key/Authorization); pip-audit run
+**Files changed:** specbridge/api/middleware.py specbridge/api/main.py specbridge/ingestion/pipeline.py pyproject.toml uv.lock tests/unit/test_security.py tests/integration/test_api_docs_query.py
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** unit test_security 7 passed; integration upload hardening test; full suite 303 passed
+**Eval results (if any):** n/a
+**Problems and how I solved them:** slowapi's middleware silently did nothing: with the installed FastAPI, app.routes no longer exposes included routers' endpoints, so slowapi found no handler and exempted every route. The rate-limit test caught it (all 5 requests returned 200). Replaced by a small middleware on the same 'limits' library and removed the slowapi dependency
+**Decisions made:** Rate limit key = X-API-Key (client IP if absent) across all endpoints; pip-audit: 'No known vulnerabilities found' (only our own package skipped, not on PyPI)
+**Deviations from spec:** slowapi (spec stack) replaced by its underlying 'limits' library; same behaviour, documented
+**Next step:** next task in PROGRESS.md

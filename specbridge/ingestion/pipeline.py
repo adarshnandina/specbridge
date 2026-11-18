@@ -22,6 +22,7 @@ from specbridge.ingestion.storage import sanitize_filename, store_pdf, validate_
 from specbridge.logging_setup import get_logger
 
 log = get_logger("specbridge.ingest")
+MAX_PAGES = 400  # reject absurdly long PDFs (resource-exhaustion guard)
 REAL_MANIFEST = Path(__file__).resolve().parents[2] / "corpus" / "real" / "manifest.yaml"
 
 
@@ -172,8 +173,10 @@ def ingest_bytes(
             time.perf_counter() - t0,
             embed_s,
         )
-    path = store_pdf(data, sha)
     parsed = parse_pdf(data)
+    if len(parsed.pages) > MAX_PAGES:
+        raise UploadError(f"PDF has {len(parsed.pages)} pages; the limit is {MAX_PAGES}")
+    path = store_pdf(data, sha)
     manifest = real_manifest().get(sha)
     if manifest:
         source_type, source_url = "real", manifest["url"]

@@ -6,11 +6,8 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
-from slowapi import Limiter
-from slowapi.errors import RateLimitExceeded
-from slowapi.middleware import SlowAPIMiddleware
 
-from specbridge.api.middleware import RequestContextMiddleware
+from specbridge.api.middleware import RateLimitMiddleware, RequestContextMiddleware
 from specbridge.api.routers import agent, documents, extractions, health, query, ui
 from specbridge.config import get_settings
 from specbridge.errors import AppError
@@ -28,17 +25,11 @@ def _error(request: Request, status: int, code: str, message: str) -> JSONRespon
     )
 
 
-def rate_key(request: Request) -> str:
-    return request.headers.get("x-api-key") or (request.client.host if request.client else "anon")
-
-
 def create_app() -> FastAPI:
     setup_logging()
     s = get_settings()
     app = FastAPI(title="SpecBridge", version="0.1.0")
-    limiter = Limiter(key_func=rate_key, default_limits=[s.rate_limit])
-    app.state.limiter = limiter
-    app.add_middleware(SlowAPIMiddleware)
+    app.add_middleware(RateLimitMiddleware, limit=s.rate_limit)
     app.add_middleware(RequestContextMiddleware)
 
     @app.exception_handler(AppError)
@@ -50,10 +41,6 @@ def create_app() -> FastAPI:
     @app.exception_handler(RequestValidationError)
     async def _validation(request: Request, exc: RequestValidationError) -> JSONResponse:
         return _error(request, 422, "validation_error", str(exc.errors())[:500])
-
-    @app.exception_handler(RateLimitExceeded)
-    async def _rate(request: Request, exc: RateLimitExceeded) -> JSONResponse:
-        return _error(request, 429, "rate_limited", f"Rate limit exceeded: {exc.detail}")
 
     @app.exception_handler(Exception)
     async def _unhandled(request: Request, exc: Exception) -> JSONResponse:
