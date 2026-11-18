@@ -374,3 +374,15 @@
 **Decisions made:** ADR-0009: embedding model baked into the image. Image is 2.67 GB (venv 1.7 GB incl. torch CPU 0.7 GB)
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 14:05 — 6.3 CI workflow file (written, never run)
+**Goal:** .github/workflows/ci.yml mirrors make ci with a Postgres service container (lint, typecheck, unit, migrate, integration, coverage gate, pip-audit, corpus+ingest, retrieval eval + gate, upload eval results). Never pushed or triggered; no git remote exists
+**What I did:** .github/workflows/ci.yml mirrors make ci with a Postgres service container (lint, typecheck, unit, migrate, integration, coverage gate, pip-audit, corpus+ingest, retrieval eval + gate, upload eval results). Never pushed or triggered; no git remote exists
+**Files changed:** .github/workflows/ci.yml
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** n/a (not run by design: hard rule 1)
+**Eval results (if any):** n/a
+**Problems and how I solved them:** none
+**Decisions made:** none
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md
