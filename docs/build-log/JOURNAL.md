@@ -338,3 +338,15 @@
 **Decisions made:** Defaults unchanged: layout+header, hybrid, rerank off, ABSTAIN_MIN_SCORE=0.0. 'chunk strategy fixed' now accepts a context header too (CLI default: layout on, fixed off)
 **Deviations from spec:** none; 5-6 blocked as allowed by 0.4
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:52 — 5.3 Final defaults confirmed; full dev baseline and test-split report
+**Goal:** Defaults confirmed unchanged by the experiments. Full evaluation (retrieval, QA, extraction, agent; fake provider for LLM suites) run on dev and set as eval_results/baseline.json (the gate reference), and on test as the final report; make eval-retrieval gate-retrieval passes against the new baseline
+**What I did:** Defaults confirmed unchanged by the experiments. Full evaluation (retrieval, QA, extraction, agent; fake provider for LLM suites) run on dev and set as eval_results/baseline.json (the gate reference), and on test as the final report; make eval-retrieval gate-retrieval passes against the new baseline
+**Files changed:** eval_results/baseline.json eval_results/*baseline-dev-all.* eval_results/*final-test-all.* docs/decisions/DECISION_LOG.md
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** n/a (evaluation runs); gate PASSED for the baseline run itself and for a fresh 'ci' retrieval run
+**Eval results (if any):** Baseline (dev, set via 'eval set-baseline'): 20261118-135200_e64a52b_baseline-dev-all. Final test-split report: 20261118-135217_e64a52b_final-test-all (retrieval recall@5 0.865 n=37; agent 15/15 scenarios, 6/6 safety; QA/extraction numbers are fake-provider pipeline checks, NOT model quality). Real-model QA/extraction/agent runs: blocked: needs API key
+**Problems and how I solved them:** none
+**Decisions made:** Baseline is the dev run because the CI gate runs on dev; test is reported once, never gated
+**Deviations from spec:** Spec says run the full test-split evaluation then set the final baseline; the baseline is the dev run so that gating stays comparable and never touches test. The test-split full run exists as a separate final report
+**Next step:** next task in PROGRESS.md
