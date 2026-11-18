@@ -6,6 +6,7 @@
 - Model IDs (`claude-haiku-5-5`, `claude-sonnet-5-5`) come from the build environment; the pricing page lists names and prices only. Prices verified 2026-11-18 (see `config/pricing.yaml`). Please re-check model IDs on the models overview page before the first paid run.
 
 - Verify real-datasheet labels in `eval/datasets/extraction_real.jsonl` (all `verified_by_human: false`; metrics on them are provisional). Only 9 of the 10-20 target real datasheets were obtainable (Baumer, ifm AL2301, Parker, Mean Well blocked automated downloads).
+- **API key needed for paid runs** (`ANTHROPIC_API_KEY` in `.env`, or AWS credentials + `BEDROCK_MODEL_*` for Bedrock). Blocked until then: real QA eval (2.7), real extraction eval (3.4), live agent run (4.4), experiments 5-6 (5.2), real test-split final evaluation (5.3). Everything else runs on the fake provider. Estimated cost of one real dev QA run is printed by `specbridge eval run --dry-run --provider anthropic --suite qa`.
 
 ## Tasks
 Status: todo | in progress | done | blocked
@@ -30,7 +31,7 @@ Status: todo | in progress | done | blocked
 - 2.4 API routes documents/query + page images — done (2026-11-18, e3eae9a)
 - 2.5 UI login/ask/documents — done (2026-11-18, cf88a3c)
 - 2.6 Eval core + retrieval/QA suites — done (2026-11-18, 1bdf32d)
-- 2.7 First retrieval baseline + QA fake run — todo
+- 2.7 First retrieval baseline + QA fake run — done (2026-11-18, 95550ed)
 ### M3 — Extraction
 - 3.1 Schema, extractor, units, validators, retry — todo
 - 3.2 Review queue, approve/reject, push — todo

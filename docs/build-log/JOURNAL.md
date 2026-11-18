@@ -206,3 +206,15 @@
 **Decisions made:** Noise flag: significant=disjoint 95% CIs, weak=<50% overlap of narrower CI, within noise=>=50%. Retrieval hit = chunk from an expected doc_key AND expected page. CLI keeps full JSON logs in logs/app.jsonl and only warnings on stdout unless -v
 **Deviations from spec:** none
 **Next step:** next task in PROGRESS.md
+
+## 2026-11-18 13:22 — 2.7 First retrieval baseline and QA pipeline check
+**Goal:** Retrieval eval on dev (hybrid, layout chunks, bge-small) set as eval_results/baseline.json; QA suite run with the fake provider as a pipeline check; real QA run blocked (no API key)
+**What I did:** Retrieval eval on dev (hybrid, layout chunks, bge-small) set as eval_results/baseline.json; QA suite run with the fake provider as a pipeline check; real QA run blocked (no API key)
+**Files changed:** eval_results/* docs/build-log/PROGRESS.md
+**Commands run and outcome:** make lint typecheck test (pass)
+**Tests:** no new tests; runs recorded in eval_results/
+**Eval results (if any):** Retrieval baseline run 20261118-132236_7ca7287_initial-retrieval (dev, n=56): see eval_results/*initial-retrieval.md. Fake-provider QA run 20261118-132241_7ca7287_qa-fake-pipeline is a PIPELINE CHECK ONLY (extractive responder, constant judge) - not a quality result. Real QA run: blocked: needs API key
+**Problems and how I solved them:** none
+**Decisions made:** none
+**Deviations from spec:** none
+**Next step:** next task in PROGRESS.md
